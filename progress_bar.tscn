@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ofaf3ip37pkb"]
+
+[ext_resource type="Texture2D" uid="uid://efcs2ni5uxd4" path="res://imagens/barra2.png" id="1_chwcf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v5s5d"]
+texture = ExtResource("1_chwcf")
+
+[node name="ProgressBar" type="ProgressBar" unique_id=801186173]
+offset_right = 1150.0
+offset_bottom = 31.0
+theme_override_styles/fill = SubResource("StyleBoxTexture_v5s5d")
+value = 100.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=1337458429]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

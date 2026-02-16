@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://dhuwtba1ubx2k"]
+
+[ext_resource type="Script" uid="uid://bnfob8tu5s7cb" path="res://cena.gd" id="1_fx0hl"]
+[ext_resource type="Script" uid="uid://7g3efslbkjt3" path="res://cartas.gd" id="1_kh0cx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ictw"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_kh0cx"]
+
+[node name="Node2D" type="Node2D" unique_id=554399099]
+script = ExtResource("1_fx0hl")
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1907784297]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+
+[node name="carta" type="Area2D" parent="." unique_id=597128525]
+position = Vector2(587, 326)
+script = ExtResource("1_kh0cx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="carta" unique_id=1621786326]
+scale = Vector2(7, 10)
+shape = SubResource("RectangleShape2D_3ictw")
+
+[node name="Sprite2D" type="Sprite2D" parent="carta" unique_id=1731816029]
+visible = false
+texture = SubResource("CanvasTexture_kh0cx")
+
+[node name="Front" type="Label" parent="carta" unique_id=1679672833]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "front"
+metadata/_edit_use_anchors_ = true
+
+[node name="Back" type="Label" parent="carta" unique_id=522843745]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "back"
+metadata/_edit_use_anchors_ = true
