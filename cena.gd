@@ -3,6 +3,11 @@ extends Node2D
 @export var card_scene: PackedScene
 @export var usar_contagem := true
 @export var contador_scene: PackedScene
+@onready var barra = $ProgressBar
+@onready var timer = $ProgressBar/Timer
+
+var tempo_total := 100.0
+var tempo_restante := tempo_total
 
 var pontos_azul = 0
 var pontos_vermelho = 0
@@ -49,6 +54,8 @@ func _ready():
 	randomize()
 	start_jogo()  # chama a sequência do jogo
 	definir_lados()
+	
+
 	var tamanho = get_viewport().get_visible_rect().size
 	print(tamanho)
 
@@ -66,6 +73,8 @@ func start_jogo() -> void:
 		contador.queue_free()
 		labelcolor()
 		mostrar_sprite_equipe()
+		timer_bar(1.0)
+		
 	# só depois cria as cartas
 	criar_cartas()
 
@@ -125,7 +134,7 @@ func verificar_carta(carta):
 			segunda_carta.virar()
 			$Cartas/carta.mostrar_sprite()
 			desbloquear_cartas()
-			
+			mostrar_sprite_equipe()
 		
 		# limpa para próxima tentativa
 		primeira_carta = null
@@ -204,5 +213,19 @@ func mostrar_sprite_equipe():
 		"vermelho":
 			$equipe_azul.visible = false
 			$equipe_vermelha.visible = true
-			
+
+func timer_bar(delta):
+	$ProgressBar.visible = true
 	
+	if tempo_restante > 0:
+		tempo_restante -= delta
+		
+		barra.value = (tempo_restante / tempo_total) * barra.max_value
+		animar_barra()
+		
+func fim_de_tempo():
+	print("O tempo acabou!")
+
+func animar_barra():
+	var tween = create_tween()
+	tween.tween_property(barra, "value", 0, 10.0)

@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://nvl58i4davxr" path="res://contador.tscn" id="3_i0w3r"]
 [ext_resource type="Texture2D" uid="uid://ebreotoaqfu0" path="res://imagens/time-vermelho.png" id="4_bg8vu"]
 [ext_resource type="Texture2D" uid="uid://c3wcf08npu1ks" path="res://imagens/time-azul.png" id="5_r7a3d"]
+[ext_resource type="PackedScene" uid="uid://ofaf3ip37pkb" path="res://progress_bar.tscn" id="6_amsxb"]
 
 [node name="Node2D" type="Node2D" unique_id=554399099]
 script = ExtResource("1_fx0hl")
@@ -40,3 +41,8 @@ horizontal_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=249798727]
 position = Vector2(575, 324)
+
+[node name="ProgressBar" parent="." unique_id=801186173 instance=ExtResource("6_amsxb")]
+visible = false
+
+[node name="Timer" type="Timer" parent="ProgressBar" unique_id=1473285536]
