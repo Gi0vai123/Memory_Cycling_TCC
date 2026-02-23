@@ -45,4 +45,14 @@ position = Vector2(575, 324)
 [node name="ProgressBar" parent="." unique_id=801186173 instance=ExtResource("6_amsxb")]
 visible = false
 
-[node name="Timer" type="Timer" parent="ProgressBar" unique_id=1473285536]
+[node name="PontosA" type="Label" parent="." unique_id=1456905740]
+offset_left = 10.0
+offset_top = 192.0
+offset_right = 69.0
+offset_bottom = 215.0
+
+[node name="PontosV" type="Label" parent="." unique_id=1738375295]
+offset_left = 10.0
+offset_top = 218.0
+offset_right = 69.0
+offset_bottom = 241.0

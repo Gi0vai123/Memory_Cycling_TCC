@@ -8,14 +8,12 @@ extends Node2D
 
 var tempo_total := 100.0
 var tempo_restante := tempo_total
-
+var tempo_ativo = true
 var pontos_azul = 0
 var pontos_vermelho = 0
 var pontos_feitos = 0
 var jogador_1 = str("")
 var jogador_2 = str("")
-var ponto_azul = 0
-var ponto_vermelho = 0
 var lado_escolhido := ""
 var jogador_que_comeca := ""
 var pares_encontrados := 0
@@ -74,7 +72,8 @@ func start_jogo() -> void:
 		labelcolor()
 		mostrar_sprite_equipe()
 		timer_bar(1.0)
-		
+		fim_de_tempo()
+		atualizar_labels()
 	# só depois cria as cartas
 	criar_cartas()
 
@@ -121,6 +120,7 @@ func verificar_carta(carta):
 		if primeira_carta.card_id == segunda_carta.card_id:
 			print("Você acertou!")
 			pontos_ganhos()
+			atualizar_labels()
 			primeira_carta.get_node("CollisionShape2D").disabled = true
 			segunda_carta.get_node("CollisionShape2D").disabled = true
 			if pares_encontrados == 3:
@@ -199,11 +199,15 @@ func pontos_ganhos():
 	pares_encontrados += 1
 	match jogador_atual:
 		"azul":
-			ponto_azul += 1
+			pontos_azul += 1
+			
 		"vermelho":
-			ponto_vermelho += 1
-	print("Azul:", ponto_azul)
-	print("Vermelho:", ponto_vermelho)
+			pontos_vermelho += 1
+			
+	print("Azul:", pontos_azul)
+	print("Vermelho:", pontos_vermelho)
+	
+	
 	
 func mostrar_sprite_equipe():
 	match jogador_atual:
@@ -217,15 +221,24 @@ func mostrar_sprite_equipe():
 func timer_bar(delta):
 	$ProgressBar.visible = true
 	
-	if tempo_restante > 0:
+	if tempo_restante > 1.0:
 		tempo_restante -= delta
-		
 		barra.value = (tempo_restante / tempo_total) * barra.max_value
 		animar_barra()
+	else:
+		match tempo_restante:
+			0.0:
+				tempo_ativo = false
+				fim_de_tempo()
 		
 func fim_de_tempo():
 	print("O tempo acabou!")
+	print(barra.value)
 
 func animar_barra():
 	var tween = create_tween()
 	tween.tween_property(barra, "value", 0, 10.0)
+	
+func atualizar_labels():
+	$PontosA.text = "Pontos da equipe azul: " + str( pontos_azul)
+	$PontosV.text = "Pontos da equipe vermelha: " + str(pontos_vermelho)
