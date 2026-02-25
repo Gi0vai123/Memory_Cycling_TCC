@@ -1,0 +1,13 @@
+[gd_resource type="StyleBoxFlat" format=3 uid="uid://cwvycdk32gbv1"]
+
+[resource]
+bg_color = Color(0.63732296, 0.20645809, 0.29141816, 1)
+border_width_left = 3
+border_width_right = 3
+border_color = Color(0.879906, 0.73246956, 0.99088615, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_size = 10
+shadow_offset = Vector2(3.65, 0)
