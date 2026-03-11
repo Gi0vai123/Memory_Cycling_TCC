@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://b57xur4ris71r"]
+
+[ext_resource type="Texture2D" uid="uid://by8v42n5jjagi" path="res://imagens/menu/game_logo.png" id="1_e6vgv"]
+[ext_resource type="Script" uid="uid://dhvp0u7hdib1t" path="res://scripts/menu_screen.gd" id="1_sm2ni"]
+[ext_resource type="Texture2D" uid="uid://dh8kugho52him" path="res://imagens/menu/844946240_preview_3288949bd5d35b3bcfa9de0b65faade54bbd701c.jpg" id="1_yft84"]
+[ext_resource type="Theme" uid="uid://bqpeogk4i5kmh" path="res://style/btn_verde.tres" id="2_pn7wg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pn7wg"]
+
+[node name="MenuScreen" type="Control" unique_id=533891381]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sm2ni")
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1442336919]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 120
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1758967515]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1880883945]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("2_pn7wg")
+alignment = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=874564732]
+z_index = 1
+position = Vector2(-238, 141)
+scale = Vector2(1.8322651, 1.8322649)
+texture = ExtResource("1_e6vgv")
+
+[node name="start_btn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=852311705]
+z_index = 1
+layout_mode = 2
+theme = ExtResource("2_pn7wg")
+theme_override_font_sizes/font_size = 50
+action_mode = 0
+button_mask = 0
+text = "JOGAR"
+
+[node name="HSeparator_Play" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1055572948]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_pn7wg")
+
+[node name="credits_btn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=454171047]
+z_index = 1
+layout_mode = 2
+theme = ExtResource("2_pn7wg")
+theme_override_font_sizes/font_size = 50
+text = "CRÉDITOS"
+
+[node name="HSeparator_Exit" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=2012940667]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_pn7wg")
+
+[node name="exit_btn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=952492822]
+z_index = 1
+layout_mode = 2
+theme = ExtResource("2_pn7wg")
+theme_override_font_sizes/font_size = 50
+text = "SAIR"
+
+[node name="background" type="TextureRect" parent="." unique_id=228863308]
+z_index = -1
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+texture = ExtResource("1_yft84")
+expand_mode = 2
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/start_btn" to="." method="_on_start_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/credits_btn" to="." method="_on_credits_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/exit_btn" to="." method="_on_exit_btn_pressed"]
