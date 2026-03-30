@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://dhuwtba1ubx2k"]
+
+[ext_resource type="Script" uid="uid://bnfob8tu5s7cb" path="res://scripts/cena.gd" id="1_woyb7"]
+[ext_resource type="PackedScene" uid="uid://df8fntwdh536s" path="res://cartas.tscn" id="2_048lv"]
+[ext_resource type="PackedScene" uid="uid://nvl58i4davxr" path="res://contador.tscn" id="3_vuhw6"]
+[ext_resource type="Texture2D" uid="uid://ebreotoaqfu0" path="res://imagens/time-vermelho.png" id="4_qxw3i"]
+[ext_resource type="Texture2D" uid="uid://c3wcf08npu1ks" path="res://imagens/time-azul.png" id="5_7lspx"]
+[ext_resource type="Texture2D" uid="uid://efcs2ni5uxd4" path="res://imagens/barra2.png" id="6_woyb7"]
+[ext_resource type="Texture2D" uid="uid://gh7vjn47kmtd" path="res://imagens/setaazul.png" id="7_vuhw6"]
+[ext_resource type="Texture2D" uid="uid://dejc4cc0pvye1" path="res://imagens/setavermelho.png" id="8_qxw3i"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_048lv"]
+texture = ExtResource("6_woyb7")
+
+[node name="Node2D" type="Node2D" unique_id=554399099]
+script = ExtResource("1_woyb7")
+card_scene = ExtResource("2_048lv")
+contador_scene = ExtResource("3_vuhw6")
+
+[node name="equipe_vermelha" type="Sprite2D" parent="." unique_id=2083258543]
+visible = false
+position = Vector2(640, 110)
+scale = Vector2(2.415, 2.415)
+texture = ExtResource("4_qxw3i")
+
+[node name="equipe_azul" type="Sprite2D" parent="." unique_id=238840768]
+visible = false
+position = Vector2(640, 110)
+scale = Vector2(2.415, 2.415)
+texture = ExtResource("5_7lspx")
+
+[node name="mesa" type="Sprite2D" parent="." unique_id=1109146988]
+visible = false
+position = Vector2(570, 332)
+scale = Vector2(9.07175, 10.369375)
+
+[node name="Cartas" parent="." unique_id=1088509637 instance=ExtResource("2_048lv")]
+visible = false
+
+[node name="LabelJogador" type="Label" parent="." unique_id=1275840404]
+offset_left = 540.0
+offset_top = 60.0
+offset_right = 726.0
+offset_bottom = 132.0
+horizontal_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=249798727]
+anchor_mode = 0
+
+[node name="PontosA" type="Label" parent="." unique_id=1456905740]
+offset_left = 10.0
+offset_top = 80.0
+offset_right = 69.0
+offset_bottom = 103.0
+
+[node name="PontosV" type="Label" parent="." unique_id=1738375295]
+offset_left = 10.0
+offset_top = 106.0
+offset_right = 69.0
+offset_bottom = 129.0
+size_flags_horizontal = 8
+horizontal_alignment = 2
+
+[node name="ProgressBarA" type="ProgressBar" parent="." unique_id=1671045228]
+offset_right = 1276.0
+offset_bottom = 39.0
+theme_override_styles/fill = SubResource("StyleBoxTexture_048lv")
+value = 100.0
+show_percentage = false
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="ProgressBarA" unique_id=1347444853]
+layout_mode = 0
+offset_right = 1273.0
+offset_bottom = 40.0
+
+[node name="setaazul" type="Sprite2D" parent="ProgressBarA" unique_id=888987748]
+position = Vector2(1272, 65)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("7_vuhw6")
+
+[node name="ProgressBarV" type="ProgressBar" parent="." unique_id=309401788]
+visible = false
+offset_right = 1276.0
+offset_bottom = 39.0
+theme_override_styles/fill = SubResource("StyleBoxTexture_048lv")
+value = 100.0
+show_percentage = false
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="ProgressBarV" unique_id=1273403973]
+layout_mode = 0
+offset_right = 1273.0
+offset_bottom = 40.0
+
+[node name="setavermelha" type="Sprite2D" parent="ProgressBarV" unique_id=184901114]
+position = Vector2(1272, 65)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_qxw3i")

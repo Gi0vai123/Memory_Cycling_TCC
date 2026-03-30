@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://nvl58i4davxr"]
-
-[node name="Node2D" type="Node2D" unique_id=1704883121]
-
-[node name="Contador" type="Label" parent="." unique_id=374603066]
-offset_right = 1158.0
-offset_bottom = 648.0
-horizontal_alignment = 1
-vertical_alignment = 1
