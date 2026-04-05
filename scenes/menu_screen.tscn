@@ -1,0 +1,235 @@
+[gd_scene format=3 uid="uid://cl8bub2l6ksap"]
+
+[ext_resource type="Texture2D" uid="uid://by8v42n5jjagi" path="res://imagens/menu/game_logo.png" id="1_e6vgv"]
+[ext_resource type="Script" uid="uid://dhvp0u7hdib1t" path="res://scripts/menu_screen.gd" id="1_sm2ni"]
+[ext_resource type="FontFile" uid="uid://21bm27kpaagx" path="res://imagens/menu/Pixeled.ttf" id="2_ar34o"]
+[ext_resource type="Texture2D" uid="uid://dh8kugho52him" path="res://imagens/menu/background.jpg" id="2_e6vgv"]
+[ext_resource type="Texture2D" uid="uid://djwyda2rhxlfq" path="res://imagens/menu/options.png" id="2_sm2ni"]
+[ext_resource type="Texture2D" uid="uid://npyvw1ov3nko" path="res://imagens/menu/qr_code.png" id="3_amt2q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0m60l"]
+bg_color = Color(0.8901961, 0.8901961, 0.8901961, 0.047058824)
+
+[sub_resource type="Theme" id="Theme_5aq17"]
+default_font = ExtResource("2_ar34o")
+Button/colors/font_color = Color(0.98039216, 0.98039216, 0.98039216, 1)
+Button/font_sizes/font_size = 30
+Button/styles/normal = SubResource("StyleBoxFlat_0m60l")
+
+[sub_resource type="Theme" id="Theme_tc5hl"]
+Label/colors/font_color = Color(0.8235294, 0, 0, 1)
+Label/colors/font_outline_color = Color(0, 0.5019608, 0, 1)
+Label/constants/outline_size = 12
+Label/font_sizes/font_size = 22
+Label/fonts/font = ExtResource("2_ar34o")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pn7wg"]
+bg_color = Color(0.101960786, 0.7058824, 0.16470589, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sm2ni"]
+bg_color = Color(0.101960786, 0.58431375, 0.16470589, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_73fcp"]
+bg_color = Color(0.101960786, 0.50980395, 0.16470589, 1)
+
+[sub_resource type="Theme" id="Theme_ar34o"]
+resource_name = "start"
+Button/styles/hover = SubResource("StyleBoxFlat_pn7wg")
+Button/styles/normal = SubResource("StyleBoxFlat_sm2ni")
+Button/styles/pressed = SubResource("StyleBoxFlat_73fcp")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g2cvw"]
+bg_color = Color(0.86942613, 0.44246724, 0.57956946, 0.62352943)
+
+[sub_resource type="Theme" id="Theme_0m60l"]
+Button/icons/icon = ExtResource("2_sm2ni")
+Button/styles/pressed = SubResource("StyleBoxFlat_g2cvw")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ar34o"]
+bg_color = Color(1, 0, 0, 0.77254903)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amt2q"]
+bg_color = Color(0.6666667, 0, 0, 0.77254903)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gld7y"]
+bg_color = Color(0.57254905, 0, 0, 0.77254903)
+
+[sub_resource type="Theme" id="Theme_g2cvw"]
+Button/styles/hover = SubResource("StyleBoxFlat_ar34o")
+Button/styles/normal = SubResource("StyleBoxFlat_amt2q")
+Button/styles/pressed = SubResource("StyleBoxFlat_gld7y")
+
+[sub_resource type="InputEventKey" id="InputEventKey_ar34o"]
+device = -1
+pressed = true
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_amt2q"]
+events = [SubResource("InputEventKey_ar34o")]
+
+[node name="MenuScreen" type="Control" unique_id=533891381]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sm2ni")
+metadata/_edit_lock_ = true
+
+[node name="qr_code" type="ColorRect" parent="." unique_id=517244087]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_left = 380.0
+offset_top = 118.0
+offset_right = 928.0
+offset_bottom = 651.0
+color = Color(0, 0, 0, 0.77254903)
+
+[node name="exit_donate_btn" type="Button" parent="qr_code" unique_id=1982241384]
+z_index = 3
+layout_mode = 0
+offset_left = 489.0
+offset_top = -1.0
+offset_right = 533.0
+offset_bottom = 91.0
+scale = Vector2(1.2547376, 0.63649136)
+theme = SubResource("Theme_5aq17")
+text = "X"
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="qr_code" unique_id=755938821]
+position = Vector2(281, 226)
+texture = ExtResource("3_amt2q")
+
+[node name="Label" type="Label" parent="qr_code" unique_id=1501694530]
+layout_mode = 0
+offset_left = -18.0
+offset_top = 398.0
+offset_right = 589.0
+offset_bottom = 615.0
+theme = SubResource("Theme_tc5hl")
+text = "Leia o qr code para
+apoiar o projeto"
+horizontal_alignment = 1
+
+[node name="start_btn" type="Button" parent="." unique_id=852311705]
+layout_mode = 0
+offset_left = 518.0
+offset_top = 395.0
+offset_right = 761.0
+offset_bottom = 472.0
+theme = SubResource("Theme_ar34o")
+theme_override_font_sizes/font_size = 50
+text = "JOGAR"
+
+[node name="options_btn" type="Button" parent="." unique_id=208893447]
+layout_mode = 0
+offset_left = 1139.0
+offset_top = 587.0
+offset_right = 2347.0
+offset_bottom = 1795.0
+scale = Vector2(0.07753759, 0.07753759)
+theme = SubResource("Theme_0m60l")
+action_mode = 0
+flat = true
+autowrap_trim_flags = 0
+
+[node name="credits_btn" type="Button" parent="." unique_id=454171047]
+layout_mode = 0
+offset_left = 518.0
+offset_top = 477.0
+offset_right = 761.0
+offset_bottom = 546.0
+theme = SubResource("Theme_ar34o")
+theme_override_font_sizes/font_size = 50
+text = "CRÉDITOS"
+
+[node name="exit_btn" type="Button" parent="." unique_id=952492822]
+layout_mode = 0
+offset_left = 518.0
+offset_top = 551.0
+offset_right = 761.0
+offset_bottom = 628.0
+theme = SubResource("Theme_ar34o")
+theme_override_font_sizes/font_size = 50
+text = "SAIR"
+
+[node name="donate_btn" type="Button" parent="." unique_id=1560253485]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 623.0
+offset_right = 273.0
+offset_bottom = 700.0
+theme = SubResource("Theme_g2cvw")
+theme_override_font_sizes/font_size = 50
+text = "APOIA-SE"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=874564732]
+position = Vector2(298, 189)
+scale = Vector2(2.1761327, 2.2323718)
+texture = ExtResource("1_e6vgv")
+
+[node name="background" type="TextureRect" parent="." unique_id=228863308]
+z_index = -1
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+texture = ExtResource("2_e6vgv")
+expand_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="option_menu" type="ColorRect" parent="." unique_id=902716385]
+visible = false
+layout_mode = 0
+offset_left = 234.0
+offset_top = 125.0
+offset_right = 1113.0
+offset_bottom = 638.0
+color = Color(0.008500001, 0.021641675, 0.05, 1)
+
+[node name="exit_option_btn" type="Button" parent="option_menu" unique_id=1064342601]
+z_index = 3
+layout_mode = 0
+offset_left = 822.0
+offset_top = -8.0
+offset_right = 866.0
+offset_bottom = 84.0
+scale = Vector2(1.2547376, 0.63649136)
+theme = SubResource("Theme_5aq17")
+text = "X"
+flat = true
+
+[node name="Label" type="Label" parent="option_menu" unique_id=2114857638]
+layout_mode = 0
+offset_left = -234.0
+offset_top = -125.0
+offset_right = -194.0
+offset_bottom = -102.0
+
+[node name="credits" type="ColorRect" parent="." unique_id=1477912396]
+visible = false
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.019607844, 0.019607844, 0.019607844, 1)
+
+[node name="credits_exit" type="Button" parent="credits" unique_id=805346188]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+action_mode = 0
+button_mask = 0
+shortcut = SubResource("Shortcut_amt2q")
+
+[connection signal="pressed" from="qr_code/exit_donate_btn" to="." method="_on_exit_donate_btn_pressed"]
+[connection signal="pressed" from="start_btn" to="." method="_on_start_btn_pressed"]
+[connection signal="pressed" from="options_btn" to="." method="_on_options_btn_pressed"]
+[connection signal="pressed" from="credits_btn" to="." method="_on_credits_btn_pressed"]
+[connection signal="pressed" from="exit_btn" to="." method="_on_exit_btn_pressed"]
+[connection signal="pressed" from="donate_btn" to="." method="_on_donate_btn_pressed"]
+[connection signal="pressed" from="option_menu/exit_option_btn" to="." method="_on_exit_option_btn_pressed"]
+[connection signal="pressed" from="credits/credits_exit" to="." method="_on_credits_exit_pressed"]
