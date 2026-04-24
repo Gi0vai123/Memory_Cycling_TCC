@@ -35,74 +35,76 @@ scale = Vector2(9.07175, 10.369375)
 [node name="Cartas" parent="." unique_id=1088509637 instance=ExtResource("2_048lv")]
 visible = false
 
-[node name="LabelJogador" type="Label" parent="." unique_id=1275840404]
+[node name="UImp" type="CanvasLayer" parent="." unique_id=600588184]
+
+[node name="Contador" type="Label" parent="UImp" unique_id=2026469295]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -639.0
+offset_top = -359.0
+offset_right = 653.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBarV" type="ProgressBar" parent="UImp" unique_id=309401788]
+offset_right = 1277.0
+offset_bottom = 39.0
+theme_override_styles/fill = SubResource("StyleBoxTexture_048lv")
+value = 100.0
+show_percentage = false
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UImp/ProgressBarV" unique_id=1273403973]
+layout_mode = 0
+offset_right = 1273.0
+offset_bottom = 40.0
+
+[node name="setavermelha" type="Sprite2D" parent="UImp/ProgressBarV" unique_id=184901114]
+position = Vector2(1272, 65)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_qxw3i")
+
+[node name="ProgressBarA" type="ProgressBar" parent="UImp" unique_id=1671045228]
+offset_right = 1278.0
+offset_bottom = 39.0
+theme_override_styles/fill = SubResource("StyleBoxTexture_048lv")
+value = 100.0
+show_percentage = false
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UImp/ProgressBarA" unique_id=1347444853]
+layout_mode = 0
+offset_right = 1273.0
+offset_bottom = 40.0
+
+[node name="setaazul" type="Sprite2D" parent="UImp/ProgressBarA" unique_id=888987748]
+position = Vector2(1272, 65)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("7_vuhw6")
+
+[node name="LabelJogador" type="Label" parent="UImp" unique_id=1275840404]
 offset_left = 540.0
 offset_top = 60.0
 offset_right = 726.0
 offset_bottom = 132.0
 horizontal_alignment = 1
 
-[node name="PontosA" type="Label" parent="." unique_id=1456905740]
+[node name="PontosA" type="Label" parent="UImp" unique_id=1456905740]
 offset_left = 10.0
 offset_top = 80.0
 offset_right = 69.0
 offset_bottom = 103.0
+text = "aaaaa"
+horizontal_alignment = 2
 
-[node name="PontosV" type="Label" parent="." unique_id=1738375295]
+[node name="PontosV" type="Label" parent="UImp" unique_id=1738375295]
 offset_left = 10.0
 offset_top = 106.0
 offset_right = 69.0
 offset_bottom = 129.0
 size_flags_horizontal = 8
 horizontal_alignment = 2
-
-[node name="ProgressBarA" type="ProgressBar" parent="." unique_id=1671045228]
-visible = false
-offset_right = 1276.0
-offset_bottom = 39.0
-theme_override_styles/fill = SubResource("StyleBoxTexture_048lv")
-value = 100.0
-show_percentage = false
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="ProgressBarA" unique_id=1347444853]
-layout_mode = 0
-offset_right = 1273.0
-offset_bottom = 40.0
-
-[node name="setaazul" type="Sprite2D" parent="ProgressBarA" unique_id=888987748]
-position = Vector2(1272, 65)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("7_vuhw6")
-
-[node name="ProgressBarV" type="ProgressBar" parent="." unique_id=309401788]
-visible = false
-offset_right = 1276.0
-offset_bottom = 39.0
-theme_override_styles/fill = SubResource("StyleBoxTexture_048lv")
-value = 100.0
-show_percentage = false
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="ProgressBarV" unique_id=1273403973]
-layout_mode = 0
-offset_right = 1273.0
-offset_bottom = 40.0
-
-[node name="setavermelha" type="Sprite2D" parent="ProgressBarV" unique_id=184901114]
-position = Vector2(1272, 65)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("8_qxw3i")
-
-[node name="Contador" type="Label" parent="." unique_id=2026469295]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 1293.0
-offset_bottom = 720.0
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_alignment = 1
-vertical_alignment = 1

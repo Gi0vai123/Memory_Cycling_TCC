@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://cpnwnqp2ift1"]
+
+[ext_resource type="Script" uid="uid://bnm4ygixt21pq" path="res://scripts/cartas-duelo.gd" id="1_16rjy"]
+[ext_resource type="Script" uid="uid://b7skr5iud5hut" path="res://scripts/duelo_advinho.gd" id="1_kedrr"]
+[ext_resource type="Texture2D" uid="uid://co80b524sig6q" path="res://imagens/cards_do_jogo_frente.png" id="2_kedrr"]
+[ext_resource type="Texture2D" uid="uid://b0xf8avasf5hb" path="res://imagens/cards_do_jogo.png" id="3_mgnuq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6hb1j"]
+
+[node name="Node2D" type="Node2D" unique_id=866754891]
+script = ExtResource("1_kedrr")
+
+[node name="BaralhoA" type="Area2D" parent="." unique_id=1321751307]
+position = Vector2(640, 86)
+scale = Vector2(0.7, 0.7)
+metadata/_edit_group_ = true
+
+[node name="CartaA" type="Area2D" parent="BaralhoA" unique_id=1178750046]
+scale = Vector2(0.7, 0.7)
+script = ExtResource("1_16rjy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaralhoA/CartaA" unique_id=62480800]
+scale = Vector2(6.9999995, 9.999999)
+shape = SubResource("RectangleShape2D_6hb1j")
+
+[node name="Front" type="Label" parent="BaralhoA/CartaA" unique_id=424738953]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "front"
+metadata/_edit_use_anchors_ = true
+
+[node name="Back" type="Label" parent="BaralhoA/CartaA" unique_id=331538113]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "back"
+metadata/_edit_use_anchors_ = true
+
+[node name="id" type="Label" parent="BaralhoA/CartaA" unique_id=1240790482]
+offset_top = 20.0
+offset_right = 40.0
+offset_bottom = 43.0
+
+[node name="SpFrente" type="Sprite2D" parent="BaralhoA/CartaA" unique_id=664600987]
+visible = false
+scale = Vector2(0.44999996, 0.44999996)
+texture = ExtResource("2_kedrr")
+
+[node name="SpCosta" type="Sprite2D" parent="BaralhoA/CartaA" unique_id=859636856]
+visible = false
+scale = Vector2(0.44999996, 0.44999996)
+texture = ExtResource("3_mgnuq")
+
+[node name="BaralhoV" type="Area2D" parent="." unique_id=1675386830]
+position = Vector2(640, 635)
+scale = Vector2(0.7, 0.7)
+metadata/_edit_group_ = true
+
+[node name="CartaV" type="Area2D" parent="BaralhoV" unique_id=2125377810]
+scale = Vector2(0.7, 0.7)
+script = ExtResource("1_16rjy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaralhoV/CartaV" unique_id=1087661228]
+scale = Vector2(6.9999995, 9.999999)
+shape = SubResource("RectangleShape2D_6hb1j")
+
+[node name="Front" type="Label" parent="BaralhoV/CartaV" unique_id=167356401]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "front"
+metadata/_edit_use_anchors_ = true
+
+[node name="Back" type="Label" parent="BaralhoV/CartaV" unique_id=893010645]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "back"
+metadata/_edit_use_anchors_ = true
+
+[node name="id" type="Label" parent="BaralhoV/CartaV" unique_id=18615291]
+offset_top = 20.0
+offset_right = 40.0
+offset_bottom = 43.0
+
+[node name="SpFrente" type="Sprite2D" parent="BaralhoV/CartaV" unique_id=828415871]
+visible = false
+scale = Vector2(0.44999996, 0.44999996)
+texture = ExtResource("2_kedrr")
+
+[node name="SpCosta" type="Sprite2D" parent="BaralhoV/CartaV" unique_id=1443708584]
+visible = false
+scale = Vector2(0.44999996, 0.44999996)
+texture = ExtResource("3_mgnuq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=90956077]
+
+[node name="Pontos Vermelhos" type="Label" parent="CanvasLayer" unique_id=900684866]
+offset_left = 13.0
+offset_top = 647.0
+offset_right = 89.0
+offset_bottom = 711.0
+text = "aaaa"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pontos Azul" type="Label" parent="CanvasLayer" unique_id=149113242]
+offset_left = 1178.0
+offset_top = 4.0
+offset_right = 1278.0
+offset_bottom = 62.0
+horizontal_alignment = 1
+vertical_alignment = 1
