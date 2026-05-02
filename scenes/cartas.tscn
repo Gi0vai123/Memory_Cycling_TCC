@@ -6,11 +6,28 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5a2ls"]
 
-[node name="Cartas" type="Node2D" unique_id=1088509637]
+[node name="Cards" type="Node2D" unique_id=1257550546]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1369554863]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=958410070]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="carta" type="Area2D" parent="." unique_id=1292711122]
-position = Vector2(637, 646)
+position = Vector2(589.00006, 627.97504)
+scale = Vector2(0.7, 0.7)
 script = ExtResource("1_nc0ik")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="carta" unique_id=26088972]
 scale = Vector2(7, 10)
@@ -41,6 +58,39 @@ scale = Vector2(0.45, 0.45)
 texture = ExtResource("2_ljfyx")
 
 [node name="SpCosta" type="Sprite2D" parent="carta" unique_id=1001427504]
+visible = false
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("3_uly2h")
+
+[node name="Deck" type="Area2D" parent="." unique_id=1868400004]
+position = Vector2(589.00006, 627.97504)
+scale = Vector2(0.7, 0.7)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Deck" unique_id=1154110149]
+scale = Vector2(7, 10)
+shape = SubResource("RectangleShape2D_5a2ls")
+
+[node name="Front" type="Label" parent="Deck" unique_id=868934107]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "front"
+metadata/_edit_use_anchors_ = true
+
+[node name="Back" type="Label" parent="Deck" unique_id=1727365985]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "back"
+metadata/_edit_use_anchors_ = true
+
+[node name="id" type="Label" parent="Deck" unique_id=616532755]
+offset_top = 20.0
+offset_right = 40.0
+offset_bottom = 43.0
+
+[node name="SpDack" type="Sprite2D" parent="Deck" unique_id=1271904634]
 visible = false
 scale = Vector2(0.45, 0.45)
 texture = ExtResource("3_uly2h")
