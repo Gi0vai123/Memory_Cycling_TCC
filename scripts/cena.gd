@@ -19,6 +19,12 @@ var pontos_feitos = 0
 var jogador_1 = str("")
 var jogador_2 = str("")
 var lado_escolhido = ""
+
+# ── Modo campeonato ──────────────────────────
+# Se Campeonato.campeonato_ativo for true, usa os nomes
+# definidos no singleton para exibição e para registrar resultado.
+var nome_jogador_azul: String = "Azul"
+var nome_jogador_vermelho: String = "Vermelho"
 var jogador_que_comeca = ""
 var pares_encontrados = 0
 var primeira_carta = null
@@ -65,6 +71,12 @@ func contagem_regressiva(contador):
 func _ready():
 	randomize()
 	definir_lados()
+
+	# Se estiver em modo campeonato, sobrescreve os nomes de exibição
+	if Campeonato.campeonato_ativo:
+		nome_jogador_azul    = Campeonato.jogador_a
+		nome_jogador_vermelho = Campeonato.jogador_b
+
 	start_jogo()
 	
 
@@ -240,12 +252,23 @@ func verificar_carta(carta):
 
 func ganhou():
 	tempo_ativo = false
+
+	var nome_vencedor: String
 	if jogador_atual == "azul":
-		print("Jogador Azul Ganhou!")
+		nome_vencedor = nome_jogador_azul
+		print(nome_vencedor + " Ganhou!")
 	else:
-		print("Jogador Vermelho Ganhou!")
+		nome_vencedor = nome_jogador_vermelho
+		print(nome_vencedor + " Ganhou!")
+
 	await get_tree().create_timer(1.5).timeout
-	reiniciar_jogo()
+
+	# Modo campeonato: registra resultado e volta à chave
+	if Campeonato.campeonato_ativo:
+		Campeonato.registrar_resultado(nome_vencedor)
+		get_tree().change_scene_to_file("res://scenes/chave_campeonato.tscn")
+	else:
+		reiniciar_jogo()
 
 func reiniciar_jogo():
 	get_tree().reload_current_scene()
@@ -276,7 +299,10 @@ func definir_lados():
 	jogador_atual = jogador_que_comeca
 
 func textJ():
-	$LabelJogador.text = str(jogador_atual)
+	if Campeonato.campeonato_ativo:
+		$LabelJogador.text = nome_jogador_azul if jogador_atual == "azul" else nome_jogador_vermelho
+	else:
+		$LabelJogador.text = str(jogador_atual)
 
 func mudando_atual():
 	jogador_atual = lado_oposto(jogador_atual)

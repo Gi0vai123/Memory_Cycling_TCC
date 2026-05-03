@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cadastrocampeonat"]
+
+[ext_resource type="Script" uid="uid://scriptcadastrocmp" path="res://scripts/cadastro_campeonato.gd" id="1_cad01"]
+
+[node name="CadastroCampeonato" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_cad01")
