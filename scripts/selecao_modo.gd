@@ -10,6 +10,7 @@ extends Control
 const CENA_PADRAO: String     = "res://scenes/modoP.tscn"
 const CENA_CAMPEONATO: String = "res://scenes/cadastro_campeonato.tscn"
 const CENA_ADIVINHA: String   = "res://scenes/duelo-advinho.tscn"
+const CENA_PROGRESSO: String  = "res://scenes/Progresso.tscn"
 const CENA_MENU: String       = "res://scenes/menu_screen.tscn"
 
 const COR_TOGGLE_ATIVO: Color   = Color(1.0, 0.9, 0.3)
@@ -100,6 +101,21 @@ func _on_adv_normal_pressed() -> void:
 
 func _on_adv_dificil_pressed() -> void:
 	get_tree().change_scene_to_file(CENA_ADIVINHA)
+
+
+# ─────────────────────────────────────────────
+#  Modo Progresso — fases que crescem em pares
+# ─────────────────────────────────────────────
+func _on_prog_facil_pressed() -> void:
+	get_tree().change_scene_to_file(CENA_PROGRESSO)
+
+
+func _on_prog_normal_pressed() -> void:
+	get_tree().change_scene_to_file(CENA_PROGRESSO)
+
+
+func _on_prog_dificil_pressed() -> void:
+	get_tree().change_scene_to_file(CENA_PROGRESSO)
 
 
 # ─────────────────────────────────────────────

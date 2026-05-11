@@ -22,6 +22,10 @@ var segunda_carta = null
 var valor_anterior_azul = 0.0
 var valor_anterior_vermelho = 0.0
 
+# Nomes de exibição (sobrescritos pelo singleton Campeonato quando ativo)
+var nome_jogador_azul: String = "Azul"
+var nome_jogador_vermelho: String = "Vermelho"
+
 const COLUNAS = 8
 const ESPACAMENTO_X = 130
 const ESPACAMENTO_Y = 150
@@ -40,6 +44,9 @@ func contagem_regressiva(contador):
 func _ready():
 	randomize()
 	definir_lados()
+	if Campeonato.campeonato_ativo:
+		nome_jogador_azul    = Campeonato.jogador_a
+		nome_jogador_vermelho = Campeonato.jogador_b
 	start_jogo()
 
 func _process(delta):
@@ -198,10 +205,18 @@ func verificar_carta(carta):
 
 func ganhou():
 	tempo_ativo = false
-	var vencedor = "Azul" if jogador_atual == "azul" else "Vermelho"
+	var vencedor: String
+	if Campeonato.campeonato_ativo:
+		vencedor = nome_jogador_azul if jogador_atual == "azul" else nome_jogador_vermelho
+	else:
+		vencedor = "Azul" if jogador_atual == "azul" else "Vermelho"
 	print("Equipe " + vencedor + " ganhou!")
 	await get_tree().create_timer(1.5).timeout
-	reiniciar_jogo()
+	if Campeonato.campeonato_ativo:
+		Campeonato.registrar_resultado(vencedor)
+		get_tree().change_scene_to_file("res://scenes/chave_campeonato.tscn")
+	else:
+		reiniciar_jogo()
 
 func reiniciar_jogo():
 	get_tree().reload_current_scene()
@@ -231,7 +246,10 @@ func definir_lados():
 	jogador_atual = jogador_que_comeca
 
 func textJ():
-	$UImp/LabelJogador.text = jogador_atual
+	if Campeonato.campeonato_ativo:
+		$UImp/LabelJogador.text = nome_jogador_azul if jogador_atual == "azul" else nome_jogador_vermelho
+	else:
+		$UImp/LabelJogador.text = jogador_atual
 
 func mudando_atual():
 	jogador_atual = lado_oposto(jogador_atual)
