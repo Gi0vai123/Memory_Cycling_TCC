@@ -14,9 +14,9 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_start_btn_pressed() -> void:
-	
-	get_tree().change_scene_to_file("res://scenes/modoP.tscn")
-	
+
+	get_tree().change_scene_to_file("res://scenes/selecao_modo.tscn")
+
 	pass
 
 func _on_options_btn_pressed() -> void:

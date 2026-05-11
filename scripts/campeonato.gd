@@ -2,17 +2,29 @@ extends Node
 
 # ─────────────────────────────────────────────
 #  Singleton: Campeonato
-#  Registrar como AutoLoad no project.godot:
+#  Registrado como AutoLoad em project.godot:
 #  [autoload]
 #  Campeonato="*res://scripts/campeonato.gd"
+#
+#  Suporta chaves de 4, 6 ou 8 jogadores.
+#  Cada partida guarda feed_idx/feed_slot — o índice
+#  e o slot (A/B) para onde manda o vencedor.
 # ─────────────────────────────────────────────
 
 # Estado geral
 var campeonato_ativo: bool = false
 var jogadores: Array = []
 
-# A chave: array de 7 dicionários (4 quartas + 2 semis + 1 final)
-# Cada dicionário: { rodada, jogadorA, jogadorB, vencedor }
+# Quantidade de jogadores escolhida na seleção de modo (4, 6 ou 8)
+var num_jogadores: int = 8
+
+# Quantidade de rodadas da chave atual (semis+final = 2; quartas+semis+final = 3)
+var num_rodadas: int = 0
+
+# A chave: array de partidas
+# Cada partida: { rodada, jogadorA, jogadorB, vencedor, feed_idx, feed_slot }
+#   feed_idx: índice da partida que recebe o vencedor (-1 se for a final)
+#   feed_slot: "A" ou "B" — slot que o vencedor vai ocupar
 var chave: Array = []
 
 # Índice da partida que está sendo jogada no momento
@@ -24,42 +36,88 @@ var jogador_b: String = ""
 
 
 # ─────────────────────────────────────────────
-#  Iniciar campeonato com 8 nomes
+#  Iniciar campeonato com a lista de nomes
+#  (o tamanho determina o formato da chave)
 # ─────────────────────────────────────────────
 func iniciar_campeonato(nomes: Array) -> void:
 	jogadores = nomes.duplicate()
 	jogadores.shuffle()   # aleatoriza a chave
 	chave.clear()
+	num_jogadores = jogadores.size()
 
-	# Rodada 0 — Quartas de final (4 partidas)
-	# Confrontos: [0]x[1], [2]x[3], [4]x[5], [6]x[7]
-	for i in range(0, 8, 2):
-		chave.append({
-			"rodada": 0,
-			"jogadorA": jogadores[i],
-			"jogadorB": jogadores[i + 1],
-			"vencedor": ""
-		})
-
-	# Rodada 1 — Semifinal (2 partidas)
-	for i in range(2):
-		chave.append({
-			"rodada": 1,
-			"jogadorA": "",
-			"jogadorB": "",
-			"vencedor": ""
-		})
-
-	# Rodada 2 — Final (1 partida)
-	chave.append({
-		"rodada": 2,
-		"jogadorA": "",
-		"jogadorB": "",
-		"vencedor": ""
-	})
+	match num_jogadores:
+		4:
+			_montar_chave_4()
+		6:
+			_montar_chave_6()
+		8:
+			_montar_chave_8()
+		_:
+			# Fallback: tenta 8 (mantém compatibilidade)
+			_montar_chave_8()
 
 	campeonato_ativo = true
 	partida_atual_idx = -1
+
+
+# ─────────────────────────────────────────────
+#  Helper para criar uma partida
+# ─────────────────────────────────────────────
+func _partida(rodada: int, jA: String, jB: String, feed_idx: int, feed_slot: String) -> Dictionary:
+	return {
+		"rodada": rodada,
+		"jogadorA": jA,
+		"jogadorB": jB,
+		"vencedor": "",
+		"feed_idx": feed_idx,
+		"feed_slot": feed_slot,
+	}
+
+
+# ─────────────────────────────────────────────
+#  4 jogadores: 2 semis + 1 final
+#    Índices: 0=Semi1, 1=Semi2, 2=Final
+# ─────────────────────────────────────────────
+func _montar_chave_4() -> void:
+	num_rodadas = 2
+	chave.append(_partida(0, jogadores[0], jogadores[1], 2, "A"))
+	chave.append(_partida(0, jogadores[2], jogadores[3], 2, "B"))
+	chave.append(_partida(1, "", "", -1, ""))
+
+
+# ─────────────────────────────────────────────
+#  6 jogadores: 2 preliminares + 2 semis (com byes) + 1 final
+#    Jogadores 0 e 1 (após shuffle) são cabeças-de-chave
+#    Índices: 0=Prelim1, 1=Prelim2, 2=Semi1, 3=Semi2, 4=Final
+# ─────────────────────────────────────────────
+func _montar_chave_6() -> void:
+	num_rodadas = 3
+	# Preliminares — disputadas pelos jogadores 2..5
+	chave.append(_partida(0, jogadores[2], jogadores[3], 2, "B"))
+	chave.append(_partida(0, jogadores[4], jogadores[5], 3, "B"))
+	# Semis — jogadores 0 e 1 entram com bye no slot A
+	chave.append(_partida(1, jogadores[0], "", 4, "A"))
+	chave.append(_partida(1, jogadores[1], "", 4, "B"))
+	# Final
+	chave.append(_partida(2, "", "", -1, ""))
+
+
+# ─────────────────────────────────────────────
+#  8 jogadores: 4 quartas + 2 semis + 1 final
+#    Índices: 0..3=Quartas, 4=Semi1, 5=Semi2, 6=Final
+# ─────────────────────────────────────────────
+func _montar_chave_8() -> void:
+	num_rodadas = 3
+	# Quartas
+	chave.append(_partida(0, jogadores[0], jogadores[1], 4, "A"))
+	chave.append(_partida(0, jogadores[2], jogadores[3], 4, "B"))
+	chave.append(_partida(0, jogadores[4], jogadores[5], 5, "A"))
+	chave.append(_partida(0, jogadores[6], jogadores[7], 5, "B"))
+	# Semis
+	chave.append(_partida(1, "", "", 6, "A"))
+	chave.append(_partida(1, "", "", 6, "B"))
+	# Final
+	chave.append(_partida(2, "", "", -1, ""))
 
 
 # ─────────────────────────────────────────────
@@ -85,54 +143,33 @@ func iniciar_partida(idx: int) -> void:
 
 # ─────────────────────────────────────────────
 #  Registra o vencedor da partida atual
-#  e propaga para a próxima rodada
+#  e propaga para a próxima rodada via feed_idx/feed_slot
 # ─────────────────────────────────────────────
 func registrar_resultado(vencedor: String) -> void:
 	if partida_atual_idx < 0:
 		return
 
 	chave[partida_atual_idx].vencedor = vencedor
-	_propagar_vencedores()
+	_propagar_vencedor(partida_atual_idx)
+
+
+func _propagar_vencedor(idx: int) -> void:
+	var p = chave[idx]
+	if p.feed_idx < 0:
+		return
+	if p.feed_slot == "A":
+		chave[p.feed_idx].jogadorA = p.vencedor
+	else:
+		chave[p.feed_idx].jogadorB = p.vencedor
 
 
 # ─────────────────────────────────────────────
-#  Lógica interna: preenche jogadores nas rodadas seguintes
-#
-#  Estrutura dos índices na chave:
-#    0: Q1 (jA→S1.jogA)   1: Q2 (jA→S1.jogB)
-#    2: Q3 (jA→S2.jogA)   3: Q4 (jA→S2.jogB)
-#    4: S1 (jA→F.jogA)
-#    5: S2 (jA→F.jogB)
-#    6: Final
-# ─────────────────────────────────────────────
-func _propagar_vencedores() -> void:
-	# Quartas → Semifinais
-	# S1 (idx 4): recebe vencedor de Q1 (idx 0) e Q2 (idx 1)
-	# S2 (idx 5): recebe vencedor de Q3 (idx 2) e Q4 (idx 3)
-	for semi_i in range(2):
-		var q_a_idx = semi_i * 2        # 0 ou 2
-		var q_b_idx = semi_i * 2 + 1   # 1 ou 3
-		var semi_idx = 4 + semi_i      # 4 ou 5
-
-		if chave[q_a_idx].vencedor != "":
-			chave[semi_idx].jogadorA = chave[q_a_idx].vencedor
-		if chave[q_b_idx].vencedor != "":
-			chave[semi_idx].jogadorB = chave[q_b_idx].vencedor
-
-	# Semifinais → Final
-	if chave[4].vencedor != "":
-		chave[6].jogadorA = chave[4].vencedor
-	if chave[5].vencedor != "":
-		chave[6].jogadorB = chave[5].vencedor
-
-
-# ─────────────────────────────────────────────
-#  Retorna o nome do campeão (ou "" se ainda não definido)
+#  Retorna o nome do campeão (vencedor da última partida)
 # ─────────────────────────────────────────────
 func campeao() -> String:
-	if chave.size() == 7:
-		return chave[6].vencedor
-	return ""
+	if chave.is_empty():
+		return ""
+	return chave[chave.size() - 1].vencedor
 
 
 # ─────────────────────────────────────────────
@@ -145,3 +182,4 @@ func resetar() -> void:
 	partida_atual_idx = -1
 	jogador_a = ""
 	jogador_b = ""
+	# num_jogadores fica preservado — usado pela tela de cadastro
