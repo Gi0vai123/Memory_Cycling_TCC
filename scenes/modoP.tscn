@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bnfob8tu5s7cb" path="res://scripts/cena.gd" id="1_woyb7"]
 [ext_resource type="PackedScene" uid="uid://df8fntwdh536s" path="res://scenes/cartas.tscn" id="2_048lv"]
 [ext_resource type="Texture2D" uid="uid://ebreotoaqfu0" path="res://imagens/time-vermelho.png" id="4_qxw3i"]
+[ext_resource type="PackedScene" uid="uid://c6hwm4spwpxfp" path="res://prefabs/carta.tscn" id="5_1nxbq"]
 [ext_resource type="Texture2D" uid="uid://c3wcf08npu1ks" path="res://imagens/time-azul.png" id="5_7lspx"]
 [ext_resource type="Texture2D" uid="uid://efcs2ni5uxd4" path="res://imagens/barra2.png" id="6_woyb7"]
 [ext_resource type="Texture2D" uid="uid://gh7vjn47kmtd" path="res://imagens/setaazul.png" id="7_vuhw6"]
@@ -32,8 +33,9 @@ visible = false
 position = Vector2(570, 332)
 scale = Vector2(9.07175, 10.369375)
 
-[node name="Cartas" parent="." unique_id=1088509637 instance=ExtResource("2_048lv")]
+[node name="carta" parent="." unique_id=1326822372 instance=ExtResource("5_1nxbq")]
 visible = false
+position = Vector2(667, 714)
 
 [node name="UImp" type="CanvasLayer" parent="." unique_id=600588184]
 

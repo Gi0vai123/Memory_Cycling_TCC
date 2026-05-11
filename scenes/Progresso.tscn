@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bsb7ipqt085bw"]
+
+[ext_resource type="Script" uid="uid://btbgxp1slpf5y" path="res://scripts/progresso.gd" id="1_a7ww8"]
+[ext_resource type="PackedScene" uid="uid://c6hwm4spwpxfp" path="res://prefabs/carta.tscn" id="2_lkrqq"]
+[ext_resource type="PackedScene" uid="uid://df8fntwdh536s" path="res://scenes/cartas.tscn" id="2_rc5xx"]
+
+[node name="Node2D" type="Node2D" unique_id=1304687816]
+script = ExtResource("1_a7ww8")
+card_scene = ExtResource("2_rc5xx")
+
+[node name="carta" parent="." unique_id=1326822372 instance=ExtResource("2_lkrqq")]
+visible = false

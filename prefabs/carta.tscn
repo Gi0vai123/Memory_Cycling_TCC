@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://c6hwm4spwpxfp"]
+
+[ext_resource type="Script" uid="uid://7g3efslbkjt3" path="res://scripts/funcCarta.gd" id="1_6pljl"]
+[ext_resource type="Texture2D" uid="uid://co80b524sig6q" path="res://imagens/cards_do_jogo_frente.png" id="2_tbwqe"]
+[ext_resource type="Texture2D" uid="uid://b0xf8avasf5hb" path="res://imagens/cards_do_jogo.png" id="3_dowsw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5a2ls"]
+
+[node name="carta" type="Area2D" unique_id=1326822372]
+scale = Vector2(0.7, 0.7)
+script = ExtResource("1_6pljl")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=943849352]
+scale = Vector2(7, 10)
+shape = SubResource("RectangleShape2D_5a2ls")
+
+[node name="Front" type="Label" parent="." unique_id=1115111094]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "front"
+metadata/_edit_use_anchors_ = true
+
+[node name="Back" type="Label" parent="." unique_id=1242847679]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "back"
+metadata/_edit_use_anchors_ = true
+
+[node name="id" type="Label" parent="." unique_id=718367103]
+offset_top = 20.0
+offset_right = 40.0
+offset_bottom = 43.0
+
+[node name="SpFrente" type="Sprite2D" parent="." unique_id=1718998932]
+visible = false
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("2_tbwqe")
+
+[node name="SpCosta" type="Sprite2D" parent="." unique_id=1395399031]
+visible = false
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("3_dowsw")
