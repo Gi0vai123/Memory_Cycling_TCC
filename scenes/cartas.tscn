@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://df8fntwdh536s"]
 
-[ext_resource type="Script" uid="uid://7g3efslbkjt3" path="res://scripts/funcCarta.gd" id="1_nc0ik"]
-[ext_resource type="Texture2D" uid="uid://co80b524sig6q" path="res://imagens/cards_do_jogo_frente.png" id="2_ljfyx"]
+[ext_resource type="PackedScene" uid="uid://c6hwm4spwpxfp" path="res://prefabs/carta.tscn" id="1_j6rum"]
 [ext_resource type="Texture2D" uid="uid://b0xf8avasf5hb" path="res://imagens/cards_do_jogo.png" id="3_uly2h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5a2ls"]
@@ -23,44 +22,8 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="carta" type="Area2D" parent="." unique_id=1292711122]
+[node name="carta" parent="." unique_id=1326822372 instance=ExtResource("1_j6rum")]
 position = Vector2(589.00006, 627.97504)
-scale = Vector2(0.7, 0.7)
-script = ExtResource("1_nc0ik")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="carta" unique_id=26088972]
-scale = Vector2(7, 10)
-shape = SubResource("RectangleShape2D_5a2ls")
-
-[node name="Front" type="Label" parent="carta" unique_id=76124350]
-visible = false
-offset_right = 40.0
-offset_bottom = 23.0
-text = "front"
-metadata/_edit_use_anchors_ = true
-
-[node name="Back" type="Label" parent="carta" unique_id=2115580381]
-visible = false
-offset_right = 40.0
-offset_bottom = 23.0
-text = "back"
-metadata/_edit_use_anchors_ = true
-
-[node name="id" type="Label" parent="carta" unique_id=286844462]
-offset_top = 20.0
-offset_right = 40.0
-offset_bottom = 43.0
-
-[node name="SpFrente" type="Sprite2D" parent="carta" unique_id=1397003271]
-visible = false
-scale = Vector2(0.45, 0.45)
-texture = ExtResource("2_ljfyx")
-
-[node name="SpCosta" type="Sprite2D" parent="carta" unique_id=1001427504]
-visible = false
-scale = Vector2(0.45, 0.45)
-texture = ExtResource("3_uly2h")
 
 [node name="Deck" type="Area2D" parent="." unique_id=1868400004]
 position = Vector2(589.00006, 627.97504)
