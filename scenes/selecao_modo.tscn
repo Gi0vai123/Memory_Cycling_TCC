@@ -1,0 +1,351 @@
+[gd_scene format=3 uid="uid://djtfumtr2lppk"]
+
+[ext_resource type="Script" uid="uid://selecaomodo001" path="res://scripts/selecao_modo.gd" id="1_smdo1"]
+
+[node name="SelecaoModo" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_smdo1")
+
+[node name="Fundo" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.07, 0.07, 0.14, 1)
+mouse_filter = 2
+
+[node name="Titulo" type="Label" parent="."]
+layout_mode = 0
+offset_top = 28.0
+offset_right = 1280.0
+offset_bottom = 70.0
+theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
+theme_override_font_sizes/font_size = 34
+text = "ESCOLHA O MODO"
+horizontal_alignment = 1
+
+[node name="BtnVoltar" type="Button" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 26.0
+offset_right = 144.0
+offset_bottom = 62.0
+theme_override_font_sizes/font_size = 15
+text = "← Voltar"
+
+[node name="CardPadrao" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 75.0
+offset_right = 416.0
+offset_bottom = 675.0
+color = Color(0.15, 0.15, 0.25, 1)
+
+[node name="TituloModo" type="Label" parent="CardPadrao"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 400.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 26
+text = "Modo Padrão"
+horizontal_alignment = 1
+
+[node name="Imagem" type="ColorRect" parent="CardPadrao"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 65.0
+offset_right = 376.0
+offset_bottom = 290.0
+color = Color(0.25, 0.25, 0.35, 1)
+mouse_filter = 2
+
+[node name="ImagemLabel" type="Label" parent="CardPadrao/Imagem"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_colors/font_color = Color(0.6, 0.6, 0.7, 1)
+theme_override_font_sizes/font_size = 15
+text = "[ imagem em breve ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2
+
+[node name="Descricao" type="Label" parent="CardPadrao"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 305.0
+offset_right = 376.0
+offset_bottom = 395.0
+theme_override_colors/font_color = Color(0.85, 0.85, 0.95, 1)
+theme_override_font_sizes/font_size = 16
+text = "Partida 1x1 entre os times Azul e Vermelho. Vence quem encontrar mais pares antes do tempo acabar."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="DificuldadeLabel" type="Label" parent="CardPadrao"]
+layout_mode = 0
+offset_top = 505.0
+offset_right = 400.0
+offset_bottom = 525.0
+theme_override_colors/font_color = Color(0.75, 0.75, 0.9, 1)
+theme_override_font_sizes/font_size = 14
+text = "Dificuldade"
+horizontal_alignment = 1
+
+[node name="BtnFacil" type="Button" parent="CardPadrao"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 530.0
+offset_right = 131.0
+offset_bottom = 588.0
+theme_override_font_sizes/font_size = 18
+text = "Fácil"
+
+[node name="BtnNormal" type="Button" parent="CardPadrao"]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 530.0
+offset_right = 255.0
+offset_bottom = 588.0
+theme_override_font_sizes/font_size = 18
+text = "Normal"
+
+[node name="BtnDificil" type="Button" parent="CardPadrao"]
+layout_mode = 0
+offset_left = 269.0
+offset_top = 530.0
+offset_right = 379.0
+offset_bottom = 588.0
+theme_override_font_sizes/font_size = 18
+text = "Difícil"
+
+[node name="CardCampeonato" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 75.0
+offset_right = 840.0
+offset_bottom = 675.0
+color = Color(0.15, 0.15, 0.25, 1)
+
+[node name="TituloModo" type="Label" parent="CardCampeonato"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 400.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 26
+text = "Modo Campeonato"
+horizontal_alignment = 1
+
+[node name="Imagem" type="ColorRect" parent="CardCampeonato"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 65.0
+offset_right = 376.0
+offset_bottom = 290.0
+color = Color(0.25, 0.25, 0.35, 1)
+mouse_filter = 2
+
+[node name="ImagemLabel" type="Label" parent="CardCampeonato/Imagem"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_colors/font_color = Color(0.6, 0.6, 0.7, 1)
+theme_override_font_sizes/font_size = 15
+text = "[ imagem em breve ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2
+
+[node name="Descricao" type="Label" parent="CardCampeonato"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 305.0
+offset_right = 376.0
+offset_bottom = 395.0
+theme_override_colors/font_color = Color(0.85, 0.85, 0.95, 1)
+theme_override_font_sizes/font_size = 16
+text = "Chaveamento eliminatório entre os jogadores cadastrados. Escolha a quantidade e a dificuldade."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="JogadoresLabel" type="Label" parent="CardCampeonato"]
+layout_mode = 0
+offset_top = 405.0
+offset_right = 400.0
+offset_bottom = 425.0
+theme_override_colors/font_color = Color(0.75, 0.75, 0.9, 1)
+theme_override_font_sizes/font_size = 14
+text = "Quantos jogadores?"
+horizontal_alignment = 1
+
+[node name="Btn4" type="Button" parent="CardCampeonato"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 430.0
+offset_right = 140.0
+offset_bottom = 476.0
+theme_override_font_sizes/font_size = 18
+text = "4"
+
+[node name="Btn6" type="Button" parent="CardCampeonato"]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 430.0
+offset_right = 244.0
+offset_bottom = 476.0
+theme_override_font_sizes/font_size = 18
+text = "6"
+
+[node name="Btn8" type="Button" parent="CardCampeonato"]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 430.0
+offset_right = 348.0
+offset_bottom = 476.0
+theme_override_font_sizes/font_size = 18
+text = "8"
+
+[node name="DificuldadeLabel" type="Label" parent="CardCampeonato"]
+layout_mode = 0
+offset_top = 505.0
+offset_right = 400.0
+offset_bottom = 525.0
+theme_override_colors/font_color = Color(0.75, 0.75, 0.9, 1)
+theme_override_font_sizes/font_size = 14
+text = "Dificuldade"
+horizontal_alignment = 1
+
+[node name="BtnFacil" type="Button" parent="CardCampeonato"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 530.0
+offset_right = 131.0
+offset_bottom = 588.0
+theme_override_font_sizes/font_size = 18
+text = "Fácil"
+
+[node name="BtnNormal" type="Button" parent="CardCampeonato"]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 530.0
+offset_right = 255.0
+offset_bottom = 588.0
+theme_override_font_sizes/font_size = 18
+text = "Normal"
+
+[node name="BtnDificil" type="Button" parent="CardCampeonato"]
+layout_mode = 0
+offset_left = 269.0
+offset_top = 530.0
+offset_right = 379.0
+offset_bottom = 588.0
+theme_override_font_sizes/font_size = 18
+text = "Difícil"
+
+[node name="CardAdivinhacao" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 864.0
+offset_top = 75.0
+offset_right = 1264.0
+offset_bottom = 675.0
+color = Color(0.15, 0.15, 0.25, 1)
+
+[node name="TituloModo" type="Label" parent="CardAdivinhacao"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 400.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 26
+text = "Modo Adivinhação"
+horizontal_alignment = 1
+
+[node name="Imagem" type="ColorRect" parent="CardAdivinhacao"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 65.0
+offset_right = 376.0
+offset_bottom = 290.0
+color = Color(0.25, 0.25, 0.35, 1)
+mouse_filter = 2
+
+[node name="ImagemLabel" type="Label" parent="CardAdivinhacao/Imagem"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_colors/font_color = Color(0.6, 0.6, 0.7, 1)
+theme_override_font_sizes/font_size = 15
+text = "[ imagem em breve ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2
+
+[node name="Descricao" type="Label" parent="CardAdivinhacao"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 305.0
+offset_right = 376.0
+offset_bottom = 395.0
+theme_override_colors/font_color = Color(0.85, 0.85, 0.95, 1)
+theme_override_font_sizes/font_size = 16
+text = "Duelo entre os baralhos dos jogadores. Tente adivinhar qual carta o oponente vai virar a cada rodada."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="DificuldadeLabel" type="Label" parent="CardAdivinhacao"]
+layout_mode = 0
+offset_top = 505.0
+offset_right = 400.0
+offset_bottom = 525.0
+theme_override_colors/font_color = Color(0.75, 0.75, 0.9, 1)
+theme_override_font_sizes/font_size = 14
+text = "Dificuldade"
+horizontal_alignment = 1
+
+[node name="BtnFacil" type="Button" parent="CardAdivinhacao"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 530.0
+offset_right = 131.0
+offset_bottom = 588.0
+theme_override_font_sizes/font_size = 18
+text = "Fácil"
+
+[node name="BtnNormal" type="Button" parent="CardAdivinhacao"]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 530.0
+offset_right = 255.0
+offset_bottom = 588.0
+theme_override_font_sizes/font_size = 18
+text = "Normal"
+
+[node name="BtnDificil" type="Button" parent="CardAdivinhacao"]
+layout_mode = 0
+offset_left = 269.0
+offset_top = 530.0
+offset_right = 379.0
+offset_bottom = 588.0
+theme_override_font_sizes/font_size = 18
+text = "Difícil"
+
+[connection signal="pressed" from="BtnVoltar" to="." method="_on_voltar_pressed"]
+[connection signal="pressed" from="CardPadrao/BtnFacil" to="." method="_on_padrao_facil_pressed"]
+[connection signal="pressed" from="CardPadrao/BtnNormal" to="." method="_on_padrao_normal_pressed"]
+[connection signal="pressed" from="CardPadrao/BtnDificil" to="." method="_on_padrao_dificil_pressed"]
+[connection signal="pressed" from="CardCampeonato/Btn4" to="." method="_on_btn_4_pressed"]
+[connection signal="pressed" from="CardCampeonato/Btn6" to="." method="_on_btn_6_pressed"]
+[connection signal="pressed" from="CardCampeonato/Btn8" to="." method="_on_btn_8_pressed"]
+[connection signal="pressed" from="CardCampeonato/BtnFacil" to="." method="_on_camp_facil_pressed"]
+[connection signal="pressed" from="CardCampeonato/BtnNormal" to="." method="_on_camp_normal_pressed"]
+[connection signal="pressed" from="CardCampeonato/BtnDificil" to="." method="_on_camp_dificil_pressed"]
+[connection signal="pressed" from="CardAdivinhacao/BtnFacil" to="." method="_on_adv_facil_pressed"]
+[connection signal="pressed" from="CardAdivinhacao/BtnNormal" to="." method="_on_adv_normal_pressed"]
+[connection signal="pressed" from="CardAdivinhacao/BtnDificil" to="." method="_on_adv_dificil_pressed"]

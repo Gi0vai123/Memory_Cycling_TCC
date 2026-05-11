@@ -15,6 +15,10 @@ run/main_scene="uid://dhuwtba1ubx2k"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://scenes/icon.svg"
 
+[autoload]
+
+Campeonato="*res://scripts/campeonato.gd"
+
 [display]
 
 window/size/viewport_width=1280
