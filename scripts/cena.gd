@@ -124,7 +124,7 @@ func criar_cartas():
 		
 		await get_tree().create_timer(0.05).timeout
 
-	# depois que TODAS terminarem
+	
 	await mostrar_cartas_inicial()
 	for carta in cartas:
 		carta.pode_animar = true
@@ -133,19 +133,19 @@ func mostrar_cartas_inicial():
 	
 	tempo_ativo = false
 	atualizar_barra_jogador()
-	# vira todas pra frente
+	
 	for carta in cartas:
 		carta.get_node("CollisionShape2D").disabled = true
 		carta.virar()
 		
 	await get_tree().create_timer(4.0).timeout
 	
-	# vira todas pra trás
+	
 	for carta in cartas:
 		carta.virar()
 		carta.get_node("CollisionShape2D").disabled = false
 	
-	# agora começa o tempo
+	
 	tempo_ativo = true
 	
 
@@ -195,7 +195,7 @@ func atualizar_barra_jogador():
 func atualizar_setas(diferenca):
 
 	
-	# porcentagem (0 a 1)
+	
 	var p_azul = barra_azul.value
 	var p_vermelho = barra_vermelha.value 
 	
