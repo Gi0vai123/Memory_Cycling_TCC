@@ -1,59 +1,49 @@
 extends Control
 
 # ─────────────────────────────────────────────
-#  Tela da Chave do Campeonato (layout dinâmico)
-#  Funciona com chaves de 4, 6 ou 8 jogadores —
-#  posiciona caixas e conectores com base nas
-#  rodadas presentes em Campeonato.chave.
+#  Tela da Chave do Campeonato (layout dinamico).
+#
+#  O chrome (titulo, status, botoes, campeao) eh editor-built
+#  em chave_campeonato.tscn. As caixas das partidas e os
+#  conectores sao gerados em codigo dentro do BracketContainer,
+#  ja que a estrutura varia por formato (4/6/8 jogadores).
 # ─────────────────────────────────────────────
 
 const LARGURA_CAIXA: float = 255.0
 const ALTURA_CAIXA: float = 86.0
 const Y_INICIO: float = 110.0
 const Y_FIM: float = 560.0
-
-# Largura de cada coluna (rodada). col_x[r] = X_INICIO + r * COLUNA_LARGURA
 const X_INICIO: float = 50.0
 const COLUNA_LARGURA: float = 360.0
 
-# Headers genéricos por número de rodadas total
-# (escolhe o vetor certo com base em Campeonato.num_rodadas)
 const HEADERS_2 := ["SEMIFINAL", "FINAL", "CAMPEÃO"]
 const HEADERS_3 := ["1ª RODADA", "SEMIFINAL", "FINAL", "CAMPEÃO"]
 const HEADERS_3_QUARTAS := ["QUARTAS DE FINAL", "SEMIFINAL", "FINAL", "CAMPEÃO"]
 
-# Referências aos painéis: { idx: { panel, lbl_a, lbl_b, pos } }
+@onready var titulo: Label = $Titulo
+@onready var bracket: Control = $BracketContainer
+@onready var label_status: Label = $LabelStatus
+@onready var label_campeao: Label = $LabelCampeao
+@onready var btn_jogar: Button = $BtnJogar
+
+# Referencias aos paineis criados: { idx: { panel, lbl_a, lbl_b, pos } }
 var paineis_partidas: Dictionary = {}
-var label_status: Label
-var btn_jogar: Button
-var label_campeao: Label
 
 
 func _ready() -> void:
-	_criar_interface()
+	titulo.text = "CAMPEONATO (%d JOGADORES)" % Campeonato.num_jogadores
+	_montar_bracket()
 	_atualizar_chave()
 
 
 # ─────────────────────────────────────────────
-#  Constrói a interface
+#  Constroi o bracket dentro do BracketContainer
 # ─────────────────────────────────────────────
-func _criar_interface() -> void:
-
-	# Fundo
-	var fundo = ColorRect.new()
-	fundo.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	fundo.color = Color(0.07, 0.07, 0.14)
-	add_child(fundo)
-
-	# Título
-	var titulo = Label.new()
-	titulo.text = "CAMPEONATO (%d JOGADORES)" % Campeonato.num_jogadores
-	titulo.add_theme_font_size_override("font_size", 30)
-	titulo.modulate = Color(1.0, 0.85, 0.2)
-	titulo.position = Vector2(0, 16)
-	titulo.size = Vector2(1280, 50)
-	titulo.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(titulo)
+func _montar_bracket() -> void:
+	# Limpa filhos do container (re-entradas)
+	for child in bracket.get_children():
+		child.queue_free()
+	paineis_partidas.clear()
 
 	# Agrupa partidas por rodada
 	var partidas_por_rodada: Dictionary = {}
@@ -73,9 +63,9 @@ func _criar_interface() -> void:
 		lbl.add_theme_font_size_override("font_size", 14)
 		lbl.modulate = Color(0.55, 0.75, 1.0)
 		lbl.position = Vector2(X_INICIO + r * COLUNA_LARGURA, 72)
-		add_child(lbl)
+		bracket.add_child(lbl)
 
-	# Cria as caixas de cada rodada
+	# Caixas
 	for r in range(Campeonato.num_rodadas):
 		if not partidas_por_rodada.has(r):
 			continue
@@ -86,7 +76,7 @@ func _criar_interface() -> void:
 			var pos = Vector2(X_INICIO + r * COLUNA_LARGURA, ys[k])
 			_criar_caixa_partida(idx, pos)
 
-	# Conectores: cada partida liga ao seu feed_idx
+	# Conectores
 	for i in range(Campeonato.chave.size()):
 		var p = Campeonato.chave[i]
 		if p.feed_idx >= 0 and paineis_partidas.has(p.feed_idx):
@@ -100,44 +90,6 @@ func _criar_interface() -> void:
 		var x_campeao = X_INICIO + Campeonato.num_rodadas * COLUNA_LARGURA
 		_criar_conector(saida, Vector2(x_campeao, saida.y))
 
-	# Label campeão
-	var x_campeao_col = X_INICIO + Campeonato.num_rodadas * COLUNA_LARGURA
-	label_campeao = Label.new()
-	label_campeao.text = "???"
-	label_campeao.add_theme_font_size_override("font_size", 20)
-	label_campeao.modulate = Color(1.0, 0.85, 0.2)
-	label_campeao.position = Vector2(x_campeao_col, 300)
-	label_campeao.size = Vector2(220, 80)
-	label_campeao.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	add_child(label_campeao)
-
-	# Status
-	label_status = Label.new()
-	label_status.text = ""
-	label_status.add_theme_font_size_override("font_size", 18)
-	label_status.modulate = Color(0.3, 1.0, 0.5)
-	label_status.position = Vector2(50, 598)
-	label_status.size = Vector2(900, 32)
-	add_child(label_status)
-
-	# Botão Jogar
-	btn_jogar = Button.new()
-	btn_jogar.text = "▶  JOGAR PRÓXIMA PARTIDA"
-	btn_jogar.position = Vector2(400, 640)
-	btn_jogar.size = Vector2(380, 54)
-	btn_jogar.add_theme_font_size_override("font_size", 20)
-	btn_jogar.pressed.connect(_on_btn_jogar_pressed)
-	add_child(btn_jogar)
-
-	# Botão Voltar ao menu
-	var btn_voltar = Button.new()
-	btn_voltar.text = "← Menu"
-	btn_voltar.position = Vector2(40, 650)
-	btn_voltar.size = Vector2(130, 44)
-	btn_voltar.add_theme_font_size_override("font_size", 16)
-	btn_voltar.pressed.connect(_on_btn_voltar_pressed)
-	add_child(btn_voltar)
-
 
 # ─────────────────────────────────────────────
 #  Escolhe o vetor de headers conforme o formato
@@ -145,7 +97,6 @@ func _criar_interface() -> void:
 func _escolher_headers() -> Array:
 	if Campeonato.num_rodadas == 2:
 		return HEADERS_2
-	# 3 rodadas: 8 jogadores começam em quartas, 6 começam em "1ª rodada" (preliminares)
 	if Campeonato.num_jogadores == 8:
 		return HEADERS_3_QUARTAS
 	return HEADERS_3
@@ -169,47 +120,43 @@ func _ys_distribuidos(n: int) -> Array:
 
 
 # ─────────────────────────────────────────────
-#  Cria a caixa visual de uma partida
+#  Cria a caixa visual de uma partida (no BracketContainer)
 # ─────────────────────────────────────────────
 func _criar_caixa_partida(idx: int, pos: Vector2) -> void:
 	var panel = Panel.new()
 	panel.position = pos
 	panel.size = Vector2(LARGURA_CAIXA, ALTURA_CAIXA)
-	add_child(panel)
+	bracket.add_child(panel)
 
-	# Número da partida
 	var lbl_num = Label.new()
 	lbl_num.text = "P" + str(idx + 1)
 	lbl_num.add_theme_font_size_override("font_size", 11)
 	lbl_num.modulate = Color(0.5, 0.5, 0.5)
 	lbl_num.position = pos + Vector2(4, 4)
-	add_child(lbl_num)
+	bracket.add_child(lbl_num)
 
-	# Jogador A
 	var lbl_a = Label.new()
 	lbl_a.text = "???"
 	lbl_a.add_theme_font_size_override("font_size", 16)
 	lbl_a.modulate = Color(0.55, 0.75, 1.0)
 	lbl_a.position = pos + Vector2(8, 18)
 	lbl_a.size = Vector2(240, 26)
-	add_child(lbl_a)
+	bracket.add_child(lbl_a)
 
-	# Separador "vs"
 	var lbl_vs = Label.new()
 	lbl_vs.text = "— vs —"
 	lbl_vs.add_theme_font_size_override("font_size", 11)
 	lbl_vs.modulate = Color(0.45, 0.45, 0.45)
 	lbl_vs.position = pos + Vector2(8, 44)
-	add_child(lbl_vs)
+	bracket.add_child(lbl_vs)
 
-	# Jogador B
 	var lbl_b = Label.new()
 	lbl_b.text = "???"
 	lbl_b.add_theme_font_size_override("font_size", 16)
 	lbl_b.modulate = Color(1.0, 0.5, 0.5)
 	lbl_b.position = pos + Vector2(8, 58)
 	lbl_b.size = Vector2(240, 26)
-	add_child(lbl_b)
+	bracket.add_child(lbl_b)
 
 	paineis_partidas[idx] = {
 		"panel": panel,
@@ -242,15 +189,13 @@ func _criar_conector(de: Vector2, para: Vector2) -> void:
 	linha.color = Color(0.3, 0.3, 0.5, 0.7)
 
 	if abs(de.x - para.x) > abs(de.y - para.y):
-		# Horizontal
 		linha.position = Vector2(min(de.x, para.x), de.y - 1)
 		linha.size = Vector2(abs(para.x - de.x), 2)
 	else:
-		# Vertical
 		linha.position = Vector2(de.x - 1, min(de.y, para.y))
 		linha.size = Vector2(2, abs(para.y - de.y))
 
-	add_child(linha)
+	bracket.add_child(linha)
 
 
 # ─────────────────────────────────────────────
@@ -264,19 +209,16 @@ func _atualizar_chave() -> void:
 		var p = chave[idx]
 		var refs = paineis_partidas[idx]
 
-		# Nomes
 		refs.lbl_a.text = p.jogadorA if p.jogadorA != "" else "???"
 		refs.lbl_b.text = p.jogadorB if p.jogadorB != "" else "???"
 
-		# Cor do painel
 		if idx == prox_idx:
-			refs.panel.modulate = Color(1.2, 1.2, 0.4)   # amarelo
+			refs.panel.modulate = Color(1.2, 1.2, 0.4)
 		elif p.vencedor != "":
-			refs.panel.modulate = Color(0.5, 0.5, 0.5)   # cinza = encerrada
+			refs.panel.modulate = Color(0.5, 0.5, 0.5)
 		else:
 			refs.panel.modulate = Color(1.0, 1.0, 1.0)
 
-		# Risca o perdedor e destaca o vencedor
 		if p.vencedor != "":
 			if refs.lbl_a.text == p.vencedor:
 				refs.lbl_a.modulate = Color(0.2, 1.0, 0.4)
@@ -285,7 +227,6 @@ func _atualizar_chave() -> void:
 				refs.lbl_b.modulate = Color(0.2, 1.0, 0.4)
 				refs.lbl_a.modulate = Color(0.35, 0.35, 0.35)
 
-	# Campeão
 	var campeao = Campeonato.campeao()
 	if campeao != "":
 		label_campeao.text = "🏆\n" + campeao

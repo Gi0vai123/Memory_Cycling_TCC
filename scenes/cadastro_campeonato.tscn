@@ -8,3 +8,213 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource("1_cad01")
+
+[node name="Fundo" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.07, 0.07, 0.14, 1)
+mouse_filter = 2
+
+[node name="Titulo" type="Label" parent="."]
+layout_mode = 0
+offset_top = 24.0
+offset_right = 1280.0
+offset_bottom = 70.0
+theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
+theme_override_font_sizes/font_size = 30
+text = "CAMPEONATO — CADASTRO DE 8 JOGADORES"
+horizontal_alignment = 1
+
+[node name="Subtitulo" type="Label" parent="."]
+layout_mode = 0
+offset_top = 72.0
+offset_right = 1280.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 16
+text = "Preencha os 8 nomes. Campos em branco viram 'Jogador N'."
+horizontal_alignment = 1
+
+[node name="LblJog1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 130.0
+offset_right = 420.0
+offset_bottom = 158.0
+theme_override_colors/font_color = Color(0.85, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Jogador 1:"
+
+[node name="CampoJog1" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 158.0
+offset_right = 540.0
+offset_bottom = 198.0
+theme_override_font_sizes/font_size = 17
+placeholder_text = "Nome do jogador 1"
+
+[node name="LblJog2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 210.0
+offset_right = 420.0
+offset_bottom = 238.0
+theme_override_colors/font_color = Color(0.85, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Jogador 2:"
+
+[node name="CampoJog2" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 238.0
+offset_right = 540.0
+offset_bottom = 278.0
+theme_override_font_sizes/font_size = 17
+placeholder_text = "Nome do jogador 2"
+
+[node name="LblJog3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 290.0
+offset_right = 420.0
+offset_bottom = 318.0
+theme_override_colors/font_color = Color(0.85, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Jogador 3:"
+
+[node name="CampoJog3" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 318.0
+offset_right = 540.0
+offset_bottom = 358.0
+theme_override_font_sizes/font_size = 17
+placeholder_text = "Nome do jogador 3"
+
+[node name="LblJog4" type="Label" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 370.0
+offset_right = 420.0
+offset_bottom = 398.0
+theme_override_colors/font_color = Color(0.85, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Jogador 4:"
+
+[node name="CampoJog4" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 398.0
+offset_right = 540.0
+offset_bottom = 438.0
+theme_override_font_sizes/font_size = 17
+placeholder_text = "Nome do jogador 4"
+
+[node name="LblJog5" type="Label" parent="."]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 130.0
+offset_right = 900.0
+offset_bottom = 158.0
+theme_override_colors/font_color = Color(0.85, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Jogador 5:"
+
+[node name="CampoJog5" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 158.0
+offset_right = 1020.0
+offset_bottom = 198.0
+theme_override_font_sizes/font_size = 17
+placeholder_text = "Nome do jogador 5"
+
+[node name="LblJog6" type="Label" parent="."]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 210.0
+offset_right = 900.0
+offset_bottom = 238.0
+theme_override_colors/font_color = Color(0.85, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Jogador 6:"
+
+[node name="CampoJog6" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 238.0
+offset_right = 1020.0
+offset_bottom = 278.0
+theme_override_font_sizes/font_size = 17
+placeholder_text = "Nome do jogador 6"
+
+[node name="LblJog7" type="Label" parent="."]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 290.0
+offset_right = 900.0
+offset_bottom = 318.0
+theme_override_colors/font_color = Color(0.85, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Jogador 7:"
+
+[node name="CampoJog7" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 318.0
+offset_right = 1020.0
+offset_bottom = 358.0
+theme_override_font_sizes/font_size = 17
+placeholder_text = "Nome do jogador 7"
+
+[node name="LblJog8" type="Label" parent="."]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 370.0
+offset_right = 900.0
+offset_bottom = 398.0
+theme_override_colors/font_color = Color(0.85, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Jogador 8:"
+
+[node name="CampoJog8" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 398.0
+offset_right = 1020.0
+offset_bottom = 438.0
+theme_override_font_sizes/font_size = 17
+placeholder_text = "Nome do jogador 8"
+
+[node name="Aviso" type="Label" parent="."]
+layout_mode = 0
+offset_top = 490.0
+offset_right = 1280.0
+offset_bottom = 520.0
+theme_override_colors/font_color = Color(1, 0.3, 0.3, 1)
+theme_override_font_sizes/font_size = 17
+text = ""
+horizontal_alignment = 1
+
+[node name="BtnGerarChave" type="Button" parent="."]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 540.0
+offset_right = 790.0
+offset_bottom = 595.0
+theme_override_font_sizes/font_size = 22
+text = "GERAR CHAVE"
+
+[node name="BtnVoltar" type="Button" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 650.0
+offset_right = 180.0
+offset_bottom = 694.0
+theme_override_font_sizes/font_size = 16
+text = "← Voltar"
+
+[connection signal="pressed" from="BtnGerarChave" to="." method="_on_btn_gerar_chave_pressed"]
+[connection signal="pressed" from="BtnVoltar" to="." method="_on_btn_voltar_pressed"]
