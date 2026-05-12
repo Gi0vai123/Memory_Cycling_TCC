@@ -18,6 +18,7 @@ config/icon="res://scenes/icon.svg"
 [autoload]
 
 Campeonato="*res://scripts/campeonato.gd"
+Dificuldade="*res://scripts/dificuldade.gd"
 
 [display]
 

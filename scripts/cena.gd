@@ -28,8 +28,10 @@ var nome_jogador_vermelho: String = "Vermelho"
 
 const COLUNAS = 8
 const ESPACAMENTO_X = 130
-const ESPACAMENTO_Y = 150
-const QUANTIDADE_PARES = 12
+const ESPACAMENTO_Y = 105
+
+# Pares da rodada — lido do singleton Dificuldade em _ready()
+var quantidade_pares: int = 15
 
 func contagem_regressiva(contador):
 	contador.visible = true
@@ -44,6 +46,7 @@ func contagem_regressiva(contador):
 func _ready():
 	randomize()
 	definir_lados()
+	quantidade_pares = Dificuldade.pares
 	if Campeonato.campeonato_ativo:
 		nome_jogador_azul    = Campeonato.jogador_a
 		nome_jogador_vermelho = Campeonato.jogador_b
@@ -65,7 +68,7 @@ func start_jogo() -> void:
 
 func criar_cartas():
 	var ids = []
-	for i in range(1, QUANTIDADE_PARES + 1):
+	for i in range(1, quantidade_pares + 1):
 		ids.append(i)
 		ids.append(i)
 	ids.shuffle()
@@ -191,7 +194,7 @@ func verificar_carta(carta):
 			var col2 = segunda_carta.get_node_or_null("CollisionShape2D")
 			if col1: col1.disabled = true
 			if col2: col2.disabled = true
-			if pares_encontrados >= QUANTIDADE_PARES:
+			if pares_encontrados >= quantidade_pares:
 				ganhou()
 		else:
 			mudando_atual()

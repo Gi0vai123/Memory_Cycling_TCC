@@ -54,19 +54,28 @@ func _on_btn_8_pressed() -> void:
 
 
 # ─────────────────────────────────────────────
+#  Pares por dificuldade
+# ─────────────────────────────────────────────
+const PARES_FACIL: int   = 11
+const PARES_NORMAL: int  = 15
+const PARES_DIFICIL: int = 21
+
+
+# ─────────────────────────────────────────────
 #  Modo Padrao — 3 botoes de dificuldade
-#  TODO: armazenar dificuldade num autoload quando a regra
-#  de numero de pares por dificuldade estiver definida.
 # ─────────────────────────────────────────────
 func _on_padrao_facil_pressed() -> void:
+	Dificuldade.pares = PARES_FACIL
 	get_tree().change_scene_to_file(CENA_PADRAO)
 
 
 func _on_padrao_normal_pressed() -> void:
+	Dificuldade.pares = PARES_NORMAL
 	get_tree().change_scene_to_file(CENA_PADRAO)
 
 
 func _on_padrao_dificil_pressed() -> void:
+	Dificuldade.pares = PARES_DIFICIL
 	get_tree().change_scene_to_file(CENA_PADRAO)
 
 
@@ -75,16 +84,19 @@ func _on_padrao_dificil_pressed() -> void:
 # ─────────────────────────────────────────────
 func _on_camp_facil_pressed() -> void:
 	Campeonato.num_jogadores = num_jogadores_selecionado
+	Dificuldade.pares = PARES_FACIL
 	get_tree().change_scene_to_file(CENA_CAMPEONATO)
 
 
 func _on_camp_normal_pressed() -> void:
 	Campeonato.num_jogadores = num_jogadores_selecionado
+	Dificuldade.pares = PARES_NORMAL
 	get_tree().change_scene_to_file(CENA_CAMPEONATO)
 
 
 func _on_camp_dificil_pressed() -> void:
 	Campeonato.num_jogadores = num_jogadores_selecionado
+	Dificuldade.pares = PARES_DIFICIL
 	get_tree().change_scene_to_file(CENA_CAMPEONATO)
 
 
@@ -92,14 +104,17 @@ func _on_camp_dificil_pressed() -> void:
 #  Modo Adivinhacao
 # ─────────────────────────────────────────────
 func _on_adv_facil_pressed() -> void:
+	Dificuldade.pares = PARES_FACIL
 	get_tree().change_scene_to_file(CENA_ADIVINHA)
 
 
 func _on_adv_normal_pressed() -> void:
+	Dificuldade.pares = PARES_NORMAL
 	get_tree().change_scene_to_file(CENA_ADIVINHA)
 
 
 func _on_adv_dificil_pressed() -> void:
+	Dificuldade.pares = PARES_DIFICIL
 	get_tree().change_scene_to_file(CENA_ADIVINHA)
 
 
@@ -107,14 +122,17 @@ func _on_adv_dificil_pressed() -> void:
 #  Modo Progresso — fases que crescem em pares
 # ─────────────────────────────────────────────
 func _on_prog_facil_pressed() -> void:
+	Dificuldade.pares = PARES_FACIL
 	get_tree().change_scene_to_file(CENA_PROGRESSO)
 
 
 func _on_prog_normal_pressed() -> void:
+	Dificuldade.pares = PARES_NORMAL
 	get_tree().change_scene_to_file(CENA_PROGRESSO)
 
 
 func _on_prog_dificil_pressed() -> void:
+	Dificuldade.pares = PARES_DIFICIL
 	get_tree().change_scene_to_file(CENA_PROGRESSO)
 
 
