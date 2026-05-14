@@ -26,9 +26,9 @@ var valor_anterior_vermelho = 0.0
 var nome_jogador_azul: String = "Azul"
 var nome_jogador_vermelho: String = "Vermelho"
 
-const COLUNAS = 8
+const COLUNAS = 9
 const ESPACAMENTO_X = 130
-const ESPACAMENTO_Y = 105
+const ESPACAMENTO_Y = 150
 
 # Pares da rodada — lido do singleton Dificuldade em _ready()
 var quantidade_pares: int = 15
