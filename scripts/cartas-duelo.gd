@@ -16,13 +16,47 @@ var z_original = 0
 
 signal carta_clicada(carta)
 
+const SPRITES = {
+	1:  "res://prefabs/frente-cartas/frente-carta-1.jpg",
+	2:  "res://prefabs/frente-cartas/frente-carta-2.jpg",
+	3:  "res://prefabs/frente-cartas/frente-carta-3.jpg",
+	4:  "res://prefabs/frente-cartas/frente-carta-4.jpg",
+	5:  "res://prefabs/frente-cartas/frente-carta-5.jpg",
+	6:  "res://prefabs/frente-cartas/frente-carta-6.jpg",
+	7:  "res://prefabs/frente-cartas/frente-carta-7.png",
+	8:  "res://prefabs/frente-cartas/frente-carta-8.jpg",
+	9:  "res://prefabs/frente-cartas/frente-carta-9.jpg",
+	10: "res://prefabs/frente-cartas/frente-carta-10.jpg",
+	11: "res://prefabs/frente-cartas/frente-carta-11.jpg",
+	12: "res://prefabs/frente-cartas/frente-carta-12.jpg",
+	13: "res://prefabs/frente-cartas/frente-carta-13.jpg",
+}
+
+func carregar_sprite():
+	if card_id in SPRITES:
+		var texture = load(SPRITES[card_id])
+		if texture:
+			$SpFrente.texture = texture
+		else:
+			push_error("Sprite não encontrado para card_id: " + str(card_id))
+	else:
+		push_error("card_id fora do range: " + str(card_id))
+
 func _ready():
 	z_original = z_index
 	atualizar_id_visual()
+	carregar_sprite()
 	mostrar_costas()
-	
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
+
+func iniciar_animacao(atraso: float = 0.0):
+	pode_animar = false
+	await get_tree().create_timer(atraso).timeout
+	virar()
+	await get_tree().create_timer(2.0).timeout
+	virar()
+	pode_animar = true
 
 func _on_mouse_entered():
 	if not pode_animar or bloqueada:
@@ -66,22 +100,24 @@ func _input_event(viewport, event, shape_idx):
 		
 		emit_signal("carta_clicada", self)
 
+func mostrar_frente():
+	$SpFrente.visible = true
+	$SpCosta.visible = false
+	front.visible = true
+	back.visible = false
+
+func mostrar_costas():
+	$SpFrente.visible = false
+	$SpCosta.visible = true
+	front.visible = false
+	back.visible = true
+
 func virar():
 	if virada:
 		mostrar_costas()
 	else:
 		mostrar_frente()
-
 	virada = !virada
-	mostrar_sprite()
-
-func mostrar_frente():
-	front.visible = true
-	back.visible = false
-
-func mostrar_costas():
-	front.visible = false
-	back.visible = true
 
 func mostrar_sprite():
 	var sp_frente = get_node_or_null("SpFrente")

@@ -23,8 +23,8 @@ var valor_anterior_azul = 0.0
 var valor_anterior_vermelho = 0.0
 
 const COLUNAS = 8
-const ESPACAMENTO_X = 130
-const ESPACAMENTO_Y = 150
+const ESPACAMENTO_X = 160
+const ESPACAMENTO_Y = 180
 const QUANTIDADE_PARES = 12
 
 func contagem_regressiva(contador):
@@ -67,7 +67,7 @@ func criar_cartas():
 	var largura_total = (COLUNAS - 1) * ESPACAMENTO_X
 	var linhas = ceil(float(total) / float(COLUNAS))
 	var altura_total = (linhas - 1) * ESPACAMENTO_Y
-	var centro = Vector2(640, 360)
+	var centro = Vector2(640, 450)
 	var start_x = centro.x - largura_total / 2.0
 	var start_y = centro.y - altura_total / 2.0
 
@@ -88,6 +88,7 @@ func criar_cartas():
 		var area = carta_root.get_node("carta")
 		area.position = Vector2.ZERO
 		area.card_id = ids[i]
+		area.carregar_sprite()
 		area.pode_animar = false
 		area.connect("carta_clicada", Callable(self, "verificar_carta"))
 		cartas.append(area)
