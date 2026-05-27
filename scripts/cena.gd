@@ -77,7 +77,7 @@ func criar_cartas():
 	var largura_total = (COLUNAS - 1) * ESPACAMENTO_X
 	var linhas = ceil(float(total) / float(COLUNAS))
 	var altura_total = (linhas - 1) * ESPACAMENTO_Y
-	var centro = Vector2(640, 360)
+	var centro = Vector2(640, 450)
 	var start_x = centro.x - largura_total / 2.0
 	var start_y = centro.y - altura_total / 2.0
 
@@ -98,6 +98,7 @@ func criar_cartas():
 		var area = carta_root.get_node("carta")
 		area.position = Vector2.ZERO
 		area.card_id = ids[i]
+		area.carregar_sprite()
 		area.pode_animar = false
 		area.connect("carta_clicada", Callable(self, "verificar_carta"))
 		cartas.append(area)

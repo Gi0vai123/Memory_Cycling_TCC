@@ -12,13 +12,46 @@ var mouse_dentro := false
 var z_original = 0
 signal carta_clicada(carta)
 
+const SPRITES = {
+	1:  "res://prefabs/frente-cartas/frente-carta-1.jpg",
+	2:  "res://prefabs/frente-cartas/frente-carta-2.jpg",
+	3:  "res://prefabs/frente-cartas/frente-carta-3.jpg",
+	4:  "res://prefabs/frente-cartas/frente-carta-4.jpg",
+	5:  "res://prefabs/frente-cartas/frente-carta-5.jpg",
+	6:  "res://prefabs/frente-cartas/frente-carta-6.jpg",
+	7:  "res://prefabs/frente-cartas/frente-carta-7.png",
+	8:  "res://prefabs/frente-cartas/frente-carta-8.jpg",
+	9:  "res://prefabs/frente-cartas/frente-carta-9.jpg",
+	10: "res://prefabs/frente-cartas/frente-carta-10.jpg",
+	11: "res://prefabs/frente-cartas/frente-carta-11.jpg",
+	12: "res://prefabs/frente-cartas/frente-carta-12.jpg",
+	13: "res://prefabs/frente-cartas/frente-carta-13.jpg",
+	14: "res://prefabs/frente-cartas/frente-carta-14.jpg",
+	15: "res://prefabs/frente-cartas/frente-carta-15.jpg",
+	16: "res://prefabs/frente-cartas/frente-carta-16.jpg",
+	17: "res://prefabs/frente-cartas/frente-carta-17.jpg",
+	18: "res://prefabs/frente-cartas/frente-carta-18.jpg",
+	19: "res://prefabs/frente-cartas/frente-carta-19.jpg",
+	20: "res://prefabs/frente-cartas/frente-carta-20.jpg",
+	21: "res://prefabs/frente-cartas/frente-carta-21.jpg",
+}
+
 func _ready():
 	z_original = z_index
 	qualid.text = str(card_id)
-	scale = Vector2(0.7, 0.7)
 	mostrar_costas()
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
+
+func carregar_sprite():
+	if card_id in SPRITES:
+		var texture = load(SPRITES[card_id])
+		if texture:
+			sp_frente.texture = texture
+		else:
+			push_error("Sprite não encontrado para card_id: " + str(card_id))
+	else:
+		push_error("card_id fora do range: " + str(card_id))
 
 func _on_mouse_entered():
 	mouse_dentro = true
@@ -33,6 +66,8 @@ func _on_mouse_entered():
 func _on_mouse_exited():
 	mouse_dentro = false
 	z_index = z_original
+	var t = create_tween()
+	t.tween_property(self, "scale", Vector2(0.8, 0.8), 0.15)
 	parar_rotacao()
 	if virando:
 		return
