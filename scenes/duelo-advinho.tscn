@@ -4,11 +4,17 @@
 [ext_resource type="Script" uid="uid://b7skr5iud5hut" path="res://scripts/duelo_advinho.gd" id="1_kedrr"]
 [ext_resource type="Texture2D" uid="uid://co80b524sig6q" path="res://imagens/cards_do_jogo_frente.png" id="2_kedrr"]
 [ext_resource type="Texture2D" uid="uid://b0xf8avasf5hb" path="res://imagens/cards_do_jogo.png" id="3_mgnuq"]
+[ext_resource type="Texture2D" uid="uid://duf18iyss8bdy" path="res://WhatsApp Image 2026-05-14 at 20.16.23.jpeg" id="5_mgnuq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6hb1j"]
 
 [node name="Node2D" type="Node2D" unique_id=866754891]
 script = ExtResource("1_kedrr")
+
+[node name="back" type="Sprite2D" parent="." unique_id=240433473]
+position = Vector2(641.00006, 369.00003)
+scale = Vector2(0.815, 0.815)
+texture = ExtResource("5_mgnuq")
 
 [node name="BaralhoA" type="Area2D" parent="." unique_id=1321751307]
 position = Vector2(640, 86)
@@ -41,12 +47,9 @@ offset_right = 40.0
 offset_bottom = 43.0
 
 [node name="SpFrente" type="Sprite2D" parent="BaralhoA/CartaA" unique_id=664600987]
-visible = false
-scale = Vector2(0.44999996, 0.44999996)
-texture = ExtResource("2_kedrr")
+scale = Vector2(0.11, 0.11)
 
 [node name="SpCosta" type="Sprite2D" parent="BaralhoA/CartaA" unique_id=859636856]
-visible = false
 scale = Vector2(0.44999996, 0.44999996)
 texture = ExtResource("3_mgnuq")
 
@@ -82,7 +85,7 @@ offset_bottom = 43.0
 
 [node name="SpFrente" type="Sprite2D" parent="BaralhoV/CartaV" unique_id=828415871]
 visible = false
-scale = Vector2(0.44999996, 0.44999996)
+scale = Vector2(0.11, 0.11)
 texture = ExtResource("2_kedrr")
 
 [node name="SpCosta" type="Sprite2D" parent="BaralhoV/CartaV" unique_id=1443708584]

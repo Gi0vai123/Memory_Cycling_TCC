@@ -27,7 +27,7 @@ var nome_jogador_azul: String = "Azul"
 var nome_jogador_vermelho: String = "Vermelho"
 
 const ESPACAMENTO_X = 110
-const ESPACAMENTO_Y = 115
+const ESPACAMENTO_Y = 160
 
 # Pares e colunas da rodada — lidos do singleton Dificuldade em _ready()
 var quantidade_pares: int = 15
@@ -78,7 +78,7 @@ func criar_cartas():
 	var largura_total = (colunas - 1) * ESPACAMENTO_X
 	var linhas = ceil(float(total) / float(colunas))
 	var altura_total = (linhas - 1) * ESPACAMENTO_Y
-	var centro = Vector2(640, 420)
+	var centro = Vector2(640, 400)
 	var start_x = centro.x - largura_total / 2.0
 	var start_y = centro.y - altura_total / 2.0
 
@@ -99,6 +99,7 @@ func criar_cartas():
 		var area = carta_root.get_node("carta")
 		area.position = Vector2.ZERO
 		area.card_id = ids[i]
+		area.carregar_sprite()
 		area.pode_animar = false
 		area.connect("carta_clicada", Callable(self, "verificar_carta"))
 		cartas.append(area)

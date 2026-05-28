@@ -57,16 +57,16 @@ func _on_btn_8_pressed() -> void:
 #  Pares e colunas por dificuldade
 #  Os grids resultantes são retangulares perfeitos:
 #    Fácil   = 12 pares (24 cartas) → 6×4
-#    Normal  = 15 pares (30 cartas) → 6×5
-#    Difícil = 20 pares (40 cartas) → 8×5
+#    Normal  = 15 pares (30 cartas) → 10×3
+#    Difícil = 20 pares (40 cartas) → 10×4
 # ─────────────────────────────────────────────
 const PARES_FACIL: int   = 12
 const PARES_NORMAL: int  = 15
 const PARES_DIFICIL: int = 20
 
 const COLUNAS_FACIL: int   = 6
-const COLUNAS_NORMAL: int  = 6
-const COLUNAS_DIFICIL: int = 8
+const COLUNAS_NORMAL: int  = 10
+const COLUNAS_DIFICIL: int = 10
 
 
 func _aplicar_facil() -> void:
