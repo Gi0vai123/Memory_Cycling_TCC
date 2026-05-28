@@ -18,13 +18,13 @@ card_scene = ExtResource("2_048lv")
 
 [node name="equipe_vermelha" type="Sprite2D" parent="." unique_id=2083258543]
 visible = false
-position = Vector2(640, 110)
+position = Vector2(640, 80)
 scale = Vector2(2.415, 2.415)
 texture = ExtResource("4_qxw3i")
 
 [node name="equipe_azul" type="Sprite2D" parent="." unique_id=238840768]
 visible = false
-position = Vector2(640, 110)
+position = Vector2(640, 80)
 scale = Vector2(2.415, 2.415)
 texture = ExtResource("5_7lspx")
 
@@ -100,7 +100,6 @@ offset_left = 10.0
 offset_top = 80.0
 offset_right = 69.0
 offset_bottom = 103.0
-text = "aaaaa"
 horizontal_alignment = 2
 
 [node name="PontosV" type="Label" parent="UImp" unique_id=1738375295]

@@ -15,7 +15,7 @@ signal carta_clicada(carta)
 func _ready():
 	z_original = z_index
 	qualid.text = str(card_id)
-	scale = Vector2(0.7, 0.7)
+	scale = Vector2(0.55, 0.55)
 	mostrar_costas()
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
@@ -27,7 +27,7 @@ func _on_mouse_entered():
 	z_index = 100
 	if tween_hover: tween_hover.kill()
 	tween_hover = create_tween()
-	tween_hover.tween_property(self, "scale", Vector2(1, 1), 0.15)
+	tween_hover.tween_property(self, "scale", Vector2(0.8, 0.8), 0.15)
 	animar_loop_rotacao()
 
 func _on_mouse_exited():
@@ -38,7 +38,7 @@ func _on_mouse_exited():
 		return
 	if tween_hover: tween_hover.kill()
 	tween_hover = create_tween()
-	tween_hover.tween_property(self, "scale", Vector2(0.7, 0.7), 0.15)
+	tween_hover.tween_property(self, "scale", Vector2(0.55, 0.55), 0.15)
 
 func animar_loop_rotacao():
 	if tween_rotacao:
@@ -95,10 +95,10 @@ func virar():
 	virando = false
 
 	# Se o mouse saiu da carta durante o flip, ajusta o scale para o repouso
-	if not mouse_dentro and scale != Vector2(0.7, 0.7):
+	if not mouse_dentro and scale != Vector2(0.55, 0.55):
 		if tween_hover: tween_hover.kill()
 		tween_hover = create_tween()
-		tween_hover.tween_property(self, "scale", Vector2(0.7, 0.7), 0.12)
+		tween_hover.tween_property(self, "scale", Vector2(0.55, 0.55), 0.12)
 
 func mostrar_frente():
 	sp_frente.visible = true

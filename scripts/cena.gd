@@ -26,12 +26,12 @@ var valor_anterior_vermelho = 0.0
 var nome_jogador_azul: String = "Azul"
 var nome_jogador_vermelho: String = "Vermelho"
 
-const COLUNAS = 9
-const ESPACAMENTO_X = 130
-const ESPACAMENTO_Y = 150
+const ESPACAMENTO_X = 110
+const ESPACAMENTO_Y = 115
 
-# Pares da rodada — lido do singleton Dificuldade em _ready()
+# Pares e colunas da rodada — lidos do singleton Dificuldade em _ready()
 var quantidade_pares: int = 15
+var colunas: int = 6
 
 func contagem_regressiva(contador):
 	contador.visible = true
@@ -47,6 +47,7 @@ func _ready():
 	randomize()
 	definir_lados()
 	quantidade_pares = Dificuldade.pares
+	colunas = Dificuldade.colunas
 	if Campeonato.campeonato_ativo:
 		nome_jogador_azul    = Campeonato.jogador_a
 		nome_jogador_vermelho = Campeonato.jogador_b
@@ -74,10 +75,10 @@ func criar_cartas():
 	ids.shuffle()
 
 	var total = ids.size()
-	var largura_total = (COLUNAS - 1) * ESPACAMENTO_X
-	var linhas = ceil(float(total) / float(COLUNAS))
+	var largura_total = (colunas - 1) * ESPACAMENTO_X
+	var linhas = ceil(float(total) / float(colunas))
 	var altura_total = (linhas - 1) * ESPACAMENTO_Y
-	var centro = Vector2(640, 360)
+	var centro = Vector2(640, 420)
 	var start_x = centro.x - largura_total / 2.0
 	var start_y = centro.y - altura_total / 2.0
 
@@ -85,8 +86,8 @@ func criar_cartas():
 
 	var carta_roots = []
 	for i in range(total):
-		var col = i % COLUNAS
-		var row = i / COLUNAS
+		var col = i % colunas
+		var row = i / colunas
 		var pos_final = Vector2(
 			start_x + col * ESPACAMENTO_X,
 			start_y + row * ESPACAMENTO_Y

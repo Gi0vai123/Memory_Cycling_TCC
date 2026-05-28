@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5a2ls"]
 
 [node name="carta" type="Area2D" unique_id=1326822372]
-scale = Vector2(0.7, 0.7)
+scale = Vector2(0.55, 0.55)
 script = ExtResource("1_6pljl")
 metadata/_edit_group_ = true
 
