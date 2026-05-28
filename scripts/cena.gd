@@ -26,8 +26,10 @@ var valor_anterior_vermelho = 0.0
 var nome_jogador_azul: String = "Azul"
 var nome_jogador_vermelho: String = "Vermelho"
 
-const ESPACAMENTO_X = 110
-const ESPACAMENTO_Y = 160
+# Layout do grid — valores ajustados por dificuldade em _ajustar_layout()
+var espacamento_x: int = 110
+var espacamento_y: int = 160
+var centro_y: int = 400
 
 # Pares e colunas da rodada — lidos do singleton Dificuldade em _ready()
 var quantidade_pares: int = 15
@@ -48,6 +50,7 @@ func _ready():
 	definir_lados()
 	quantidade_pares = Dificuldade.pares
 	colunas = Dificuldade.colunas
+	_ajustar_layout()
 	if Campeonato.campeonato_ativo:
 		nome_jogador_azul    = Campeonato.jogador_a
 		nome_jogador_vermelho = Campeonato.jogador_b
@@ -56,6 +59,26 @@ func _ready():
 func _process(delta):
 	if tempo_ativo:
 		timer_bar(delta)
+
+# Ajusta o spacing e o centro do grid conforme a dificuldade
+func _ajustar_layout() -> void:
+	match quantidade_pares:
+		12:  # Fácil 6×4 — mais espaço horizontal
+			espacamento_x = 170
+			espacamento_y = 160
+			centro_y = 380
+		15:  # Normal 10×3 — mais respiro vertical
+			espacamento_x = 110
+			espacamento_y = 180
+			centro_y = 400
+		20:  # Difícil 10×4 — grid mais centralizado
+			espacamento_x = 100
+			espacamento_y = 170
+			centro_y = 380
+		_:
+			espacamento_x = 110
+			espacamento_y = 160
+			centro_y = 400
 
 func start_jogo() -> void:
 	if usar_contagem and contador_scene:
@@ -75,10 +98,10 @@ func criar_cartas():
 	ids.shuffle()
 
 	var total = ids.size()
-	var largura_total = (colunas - 1) * ESPACAMENTO_X
+	var largura_total = (colunas - 1) * espacamento_x
 	var linhas = ceil(float(total) / float(colunas))
-	var altura_total = (linhas - 1) * ESPACAMENTO_Y
-	var centro = Vector2(640, 400)
+	var altura_total = (linhas - 1) * espacamento_y
+	var centro = Vector2(640, centro_y)
 	var start_x = centro.x - largura_total / 2.0
 	var start_y = centro.y - altura_total / 2.0
 
@@ -89,8 +112,8 @@ func criar_cartas():
 		var col = i % colunas
 		var row = i / colunas
 		var pos_final = Vector2(
-			start_x + col * ESPACAMENTO_X,
-			start_y + row * ESPACAMENTO_Y
+			start_x + col * espacamento_x,
+			start_y + row * espacamento_y
 		)
 		var carta_root = card_scene.instantiate()
 		add_child(carta_root)
