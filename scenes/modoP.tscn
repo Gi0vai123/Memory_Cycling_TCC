@@ -31,11 +31,13 @@ scale = Vector2(0.815, 0.815)
 texture = ExtResource("3_aqhb2")
 
 [node name="equipe_vermelha" type="Sprite2D" parent="." unique_id=2083258543]
+visible = false
 position = Vector2(640, 97)
 scale = Vector2(2.415, 2.415)
 texture = ExtResource("4_qxw3i")
 
 [node name="equipe_azul" type="Sprite2D" parent="." unique_id=238840768]
+visible = false
 position = Vector2(640, 97)
 scale = Vector2(2.415, 2.415)
 texture = ExtResource("5_7lspx")
