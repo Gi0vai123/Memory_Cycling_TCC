@@ -46,6 +46,10 @@ const SPRITES = {
 	21: "res://prefabs/frente-cartas/frente-carta-21.jpg",
 }
 
+const SCALE_REPOUSO := Vector2(0.8, 0.8)
+const SCALE_HOVER   := Vector2(1.0, 1.0)
+
+
 func _ready():
 	z_original = z_index
 	carregar_sprite()
@@ -73,20 +77,18 @@ func _on_mouse_entered():
 	z_index = 100
 	if tween_hover: tween_hover.kill()
 	tween_hover = create_tween()
-	tween_hover.tween_property(self, "scale", Vector2(1, 1), 0.15)
+	tween_hover.tween_property(self, "scale", SCALE_HOVER, 0.15)
 	animar_loop_rotacao()
 
 func _on_mouse_exited():
 	mouse_dentro = false
 	z_index = z_original
-	var t = create_tween()
-	t.tween_property(self, "scale", Vector2(0.8, 0.8), 0.15)
 	parar_rotacao()
 	if virando:
 		return
 	if tween_hover: tween_hover.kill()
 	tween_hover = create_tween()
-	tween_hover.tween_property(self, "scale", Vector2(0.7, 0.7), 0.15)
+	tween_hover.tween_property(self, "scale", SCALE_REPOUSO, 0.15)
 
 func animar_loop_rotacao():
 	if tween_rotacao:
@@ -136,7 +138,7 @@ func virar():
 	if not mouse_dentro and scale != Vector2(0.7, 0.7):
 		if tween_hover: tween_hover.kill()
 		tween_hover = create_tween()
-		tween_hover.tween_property(self, "scale", Vector2(0.7, 0.7), 0.12)
+		tween_hover.tween_property(self, "scale", SCALE_REPOUSO, 0.12)
 
 func mostrar_frente():
 	sp_frente.visible = true

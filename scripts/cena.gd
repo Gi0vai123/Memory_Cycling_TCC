@@ -43,6 +43,8 @@ func _ready():
 	randomize()
 	definir_lados()
 	quantidade_pares = Dificuldade.pares
+	colunas = Dificuldade.colunas
+	_ajustar_layout()
 	if Campeonato.campeonato_ativo:
 		nome_jogador_azul = Campeonato.jogador_a
 		nome_jogador_vermelho = Campeonato.jogador_b
@@ -123,6 +125,26 @@ func contagem_regressiva(contador):
 	contador.text = ""
 	contador.visible = false
 
+# Ajusta o spacing e o centro do grid conforme a dificuldade
+func _ajustar_layout() -> void:
+	match quantidade_pares:
+		12:  # Fácil 6×4 — mais espaço horizontal
+			espacamento_x = 170
+			espacamento_y = 160
+			centro_y = 380
+		15:  # Normal 10×3 — mais respiro vertical
+			espacamento_x = 110
+			espacamento_y = 180
+			centro_y = 400
+		20:  # Difícil 10×4 — grid mais centralizado
+			espacamento_x = 100
+			espacamento_y = 170
+			centro_y = 380
+		_:
+			espacamento_x = 110
+			espacamento_y = 160
+			centro_y = 400
+
 func start_jogo() -> void:
 	if usar_contagem and contador_scene:
 		await contagem_regressiva(contador_scene)
@@ -165,8 +187,8 @@ func criar_cartas():
 		var start_x = centro.x - largura_linha / 2.0
 
 		var pos_final = Vector2(
-			start_x + col * ESPACAMENTO_X,
-			start_y + row * ESPACAMENTO_Y
+			start_x + col * espacamento_x,
+			start_y + row * espacamento_y
 		)
 
 		var carta_root = card_scene.instantiate()

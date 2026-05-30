@@ -54,28 +54,51 @@ func _on_btn_8_pressed() -> void:
 
 
 # ─────────────────────────────────────────────
-#  Pares por dificuldade
+#  Pares e colunas por dificuldade
+#  Os grids resultantes são retangulares perfeitos:
+#    Fácil   = 12 pares (24 cartas) → 6×4
+#    Normal  = 15 pares (30 cartas) → 10×3
+#    Difícil = 20 pares (40 cartas) → 10×4
 # ─────────────────────────────────────────────
-const PARES_FACIL: int   = 11
+const PARES_FACIL: int   = 12
 const PARES_NORMAL: int  = 15
-const PARES_DIFICIL: int = 21
+const PARES_DIFICIL: int = 20
+
+const COLUNAS_FACIL: int   = 6
+const COLUNAS_NORMAL: int  = 10
+const COLUNAS_DIFICIL: int = 10
+
+
+func _aplicar_facil() -> void:
+	Dificuldade.pares = PARES_FACIL
+	Dificuldade.colunas = COLUNAS_FACIL
+
+
+func _aplicar_normal() -> void:
+	Dificuldade.pares = PARES_NORMAL
+	Dificuldade.colunas = COLUNAS_NORMAL
+
+
+func _aplicar_dificil() -> void:
+	Dificuldade.pares = PARES_DIFICIL
+	Dificuldade.colunas = COLUNAS_DIFICIL
 
 
 # ─────────────────────────────────────────────
 #  Modo Padrao — 3 botoes de dificuldade
 # ─────────────────────────────────────────────
 func _on_padrao_facil_pressed() -> void:
-	Dificuldade.pares = PARES_FACIL
+	_aplicar_facil()
 	get_tree().change_scene_to_file(CENA_PADRAO)
 
 
 func _on_padrao_normal_pressed() -> void:
-	Dificuldade.pares = PARES_NORMAL
+	_aplicar_normal()
 	get_tree().change_scene_to_file(CENA_PADRAO)
 
 
 func _on_padrao_dificil_pressed() -> void:
-	Dificuldade.pares = PARES_DIFICIL
+	_aplicar_dificil()
 	get_tree().change_scene_to_file(CENA_PADRAO)
 
 
@@ -84,19 +107,19 @@ func _on_padrao_dificil_pressed() -> void:
 # ─────────────────────────────────────────────
 func _on_camp_facil_pressed() -> void:
 	Campeonato.num_jogadores = num_jogadores_selecionado
-	Dificuldade.pares = PARES_FACIL
+	_aplicar_facil()
 	get_tree().change_scene_to_file(CENA_CAMPEONATO)
 
 
 func _on_camp_normal_pressed() -> void:
 	Campeonato.num_jogadores = num_jogadores_selecionado
-	Dificuldade.pares = PARES_NORMAL
+	_aplicar_normal()
 	get_tree().change_scene_to_file(CENA_CAMPEONATO)
 
 
 func _on_camp_dificil_pressed() -> void:
 	Campeonato.num_jogadores = num_jogadores_selecionado
-	Dificuldade.pares = PARES_DIFICIL
+	_aplicar_dificil()
 	get_tree().change_scene_to_file(CENA_CAMPEONATO)
 
 
@@ -104,17 +127,17 @@ func _on_camp_dificil_pressed() -> void:
 #  Modo Adivinhacao
 # ─────────────────────────────────────────────
 func _on_adv_facil_pressed() -> void:
-	Dificuldade.pares = PARES_FACIL
+	_aplicar_facil()
 	get_tree().change_scene_to_file(CENA_ADIVINHA)
 
 
 func _on_adv_normal_pressed() -> void:
-	Dificuldade.pares = PARES_NORMAL
+	_aplicar_normal()
 	get_tree().change_scene_to_file(CENA_ADIVINHA)
 
 
 func _on_adv_dificil_pressed() -> void:
-	Dificuldade.pares = PARES_DIFICIL
+	_aplicar_dificil()
 	get_tree().change_scene_to_file(CENA_ADIVINHA)
 
 
@@ -122,17 +145,17 @@ func _on_adv_dificil_pressed() -> void:
 #  Modo Progresso — fases que crescem em pares
 # ─────────────────────────────────────────────
 func _on_prog_facil_pressed() -> void:
-	Dificuldade.pares = PARES_FACIL
+	_aplicar_facil()
 	get_tree().change_scene_to_file(CENA_PROGRESSO)
 
 
 func _on_prog_normal_pressed() -> void:
-	Dificuldade.pares = PARES_NORMAL
+	_aplicar_normal()
 	get_tree().change_scene_to_file(CENA_PROGRESSO)
 
 
 func _on_prog_dificil_pressed() -> void:
-	Dificuldade.pares = PARES_DIFICIL
+	_aplicar_dificil()
 	get_tree().change_scene_to_file(CENA_PROGRESSO)
 
 
