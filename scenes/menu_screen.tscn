@@ -1,11 +1,10 @@
 [gd_scene format=3 uid="uid://cl8bub2l6ksap"]
 
-[ext_resource type="Texture2D" uid="uid://by8v42n5jjagi" path="res://imagens/menu/game_logo.png" id="1_e6vgv"]
 [ext_resource type="Script" uid="uid://dhvp0u7hdib1t" path="res://scripts/menu_screen.gd" id="1_sm2ni"]
 [ext_resource type="FontFile" uid="uid://21bm27kpaagx" path="res://imagens/menu/Pixeled.ttf" id="2_ar34o"]
-[ext_resource type="Texture2D" uid="uid://dh8kugho52him" path="res://imagens/menu/background.jpg" id="2_e6vgv"]
 [ext_resource type="Texture2D" uid="uid://djwyda2rhxlfq" path="res://imagens/menu/options.png" id="2_sm2ni"]
 [ext_resource type="Texture2D" uid="uid://npyvw1ov3nko" path="res://imagens/menu/qr_code.png" id="3_amt2q"]
+[ext_resource type="Texture2D" uid="uid://hdy2xeykqcr3" path="res://menuMC.png" id="5_73fcp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0m60l"]
 bg_color = Color(0.8901961, 0.8901961, 0.8901961, 0.047058824)
@@ -17,26 +16,23 @@ Button/font_sizes/font_size = 30
 Button/styles/normal = SubResource("StyleBoxFlat_0m60l")
 
 [sub_resource type="Theme" id="Theme_tc5hl"]
-Label/colors/font_color = Color(0.8235294, 0, 0, 1)
-Label/colors/font_outline_color = Color(0, 0.5019608, 0, 1)
+Label/colors/font_color = Color(0.99802274, 0.4822489, 0.5261971, 1)
+Label/colors/font_outline_color = Color(0.38745674, 0.30340275, 0.8201914, 1)
 Label/constants/outline_size = 12
 Label/font_sizes/font_size = 22
 Label/fonts/font = ExtResource("2_ar34o")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pn7wg"]
-bg_color = Color(0.101960786, 0.7058824, 0.16470589, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sm2ni"]
-bg_color = Color(0.101960786, 0.58431375, 0.16470589, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_73fcp"]
-bg_color = Color(0.101960786, 0.50980395, 0.16470589, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5aq17"]
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Theme" id="Theme_ar34o"]
 resource_name = "start"
-Button/styles/hover = SubResource("StyleBoxFlat_pn7wg")
-Button/styles/normal = SubResource("StyleBoxFlat_sm2ni")
-Button/styles/pressed = SubResource("StyleBoxFlat_73fcp")
+Button/colors/font_color = Color(0.9529412, 0.019607844, 0.30588236, 1)
+Button/colors/font_focus_color = Color(0.9529412, 0.019607844, 0.30588236, 1)
+Button/colors/font_hover_color = Color(0.9647059, 0.14509805, 0.43529412, 1)
+Button/colors/font_hover_pressed_color = Color(0.9529412, 0.019607844, 0.30588236, 1)
+Button/colors/font_pressed_color = Color(0.9529412, 0.019607844, 0.30588236, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_5aq17")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g2cvw"]
 bg_color = Color(0.86942613, 0.44246724, 0.57956946, 0.62352943)
@@ -118,9 +114,9 @@ horizontal_alignment = 1
 [node name="start_btn" type="Button" parent="." unique_id=852311705]
 layout_mode = 0
 offset_left = 518.0
-offset_top = 395.0
+offset_top = 369.0
 offset_right = 761.0
-offset_bottom = 472.0
+offset_bottom = 446.0
 theme = SubResource("Theme_ar34o")
 theme_override_font_sizes/font_size = 50
 text = "JOGAR"
@@ -140,9 +136,9 @@ autowrap_trim_flags = 0
 [node name="credits_btn" type="Button" parent="." unique_id=454171047]
 layout_mode = 0
 offset_left = 518.0
-offset_top = 477.0
-offset_right = 761.0
-offset_bottom = 546.0
+offset_top = 464.0
+offset_right = 765.0
+offset_bottom = 541.0
 theme = SubResource("Theme_ar34o")
 theme_override_font_sizes/font_size = 50
 text = "CRÉDITOS"
@@ -150,27 +146,22 @@ text = "CRÉDITOS"
 [node name="exit_btn" type="Button" parent="." unique_id=952492822]
 layout_mode = 0
 offset_left = 518.0
-offset_top = 551.0
+offset_top = 550.0
 offset_right = 761.0
-offset_bottom = 628.0
+offset_bottom = 627.0
 theme = SubResource("Theme_ar34o")
 theme_override_font_sizes/font_size = 50
 text = "SAIR"
 
 [node name="donate_btn" type="Button" parent="." unique_id=1560253485]
 layout_mode = 0
-offset_left = 30.0
-offset_top = 623.0
-offset_right = 273.0
-offset_bottom = 700.0
+offset_left = 96.0
+offset_top = 548.0
+offset_right = 348.0
+offset_bottom = 617.0
 theme = SubResource("Theme_g2cvw")
 theme_override_font_sizes/font_size = 50
 text = "APOIA-SE"
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=874564732]
-position = Vector2(298, 189)
-scale = Vector2(2.1761327, 2.2323718)
-texture = ExtResource("1_e6vgv")
 
 [node name="background" type="TextureRect" parent="." unique_id=228863308]
 z_index = -1
@@ -178,7 +169,7 @@ layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 720.0
 mouse_filter = 2
-texture = ExtResource("2_e6vgv")
+texture = ExtResource("5_73fcp")
 expand_mode = 2
 metadata/_edit_lock_ = true
 

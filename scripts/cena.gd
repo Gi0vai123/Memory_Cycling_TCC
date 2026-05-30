@@ -1,4 +1,5 @@
 extends Node2D
+
 @export var card_scene: PackedScene
 @export var usar_contagem = true
 @onready var contador_scene = $UImp/Contador
@@ -21,17 +22,96 @@ var primeira_carta = null
 var segunda_carta = null
 var valor_anterior_azul = 0.0
 var valor_anterior_vermelho = 0.0
+var pode_clicar = false
 
-# Nomes de exibição (sobrescritos pelo singleton Campeonato quando ativo)
 var nome_jogador_azul: String = "Azul"
 var nome_jogador_vermelho: String = "Vermelho"
 
 const COLUNAS = 9
 const ESPACAMENTO_X = 130
 const ESPACAMENTO_Y = 150
+const DEBUG_UM_CONTROLE = true
+const DEADZONE = 0.5
+const COOLDOWN_MOVIMENTO = 0.2
 
-# Pares da rodada — lido do singleton Dificuldade em _ready()
 var quantidade_pares: int = 15
+var cursor_index: int = 0
+var total_linhas: int = 0
+var cooldown_timer: float = 0.0
+
+func _ready():
+	randomize()
+	definir_lados()
+	quantidade_pares = Dificuldade.pares
+	if Campeonato.campeonato_ativo:
+		nome_jogador_azul = Campeonato.jogador_a
+		nome_jogador_vermelho = Campeonato.jogador_b
+	start_jogo()
+
+func _process(delta):
+	if tempo_ativo:
+		timer_bar(delta)
+	if cooldown_timer > 0:
+		cooldown_timer -= delta
+	if pode_clicar and not cartas.is_empty() and cooldown_timer <= 0:
+		_processar_analogico()
+
+func _processar_analogico():
+	var device = 0 if DEBUG_UM_CONTROLE else (0 if jogador_atual == "azul" else 1)
+	var h = Input.get_joy_axis(device, JOY_AXIS_LEFT_X)
+	var v = Input.get_joy_axis(device, JOY_AXIS_LEFT_Y)
+
+	var total = cartas.size()
+	total_linhas = ceil(float(total) / float(COLUNAS))
+	var linha_atual = cursor_index / COLUNAS
+	var coluna_atual = cursor_index % COLUNAS
+	var cartas_ultima_linha = total % COLUNAS
+	if cartas_ultima_linha == 0:
+		cartas_ultima_linha = COLUNAS
+
+	if h > DEADZONE:
+		var novo = cursor_index + 1
+		if novo < total:
+			_mover_cursor(novo)
+		cooldown_timer = COOLDOWN_MOVIMENTO
+	elif h < -DEADZONE:
+		var novo = cursor_index - 1
+		if novo >= 0:
+			_mover_cursor(novo)
+		cooldown_timer = COOLDOWN_MOVIMENTO
+	elif v > DEADZONE:
+		var nova_linha = linha_atual + 1
+		if nova_linha < total_linhas:
+			var max_col = COLUNAS - 1
+			if nova_linha == total_linhas - 1:
+				max_col = cartas_ultima_linha - 1
+			_mover_cursor(nova_linha * COLUNAS + min(coluna_atual, max_col))
+		cooldown_timer = COOLDOWN_MOVIMENTO
+	elif v < -DEADZONE:
+		var nova_linha = linha_atual - 1
+		if nova_linha >= 0:
+			_mover_cursor(nova_linha * COLUNAS + coluna_atual)
+		cooldown_timer = COOLDOWN_MOVIMENTO
+
+func _input(event):
+	if not pode_clicar or cartas.is_empty():
+		return
+	if not DEBUG_UM_CONTROLE:
+		if event is InputEventJoypadButton:
+			var device_permitido = 0 if jogador_atual == "azul" else 1
+			if event.device != device_permitido:
+				return
+	if event.is_action_pressed("ui_accept"):
+		var carta = cartas[cursor_index]
+		if is_instance_valid(carta) and not carta.virada:
+			carta.selecionar()
+
+func _mover_cursor(novo_index: int):
+	if cursor_index < cartas.size() and is_instance_valid(cartas[cursor_index]):
+		cartas[cursor_index].desfocar()
+	cursor_index = novo_index
+	if cursor_index < cartas.size() and is_instance_valid(cartas[cursor_index]):
+		cartas[cursor_index].focar()
 
 func contagem_regressiva(contador):
 	contador.visible = true
@@ -42,19 +122,6 @@ func contagem_regressiva(contador):
 	await get_tree().create_timer(0.5).timeout
 	contador.text = ""
 	contador.visible = false
-
-func _ready():
-	randomize()
-	definir_lados()
-	quantidade_pares = Dificuldade.pares
-	if Campeonato.campeonato_ativo:
-		nome_jogador_azul    = Campeonato.jogador_a
-		nome_jogador_vermelho = Campeonato.jogador_b
-	start_jogo()
-
-func _process(delta):
-	if tempo_ativo:
-		timer_bar(delta)
 
 func start_jogo() -> void:
 	if usar_contagem and contador_scene:
@@ -74,23 +141,34 @@ func criar_cartas():
 	ids.shuffle()
 
 	var total = ids.size()
-	var largura_total = (COLUNAS - 1) * ESPACAMENTO_X
 	var linhas = ceil(float(total) / float(COLUNAS))
 	var altura_total = (linhas - 1) * ESPACAMENTO_Y
 	var centro = Vector2(640, 450)
-	var start_x = centro.x - largura_total / 2.0
 	var start_y = centro.y - altura_total / 2.0
 
 	cartas.clear()
 
 	var carta_roots = []
 	for i in range(total):
-		var col = i % COLUNAS
 		var row = i / COLUNAS
+		var col = i % COLUNAS
+
+		var cartas_nessa_linha: int
+		if row < linhas - 1:
+			cartas_nessa_linha = COLUNAS
+		else:
+			cartas_nessa_linha = total % COLUNAS
+			if cartas_nessa_linha == 0:
+				cartas_nessa_linha = COLUNAS
+
+		var largura_linha = (cartas_nessa_linha - 1) * ESPACAMENTO_X
+		var start_x = centro.x - largura_linha / 2.0
+
 		var pos_final = Vector2(
 			start_x + col * ESPACAMENTO_X,
 			start_y + row * ESPACAMENTO_Y
 		)
+
 		var carta_root = card_scene.instantiate()
 		add_child(carta_root)
 		carta_root.position = Vector2.ZERO
@@ -115,8 +193,13 @@ func criar_cartas():
 	for c in cartas:
 		c.pode_animar = true
 
+	cursor_index = 0
+	if not cartas.is_empty():
+		cartas[0].focar()
+
 func mostrar_cartas_inicial():
 	tempo_ativo = false
+	pode_clicar = false
 	atualizar_barra_jogador()
 	_set_collision(true)
 	for c in cartas:
@@ -128,6 +211,7 @@ func mostrar_cartas_inicial():
 			c.virar()
 	_set_collision(false)
 	tempo_ativo = true
+	pode_clicar = true
 
 func _set_collision(disabled: bool):
 	for c in cartas:
@@ -178,34 +262,38 @@ func atualizar_setas(diferenca):
 		seta_vermelha.global_position.x -= movimento
 
 func fim_de_tempo():
-	print("O tempo acabou!")
 	await get_tree().create_timer(1.0).timeout
 	reiniciar_jogo()
 
 func verificar_carta(carta):
+	if not pode_clicar:
+		return
 	if primeira_carta == null:
 		primeira_carta = carta
-		bloqueio_de_cartas()
-	elif segunda_carta == null:
+		primeira_carta.get_node_or_null("CollisionShape2D").disabled = true
+	elif segunda_carta == null and carta != primeira_carta:
 		segunda_carta = carta
-		bloqueio_de_cartas()
+		pode_clicar = false
+		_set_collision(true)
 		if primeira_carta.card_id == segunda_carta.card_id:
 			pontos_ganhos()
-			var col1 = primeira_carta.get_node_or_null("CollisionShape2D")
-			var col2 = segunda_carta.get_node_or_null("CollisionShape2D")
-			if col1: col1.disabled = true
-			if col2: col2.disabled = true
+			primeira_carta = null
+			segunda_carta = null
+			_set_collision(false)
 			if pares_encontrados >= quantidade_pares:
 				ganhou()
+				return
+			pode_clicar = true
 		else:
 			mudando_atual()
 			await get_tree().create_timer(0.5).timeout
 			primeira_carta.virar()
 			segunda_carta.virar()
-			desbloquear_cartas()
+			primeira_carta = null
+			segunda_carta = null
+			_set_collision(false)
 			mostrar_sprite_equipe()
-		primeira_carta = null
-		segunda_carta = null
+			pode_clicar = true
 
 func ganhou():
 	tempo_ativo = false
@@ -214,7 +302,6 @@ func ganhou():
 		vencedor = nome_jogador_azul if jogador_atual == "azul" else nome_jogador_vermelho
 	else:
 		vencedor = "Azul" if jogador_atual == "azul" else "Vermelho"
-	print("Equipe " + vencedor + " ganhou!")
 	await get_tree().create_timer(1.5).timeout
 	if Campeonato.campeonato_ativo:
 		Campeonato.registrar_resultado(vencedor)
@@ -279,5 +366,5 @@ func mostrar_sprite_equipe():
 			$equipe_vermelha.visible = true
 
 func atualizar_labels():
-	$UImp/PontosA.text = "Pontos da equipe azul: " + str(pontos_azul)
-	$UImp/PontosV.text = "Pontos da equipe vermelha: " + str(pontos_vermelho)
+	$UImp/PontosA.text = str(pontos_azul)
+	$UImp/PontosV.text = str(pontos_vermelho)

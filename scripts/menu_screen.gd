@@ -1,7 +1,7 @@
 extends Control
 
 func _ready() -> void:
-	
+	$start_btn.grab_focus()
 	
 	
 	pass

@@ -27,7 +27,7 @@ var num_jogadores_selecionado: int = 8
 
 func _ready() -> void:
 	_atualizar_toggles()
-
+	$BtnVoltar.grab_focus()
 
 # ─────────────────────────────────────────────
 #  Toggles de quantidade de jogadores (Campeonato)
