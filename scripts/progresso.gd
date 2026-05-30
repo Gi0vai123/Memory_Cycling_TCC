@@ -13,6 +13,9 @@ const ESPACAMENTO_Y = 200
 const PARES_INICIAIS = 2
 const INCREMENTO_PARES = 2
 const COLUNAS = 4
+const DEBUG_UM_CONTROLE = true
+const DEADZONE = 0.5
+const COOLDOWN_MOVIMENTO = 0.2
 
 var pares_fase_atual = PARES_INICIAIS
 var pares_encontrados = 0
@@ -25,11 +28,79 @@ var jogador_atual = "azul"
 var pontos_azul = 0
 var pontos_vermelho = 0
 
+var cursor_index: int = 0
+var cooldown_timer: float = 0.0
+
 func _ready():
 	randomize()
 	if usar_contagem and contador_scene:
 		await contagem_regressiva(contador_scene)
 	iniciar_fase()
+
+func _process(delta):
+	if cooldown_timer > 0:
+		cooldown_timer -= delta
+	if pode_virar and not cartas.is_empty() and cooldown_timer <= 0:
+		_processar_analogico()
+
+func _processar_analogico():
+	var device = 0 if DEBUG_UM_CONTROLE else (0 if jogador_atual == "azul" else 1)
+	var total = cartas.size()
+	var colunas = min(COLUNAS, total)
+	var linhas = ceil(float(total) / float(colunas))
+	var linha_atual = cursor_index / colunas
+	var coluna_atual = cursor_index % colunas
+
+	var h = Input.get_joy_axis(device, JOY_AXIS_LEFT_X)
+	var v = Input.get_joy_axis(device, JOY_AXIS_LEFT_Y)
+
+	if h > DEADZONE:
+		var novo = cursor_index + 1
+		if novo < total:
+			_mover_cursor(novo)
+		cooldown_timer = COOLDOWN_MOVIMENTO
+	elif h < -DEADZONE:
+		var novo = cursor_index - 1
+		if novo >= 0:
+			_mover_cursor(novo)
+		cooldown_timer = COOLDOWN_MOVIMENTO
+	elif v > DEADZONE:
+		var nova_linha = linha_atual + 1
+		if nova_linha < linhas:
+			var cartas_ultima_linha = total % colunas
+			if cartas_ultima_linha == 0:
+				cartas_ultima_linha = colunas
+			var max_col = colunas - 1
+			if nova_linha == linhas - 1:
+				max_col = cartas_ultima_linha - 1
+			_mover_cursor(nova_linha * colunas + min(coluna_atual, max_col))
+		cooldown_timer = COOLDOWN_MOVIMENTO
+	elif v < -DEADZONE:
+		var nova_linha = linha_atual - 1
+		if nova_linha >= 0:
+			_mover_cursor(nova_linha * colunas + coluna_atual)
+		cooldown_timer = COOLDOWN_MOVIMENTO
+
+func _input(event):
+	if not pode_virar or cartas.is_empty():
+		return
+	if not DEBUG_UM_CONTROLE:
+		if event is InputEventJoypadButton:
+			var device_permitido = 0 if jogador_atual == "azul" else 1
+			if event.device != device_permitido:
+				return
+	if event.is_action_pressed("ui_accept"):
+		var carta = cartas[cursor_index]
+		if is_instance_valid(carta) and not carta.virada:
+			carta.virar()
+			_on_carta_clicada(carta)
+
+func _mover_cursor(novo_index: int):
+	if cursor_index < cartas.size() and is_instance_valid(cartas[cursor_index]):
+		cartas[cursor_index].desfocar()
+	cursor_index = novo_index
+	if cursor_index < cartas.size() and is_instance_valid(cartas[cursor_index]):
+		cartas[cursor_index].focar()
 
 func contagem_regressiva(contador):
 	contador.visible = true
@@ -52,6 +123,7 @@ func iniciar_fase():
 	segunda_carta = null
 	pares_encontrados = 0
 	pares_necessarios = pares_fase_atual
+	cursor_index = 0
 	atualizar_ui()
 	await criar_cartas()
 	await mostrar_cartas_inicial()
@@ -124,6 +196,9 @@ func mostrar_cartas_inicial():
 	pode_virar = true
 	for c in cartas:
 		c.pode_animar = true
+	cursor_index = 0
+	if not cartas.is_empty():
+		cartas[0].focar()
 
 func _on_carta_clicada(carta):
 	if not pode_virar:

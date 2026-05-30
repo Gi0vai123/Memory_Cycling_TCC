@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b2ixhphmkjujg" path="res://scripts/selecao_modo.gd" id="1_smdo1"]
 
-[node name="SelecaoModo" type="Control" unique_id=1713050431]
+[node name="SelecaoModo" type="Control" unique_id=1184998056]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,14 +11,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_smdo1")
 
-[node name="Fundo" type="ColorRect" parent="." unique_id=1691195996]
+[node name="Fundo" type="ColorRect" parent="." unique_id=1741136263]
 layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 720.0
 mouse_filter = 2
 color = Color(0.07, 0.07, 0.14, 1)
 
-[node name="Titulo" type="Label" parent="." unique_id=1208253424]
+[node name="Titulo" type="Label" parent="." unique_id=16180946]
 layout_mode = 0
 offset_top = 28.0
 offset_right = 1280.0
@@ -28,7 +28,7 @@ theme_override_font_sizes/font_size = 34
 text = "ESCOLHA O MODO"
 horizontal_alignment = 1
 
-[node name="BtnVoltar" type="Button" parent="." unique_id=2146067255]
+[node name="BtnVoltar" type="Button" parent="." unique_id=1977032901]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 26.0
@@ -37,7 +37,7 @@ offset_bottom = 62.0
 theme_override_font_sizes/font_size = 15
 text = "← Voltar"
 
-[node name="CardPadrao" type="ColorRect" parent="." unique_id=2102901559]
+[node name="CardPadrao" type="ColorRect" parent="." unique_id=539547447]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 75.0
@@ -45,7 +45,7 @@ offset_right = 316.0
 offset_bottom = 675.0
 color = Color(0.15, 0.15, 0.25, 1)
 
-[node name="TituloModo" type="Label" parent="CardPadrao" unique_id=1947261672]
+[node name="TituloModo" type="Label" parent="CardPadrao" unique_id=1194224411]
 layout_mode = 0
 offset_top = 20.0
 offset_right = 300.0
@@ -55,7 +55,7 @@ theme_override_font_sizes/font_size = 22
 text = "Modo Padrão"
 horizontal_alignment = 1
 
-[node name="Imagem" type="ColorRect" parent="CardPadrao" unique_id=900317664]
+[node name="Imagem" type="ColorRect" parent="CardPadrao" unique_id=162262125]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 65.0
@@ -64,7 +64,7 @@ offset_bottom = 240.0
 mouse_filter = 2
 color = Color(0.25, 0.25, 0.35, 1)
 
-[node name="ImagemLabel" type="Label" parent="CardPadrao/Imagem" unique_id=207226076]
+[node name="ImagemLabel" type="Label" parent="CardPadrao/Imagem" unique_id=1537051867]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -77,7 +77,7 @@ text = "[ imagem em breve ]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Descricao" type="Label" parent="CardPadrao" unique_id=1788842004]
+[node name="Descricao" type="Label" parent="CardPadrao" unique_id=1653163680]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 255.0
@@ -89,7 +89,7 @@ text = "Partida 1x1 entre os times Azul e Vermelho. Vence quem encontrar mais pa
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="DificuldadeLabel" type="Label" parent="CardPadrao" unique_id=107085625]
+[node name="DificuldadeLabel" type="Label" parent="CardPadrao" unique_id=2118712593]
 layout_mode = 0
 offset_top = 460.0
 offset_right = 300.0
@@ -99,7 +99,7 @@ theme_override_font_sizes/font_size = 13
 text = "Dificuldade"
 horizontal_alignment = 1
 
-[node name="BtnFacil" type="Button" parent="CardPadrao" unique_id=1751063594]
+[node name="BtnFacil" type="Button" parent="CardPadrao" unique_id=498719140]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 490.0
@@ -108,7 +108,7 @@ offset_bottom = 545.0
 theme_override_font_sizes/font_size = 15
 text = "Fácil"
 
-[node name="BtnNormal" type="Button" parent="CardPadrao" unique_id=1069822604]
+[node name="BtnNormal" type="Button" parent="CardPadrao" unique_id=1939341185]
 layout_mode = 0
 offset_left = 108.0
 offset_top = 490.0
@@ -117,7 +117,7 @@ offset_bottom = 545.0
 theme_override_font_sizes/font_size = 15
 text = "Normal"
 
-[node name="BtnDificil" type="Button" parent="CardPadrao" unique_id=561654628]
+[node name="BtnDificil" type="Button" parent="CardPadrao" unique_id=1278453271]
 layout_mode = 0
 offset_left = 200.0
 offset_top = 490.0
@@ -126,7 +126,7 @@ offset_bottom = 545.0
 theme_override_font_sizes/font_size = 15
 text = "Difícil"
 
-[node name="CardCampeonato" type="ColorRect" parent="." unique_id=1138186490]
+[node name="CardCampeonato" type="ColorRect" parent="." unique_id=969187208]
 layout_mode = 0
 offset_left = 332.0
 offset_top = 75.0
@@ -134,7 +134,7 @@ offset_right = 632.0
 offset_bottom = 675.0
 color = Color(0.15, 0.15, 0.25, 1)
 
-[node name="TituloModo" type="Label" parent="CardCampeonato" unique_id=1007530219]
+[node name="TituloModo" type="Label" parent="CardCampeonato" unique_id=1768616340]
 layout_mode = 0
 offset_top = 20.0
 offset_right = 300.0
@@ -144,7 +144,7 @@ theme_override_font_sizes/font_size = 22
 text = "Modo Campeonato"
 horizontal_alignment = 1
 
-[node name="Imagem" type="ColorRect" parent="CardCampeonato" unique_id=1799047649]
+[node name="Imagem" type="ColorRect" parent="CardCampeonato" unique_id=246578707]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 65.0
@@ -153,7 +153,7 @@ offset_bottom = 240.0
 mouse_filter = 2
 color = Color(0.25, 0.25, 0.35, 1)
 
-[node name="ImagemLabel" type="Label" parent="CardCampeonato/Imagem" unique_id=1143018816]
+[node name="ImagemLabel" type="Label" parent="CardCampeonato/Imagem" unique_id=524711530]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -166,7 +166,7 @@ text = "[ imagem em breve ]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Descricao" type="Label" parent="CardCampeonato" unique_id=238284449]
+[node name="Descricao" type="Label" parent="CardCampeonato" unique_id=944352312]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 255.0
@@ -178,7 +178,7 @@ text = "Chaveamento eliminatório entre os jogadores cadastrados. Escolha quanto
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="JogadoresLabel" type="Label" parent="CardCampeonato" unique_id=91526824]
+[node name="JogadoresLabel" type="Label" parent="CardCampeonato" unique_id=1539820394]
 layout_mode = 0
 offset_top = 370.0
 offset_right = 300.0
@@ -188,7 +188,7 @@ theme_override_font_sizes/font_size = 13
 text = "Quantos jogadores?"
 horizontal_alignment = 1
 
-[node name="Btn4" type="Button" parent="CardCampeonato" unique_id=388801762]
+[node name="Btn4" type="Button" parent="CardCampeonato" unique_id=333313546]
 layout_mode = 0
 offset_left = 30.0
 offset_top = 395.0
@@ -197,7 +197,7 @@ offset_bottom = 435.0
 theme_override_font_sizes/font_size = 16
 text = "4"
 
-[node name="Btn6" type="Button" parent="CardCampeonato" unique_id=2093611655]
+[node name="Btn6" type="Button" parent="CardCampeonato" unique_id=547141355]
 layout_mode = 0
 offset_left = 118.0
 offset_top = 395.0
@@ -206,7 +206,7 @@ offset_bottom = 435.0
 theme_override_font_sizes/font_size = 16
 text = "6"
 
-[node name="Btn8" type="Button" parent="CardCampeonato" unique_id=781953652]
+[node name="Btn8" type="Button" parent="CardCampeonato" unique_id=1204506105]
 layout_mode = 0
 offset_left = 206.0
 offset_top = 395.0
@@ -215,7 +215,7 @@ offset_bottom = 435.0
 theme_override_font_sizes/font_size = 16
 text = "8"
 
-[node name="DificuldadeLabel" type="Label" parent="CardCampeonato" unique_id=1542084266]
+[node name="DificuldadeLabel" type="Label" parent="CardCampeonato" unique_id=291488350]
 layout_mode = 0
 offset_top = 460.0
 offset_right = 300.0
@@ -225,7 +225,7 @@ theme_override_font_sizes/font_size = 13
 text = "Dificuldade"
 horizontal_alignment = 1
 
-[node name="BtnFacil" type="Button" parent="CardCampeonato" unique_id=1082745718]
+[node name="BtnFacil" type="Button" parent="CardCampeonato" unique_id=525715053]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 490.0
@@ -234,7 +234,7 @@ offset_bottom = 545.0
 theme_override_font_sizes/font_size = 15
 text = "Fácil"
 
-[node name="BtnNormal" type="Button" parent="CardCampeonato" unique_id=18143243]
+[node name="BtnNormal" type="Button" parent="CardCampeonato" unique_id=524346336]
 layout_mode = 0
 offset_left = 108.0
 offset_top = 490.0
@@ -243,7 +243,7 @@ offset_bottom = 545.0
 theme_override_font_sizes/font_size = 15
 text = "Normal"
 
-[node name="BtnDificil" type="Button" parent="CardCampeonato" unique_id=1120475958]
+[node name="BtnDificil" type="Button" parent="CardCampeonato" unique_id=535416729]
 layout_mode = 0
 offset_left = 200.0
 offset_top = 490.0
@@ -252,7 +252,7 @@ offset_bottom = 545.0
 theme_override_font_sizes/font_size = 15
 text = "Difícil"
 
-[node name="CardProgresso" type="ColorRect" parent="." unique_id=1222887071]
+[node name="CardProgresso" type="ColorRect" parent="." unique_id=1608158688]
 layout_mode = 0
 offset_left = 648.0
 offset_top = 75.0
@@ -260,7 +260,7 @@ offset_right = 948.0
 offset_bottom = 675.0
 color = Color(0.15, 0.15, 0.25, 1)
 
-[node name="TituloModo" type="Label" parent="CardProgresso" unique_id=1663441977]
+[node name="TituloModo" type="Label" parent="CardProgresso" unique_id=316279045]
 layout_mode = 0
 offset_top = 20.0
 offset_right = 300.0
@@ -270,7 +270,7 @@ theme_override_font_sizes/font_size = 22
 text = "Modo Progresso"
 horizontal_alignment = 1
 
-[node name="Imagem" type="ColorRect" parent="CardProgresso" unique_id=1397832761]
+[node name="Imagem" type="ColorRect" parent="CardProgresso" unique_id=1073064145]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 65.0
@@ -279,7 +279,7 @@ offset_bottom = 240.0
 mouse_filter = 2
 color = Color(0.25, 0.25, 0.35, 1)
 
-[node name="ImagemLabel" type="Label" parent="CardProgresso/Imagem" unique_id=1626335803]
+[node name="ImagemLabel" type="Label" parent="CardProgresso/Imagem" unique_id=236466310]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -292,7 +292,7 @@ text = "[ imagem em breve ]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Descricao" type="Label" parent="CardProgresso" unique_id=1487606762]
+[node name="Descricao" type="Label" parent="CardProgresso" unique_id=328553215]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 255.0
@@ -304,7 +304,7 @@ text = "Fases progressivas: começa com 2 pares e a cada fase nova entram mais. 
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="DificuldadeLabel" type="Label" parent="CardProgresso" unique_id=96645600]
+[node name="DificuldadeLabel" type="Label" parent="CardProgresso" unique_id=626168746]
 layout_mode = 0
 offset_top = 460.0
 offset_right = 300.0
@@ -314,7 +314,7 @@ theme_override_font_sizes/font_size = 13
 text = "Dificuldade"
 horizontal_alignment = 1
 
-[node name="BtnFacil" type="Button" parent="CardProgresso" unique_id=165296275]
+[node name="BtnFacil" type="Button" parent="CardProgresso" unique_id=975860402]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 490.0
@@ -323,7 +323,7 @@ offset_bottom = 545.0
 theme_override_font_sizes/font_size = 15
 text = "Fácil"
 
-[node name="BtnNormal" type="Button" parent="CardProgresso" unique_id=271699352]
+[node name="BtnNormal" type="Button" parent="CardProgresso" unique_id=1070984740]
 layout_mode = 0
 offset_left = 108.0
 offset_top = 490.0
@@ -332,7 +332,7 @@ offset_bottom = 545.0
 theme_override_font_sizes/font_size = 15
 text = "Normal"
 
-[node name="BtnDificil" type="Button" parent="CardProgresso" unique_id=919767398]
+[node name="BtnDificil" type="Button" parent="CardProgresso" unique_id=1096635979]
 layout_mode = 0
 offset_left = 200.0
 offset_top = 490.0
@@ -341,7 +341,7 @@ offset_bottom = 545.0
 theme_override_font_sizes/font_size = 15
 text = "Difícil"
 
-[node name="CardAdivinhacao" type="ColorRect" parent="." unique_id=1157355158]
+[node name="CardAdivinhacao" type="ColorRect" parent="." unique_id=447153794]
 layout_mode = 0
 offset_left = 964.0
 offset_top = 75.0
@@ -349,7 +349,7 @@ offset_right = 1264.0
 offset_bottom = 675.0
 color = Color(0.15, 0.15, 0.25, 1)
 
-[node name="TituloModo" type="Label" parent="CardAdivinhacao" unique_id=1100064289]
+[node name="TituloModo" type="Label" parent="CardAdivinhacao" unique_id=1683838228]
 layout_mode = 0
 offset_top = 20.0
 offset_right = 300.0
@@ -359,7 +359,7 @@ theme_override_font_sizes/font_size = 22
 text = "Modo Adivinhação"
 horizontal_alignment = 1
 
-[node name="Imagem" type="ColorRect" parent="CardAdivinhacao" unique_id=2027905481]
+[node name="Imagem" type="ColorRect" parent="CardAdivinhacao" unique_id=1576003426]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 65.0
@@ -368,7 +368,7 @@ offset_bottom = 240.0
 mouse_filter = 2
 color = Color(0.25, 0.25, 0.35, 1)
 
-[node name="ImagemLabel" type="Label" parent="CardAdivinhacao/Imagem" unique_id=1614886303]
+[node name="ImagemLabel" type="Label" parent="CardAdivinhacao/Imagem" unique_id=1944445369]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -381,7 +381,7 @@ text = "[ imagem em breve ]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Descricao" type="Label" parent="CardAdivinhacao" unique_id=234889323]
+[node name="Descricao" type="Label" parent="CardAdivinhacao" unique_id=555979965]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 255.0
@@ -393,7 +393,7 @@ text = "Duelo entre os baralhos dos jogadores. Tente adivinhar qual carta o opon
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="DificuldadeLabel" type="Label" parent="CardAdivinhacao" unique_id=865824312]
+[node name="DificuldadeLabel" type="Label" parent="CardAdivinhacao" unique_id=1004006936]
 layout_mode = 0
 offset_top = 460.0
 offset_right = 300.0
@@ -403,7 +403,7 @@ theme_override_font_sizes/font_size = 13
 text = "Dificuldade"
 horizontal_alignment = 1
 
-[node name="BtnFacil" type="Button" parent="CardAdivinhacao" unique_id=1311745689]
+[node name="BtnFacil" type="Button" parent="CardAdivinhacao" unique_id=1953597479]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 490.0
@@ -412,7 +412,7 @@ offset_bottom = 545.0
 theme_override_font_sizes/font_size = 15
 text = "Fácil"
 
-[node name="BtnNormal" type="Button" parent="CardAdivinhacao" unique_id=1043212619]
+[node name="BtnNormal" type="Button" parent="CardAdivinhacao" unique_id=1402339516]
 layout_mode = 0
 offset_left = 108.0
 offset_top = 490.0
@@ -421,7 +421,7 @@ offset_bottom = 545.0
 theme_override_font_sizes/font_size = 15
 text = "Normal"
 
-[node name="BtnDificil" type="Button" parent="CardAdivinhacao" unique_id=787448908]
+[node name="BtnDificil" type="Button" parent="CardAdivinhacao" unique_id=1265056609]
 layout_mode = 0
 offset_left = 200.0
 offset_top = 490.0

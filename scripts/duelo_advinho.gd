@@ -15,13 +15,71 @@ var carta_propria: Area2D = null
 var carta_oponente: Area2D = null
 var fase_escolha: String = ""
 
+var cartas_navegaveis: Array = []
+var cursor_index: int = 0
+
+const DEBUG_UM_CONTROLE = true
+const DEADZONE = 0.5
+const COOLDOWN_MOVIMENTO = 0.2
+
+var cooldown_timer: float = 0.0
+
 func _ready():
 	iniciar_duelo()
+
+func _process(delta):
+	if cooldown_timer > 0:
+		cooldown_timer -= delta
+	if not cartas_navegaveis.is_empty() and cooldown_timer <= 0:
+		_processar_analogico()
+
+func _processar_analogico():
+	var device = 0 if DEBUG_UM_CONTROLE else (0 if turno_atual == "azul" else 1)
+	var h = Input.get_joy_axis(device, JOY_AXIS_LEFT_X)
+
+	if h > DEADZONE:
+		mover_cursor(1)
+		cooldown_timer = COOLDOWN_MOVIMENTO
+	elif h < -DEADZONE:
+		mover_cursor(-1)
+		cooldown_timer = COOLDOWN_MOVIMENTO
+
+func _input(event):
+	if cartas_navegaveis.is_empty():
+		return
+	if not DEBUG_UM_CONTROLE:
+		if event is InputEventJoypadButton:
+			var device_permitido = 0 if turno_atual == "azul" else 1
+			if event.device != device_permitido:
+				return
+	if event.is_action_pressed("ui_accept"):
+		ao_clicar_carta(cartas_navegaveis[cursor_index])
+
+func mover_cursor(direcao: int):
+	cartas_navegaveis[cursor_index].desfocar()
+	cursor_index = (cursor_index + direcao) % cartas_navegaveis.size()
+	cartas_navegaveis[cursor_index].focar()
+
+func atualizar_navegacao():
+	if not cartas_navegaveis.is_empty():
+		cartas_navegaveis[cursor_index].desfocar()
+
+	if fase_escolha == "propria":
+		cartas_navegaveis = todas_cartas.filter(func(c): return c.lado == turno_atual)
+	elif fase_escolha == "oponente":
+		var lado_oponente = "vermelho" if turno_atual == "azul" else "azul"
+		cartas_navegaveis = todas_cartas.filter(func(c): return c.lado == lado_oponente)
+	else:
+		cartas_navegaveis = []
+		return
+
+	cursor_index = 0
+	if not cartas_navegaveis.is_empty():
+		cartas_navegaveis[cursor_index].focar()
 
 func iniciar_duelo():
 	limpar_cartas()
 	criar_cartas_duelo()
-
 	await get_tree().create_timer(0.3).timeout
 	await cuspir_cartas()
 	await virar_cartas()
@@ -33,6 +91,7 @@ func limpar_cartas():
 	for c in todas_cartas:
 		c.queue_free()
 	todas_cartas.clear()
+	cartas_navegaveis.clear()
 
 func criar_cartas_duelo():
 	var ids = [1, 2, 3]
@@ -46,10 +105,8 @@ func criar_cartas_duelo():
 		carta.card_id = ids[i]
 		carta.lado = "azul"
 		carta.global_position = baralho_azul.global_position
-
 		add_child(carta)
 		todas_cartas.append(carta)
-
 		carta.connect("carta_clicada", Callable(self, "ao_clicar_carta"))
 		carta.atualizar_id_visual()
 
@@ -62,10 +119,8 @@ func criar_cartas_duelo():
 		carta.card_id = ids[i]
 		carta.lado = "vermelho"
 		carta.global_position = baralho_vermelho.global_position
-
 		add_child(carta)
 		todas_cartas.append(carta)
-
 		carta.connect("carta_clicada", Callable(self, "ao_clicar_carta"))
 		carta.atualizar_id_visual()
 
@@ -78,31 +133,24 @@ func cuspir_cartas():
 
 		var base_azul = baralho_azul.global_position
 		var base_vermelho = baralho_vermelho.global_position
-
 		var offset_x = (i - 1) * espacamento
 
 		var pos_final_azul = Vector2(base_azul.x + offset_x, base_azul.y + 200)
 		var pos_final_vermelho = Vector2(base_vermelho.x + offset_x, base_vermelho.y - 200)
 
 		var tween = create_tween()
-
 		tween.tween_property(carta_azul, "global_position", pos_final_azul, 0.4)\
-			.set_trans(Tween.TRANS_BACK)\
-			.set_ease(Tween.EASE_OUT)
-
+			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 		tween.tween_property(carta_vermelha, "global_position", pos_final_vermelho, 0.4)\
-			.set_trans(Tween.TRANS_BACK)\
-			.set_ease(Tween.EASE_OUT)
+			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 		await get_tree().create_timer(0.12).timeout
 
 func ao_clicar_carta(carta):
 	if fase_escolha == "propria":
 		carta_propria = carta
-		carta.mostrar_frente()
+		carta.virar()
 		carta.bloquear()
-
-		print("Carta própria escolhida: ", carta.card_id, " (", carta.lado, ")")
 
 		fase_escolha = "oponente"
 		var lado_oponente = "vermelho" if turno_atual == "azul" else "azul"
@@ -113,12 +161,15 @@ func ao_clicar_carta(carta):
 			else:
 				c.bloquear()
 
+		atualizar_navegacao()
+
 	elif fase_escolha == "oponente":
 		carta_oponente = carta
-		carta.mostrar_frente()
+		carta.virar()
 		carta.bloquear()
 
-		print("Carta oponente escolhida: ", carta_oponente.card_id, " (", carta_oponente.lado, ")")
+		cartas_navegaveis = []
+		fase_escolha = ""
 
 		for c in todas_cartas:
 			c.bloquear()
@@ -137,8 +188,6 @@ func resolver_duelo():
 			pontos_vermelho += 1
 			P_vermelho.text = str(pontos_vermelho)
 
-		print("ACERTOU! ", acertos, "/3")
-
 		todas_cartas.erase(carta_propria)
 		todas_cartas.erase(carta_oponente)
 
@@ -146,36 +195,23 @@ func resolver_duelo():
 
 		var t1 = create_tween()
 		var t2 = create_tween()
-
 		t1.tween_property(carta_propria, "global_position", ponto_meio, 0.3)\
-			.set_trans(Tween.TRANS_CUBIC)\
-			.set_ease(Tween.EASE_IN_OUT)
-
+			.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 		t2.tween_property(carta_oponente, "global_position", ponto_meio, 0.3)\
-			.set_trans(Tween.TRANS_CUBIC)\
-			.set_ease(Tween.EASE_IN_OUT)
+			.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 
 		await get_tree().create_timer(0.35).timeout
 
 		var saida = Vector2(-200, ponto_meio.y)
-
 		var t3 = create_tween().set_parallel(true)
-
 		t3.tween_property(carta_propria, "global_position", saida, 0.5)\
-			.set_trans(Tween.TRANS_CUBIC)\
-			.set_ease(Tween.EASE_IN)
-
+			.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 		t3.tween_property(carta_propria, "scale", Vector2(0.0, 0.7), 0.5)\
-			.set_trans(Tween.TRANS_CUBIC)\
-			.set_ease(Tween.EASE_IN)
-
+			.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 		t3.tween_property(carta_oponente, "global_position", saida, 0.5)\
-			.set_trans(Tween.TRANS_CUBIC)\
-			.set_ease(Tween.EASE_IN)
-
+			.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 		t3.tween_property(carta_oponente, "scale", Vector2(0.0, 0.7), 0.5)\
-			.set_trans(Tween.TRANS_CUBIC)\
-			.set_ease(Tween.EASE_IN)
+			.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 
 		await get_tree().create_timer(0.55).timeout
 
@@ -183,15 +219,16 @@ func resolver_duelo():
 		carta_oponente.queue_free()
 
 		if acertos >= 3:
-			print("VENCEU! Lado ", turno_atual, " acertou todos os pares!")
-			get_tree().reload_current_scene()
+			acertos = 0
+			pontos_azul = 0
+			pontos_vermelho = 0
+			await get_tree().create_timer(0.5).timeout
+			iniciar_duelo()
 		else:
 			await embaralhar_cartas()
 			iniciar_escolha()
 	else:
-		print("ERROU!")
 		acertos = 0
-
 		await abaixar_cartas()
 		await embaralhar_cartas()
 		iniciar_escolha()
@@ -199,7 +236,6 @@ func resolver_duelo():
 func virar_cartas():
 	for carta in todas_cartas:
 		carta.mostrar_frente()
-
 	await get_tree().create_timer(2.5).timeout
 
 func abaixar_cartas():
@@ -207,18 +243,15 @@ func abaixar_cartas():
 		var tween = create_tween()
 		tween.tween_property(carta, "scale", Vector2(0.7, 0.0), 0.2)\
 			.set_trans(Tween.TRANS_SINE)
-
 		await get_tree().create_timer(0.05).timeout
 
 	await get_tree().create_timer(0.3).timeout
 
 	for carta in todas_cartas:
 		carta.mostrar_costas()
-
 		var tween = create_tween()
 		tween.tween_property(carta, "scale", Vector2(0.7, 0.7), 0.2)\
 			.set_trans(Tween.TRANS_SINE)
-
 		await get_tree().create_timer(0.05).timeout
 
 	await get_tree().create_timer(0.3).timeout
@@ -230,28 +263,23 @@ func embaralhar_cartas():
 	for _rodada in range(3):
 		var posicoes_azul = cartas_azul.map(func(c): return c.global_position)
 		var posicoes_vermelho = cartas_vermelho.map(func(c): return c.global_position)
-
 		posicoes_azul.shuffle()
 		posicoes_vermelho.shuffle()
 
 		for i in range(cartas_azul.size()):
 			var tween = create_tween()
 			tween.tween_property(cartas_azul[i], "global_position", posicoes_azul[i], 0.45)\
-				.set_trans(Tween.TRANS_CUBIC)\
-				.set_ease(Tween.EASE_IN_OUT)
+				.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 
 		for i in range(cartas_vermelho.size()):
 			var tween = create_tween()
 			tween.tween_property(cartas_vermelho[i], "global_position", posicoes_vermelho[i], 0.45)\
-				.set_trans(Tween.TRANS_CUBIC)\
-				.set_ease(Tween.EASE_IN_OUT)
+				.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 
 		await get_tree().create_timer(0.55).timeout
 
 func iniciar_escolha():
 	turno_atual = "azul" if randi() % 2 == 0 else "vermelho"
-	print("Vez do lado: ", turno_atual)
-
 	carta_propria = null
 	carta_oponente = null
 	fase_escolha = "propria"
@@ -261,3 +289,5 @@ func iniciar_escolha():
 			carta.desbloquear()
 		else:
 			carta.bloquear()
+
+	atualizar_navegacao()

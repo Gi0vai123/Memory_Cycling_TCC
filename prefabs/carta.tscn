@@ -32,6 +32,7 @@ text = "back"
 metadata/_edit_use_anchors_ = true
 
 [node name="id" type="Label" parent="." unique_id=718367103]
+visible = false
 offset_top = 20.0
 offset_right = 40.0
 offset_bottom = 43.0
