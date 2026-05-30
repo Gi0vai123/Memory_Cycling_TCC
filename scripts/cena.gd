@@ -13,6 +13,7 @@ var tempo_azul = tempo_total
 var tempo_vermelho = tempo_total
 var tempo_ativo = false
 var cartas = []
+var posicoes_grid: Array = []  # posicoes finais das cartas (pra reembaralhar)
 var pontos_azul = 0
 var pontos_vermelho = 0
 var jogador_atual = ""
@@ -121,21 +122,21 @@ func _mover_cursor(novo_index: int):
 # Ajusta o spacing e o centro do grid conforme a dificuldade
 func _ajustar_layout() -> void:
 	match quantidade_pares:
-		12:  # Fácil 6×4 — mais espaço horizontal
-			espacamento_x = 170
-			espacamento_y = 160
+		12:  # Fácil 6×4
+			espacamento_x = 130
+			espacamento_y = 170
 			centro_y = 380
-		15:  # Normal 10×3 — mais respiro vertical
+		15:  # Normal 10×3
 			espacamento_x = 110
-			espacamento_y = 180
+			espacamento_y = 175
 			centro_y = 400
-		20:  # Difícil 10×4 — grid mais centralizado
+		20:  # Difícil 10×4
 			espacamento_x = 100
 			espacamento_y = 170
 			centro_y = 380
 		_:
 			espacamento_x = 110
-			espacamento_y = 160
+			espacamento_y = 170
 			centro_y = 400
 
 func contagem_regressiva(contador):
@@ -172,6 +173,7 @@ func criar_cartas():
 	var start_y = centro.y - altura_total / 2.0
 
 	cartas.clear()
+	posicoes_grid.clear()
 
 	var carta_roots = []
 	for i in range(total):
@@ -205,6 +207,7 @@ func criar_cartas():
 		area.pode_animar = false
 		area.connect("carta_clicada", Callable(self, "verificar_carta"))
 		cartas.append(area)
+		posicoes_grid.append(pos_final)
 		carta_roots.append({"root": carta_root, "pos": pos_final})
 
 	for entry in carta_roots:
@@ -241,9 +244,88 @@ func mostrar_cartas_inicial():
 func _set_collision(disabled: bool):
 	for c in cartas:
 		if is_instance_valid(c):
+			# Cartas ja matched ficam sempre travadas — nao reabilita
+			if not disabled and c.matched:
+				continue
 			var col = c.get_node_or_null("CollisionShape2D")
 			if col:
 				col.disabled = disabled
+
+# Embaralha de novo quando todos os pares forem achados.
+# Pausa o tempo, junta as cartas no centro, troca os IDs e devolve pro grid.
+func reembaralhar():
+	tempo_ativo = false
+	pode_clicar = false
+	_set_collision(true)
+
+	# Espera qualquer flip em andamento terminar (a 2a carta do ultimo par
+	# pode estar no meio da animacao quando o match dispara reembaralhar)
+	await get_tree().create_timer(0.3).timeout
+
+	# Vira tudo pra costa e libera o matched pra proxima rodada
+	for c in cartas:
+		c.matched = false
+		if c.virada:
+			c.virar()
+
+	# Junta no centro
+	var centro_pos = Vector2(640, centro_y)
+	for c in cartas:
+		var root = c.get_parent()
+		if root:
+			var tw = create_tween()
+			tw.tween_property(root, "position", centro_pos, 0.5) \
+				.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+
+	await get_tree().create_timer(0.6).timeout
+
+	# Reseta o visual de cada carta antes de voltar pro grid
+	for c in cartas:
+		if c.tween_hover:
+			c.tween_hover.kill()
+		if c.tween_rotacao:
+			c.tween_rotacao.kill()
+		c.scale = Vector2(0.8, 0.8)
+		c.position = Vector2.ZERO
+		c.rotation_degrees = 0
+		c.z_index = c.z_original
+
+	# Embaralha os IDs e recarrega o sprite de cada carta
+	var ids = []
+	for c in cartas:
+		ids.append(c.card_id)
+	ids.shuffle()
+	for i in cartas.size():
+		cartas[i].card_id = ids[i]
+		cartas[i].carregar_sprite()
+
+	# Devolve cada carta pra sua posicao original no grid
+	for i in cartas.size():
+		var root = cartas[i].get_parent()
+		if root and i < posicoes_grid.size():
+			var tw = create_tween()
+			tw.tween_property(root, "position", posicoes_grid[i], 0.5) \
+				.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+	await get_tree().create_timer(0.6).timeout
+
+	# Garante a posicao final exata caso algum tween tenha desviado
+	for i in cartas.size():
+		var c = cartas[i]
+		var root = c.get_parent()
+		c.scale = Vector2(0.8, 0.8)
+		c.position = Vector2.ZERO
+		c.rotation_degrees = 0
+		c.z_index = c.z_original
+		if root:
+			root.scale = Vector2(1, 1)
+			if i < posicoes_grid.size():
+				root.position = posicoes_grid[i]
+
+	pares_encontrados = 0
+	_set_collision(false)
+	tempo_ativo = true
+	pode_clicar = true
 
 func timer_bar(delta):
 	if jogador_atual == "azul":
@@ -288,7 +370,7 @@ func atualizar_setas(diferenca):
 
 func fim_de_tempo():
 	await get_tree().create_timer(1.0).timeout
-	reiniciar_jogo()
+	ganhou()
 
 func verificar_carta(carta):
 	if not pode_clicar:
@@ -302,11 +384,15 @@ func verificar_carta(carta):
 		_set_collision(true)
 		if primeira_carta.card_id == segunda_carta.card_id:
 			pontos_ganhos()
+			# Marca as duas como matched antes de reabrir colisoes —
+			# _set_collision pula matched, entao elas ficam travadas pra sempre
+			primeira_carta.matched = true
+			segunda_carta.matched = true
 			primeira_carta = null
 			segunda_carta = null
 			_set_collision(false)
 			if pares_encontrados >= quantidade_pares:
-				ganhou()
+				reembaralhar()
 				return
 			pode_clicar = true
 		else:
@@ -322,11 +408,23 @@ func verificar_carta(carta):
 
 func ganhou():
 	tempo_ativo = false
+	pode_clicar = false
+
+	# Vencedor: quem tem mais pontos. Empate vai pra quem virou o ultimo par (jogador_atual).
+	var lado_vencedor: String
+	if pontos_azul > pontos_vermelho:
+		lado_vencedor = "azul"
+	elif pontos_vermelho > pontos_azul:
+		lado_vencedor = "vermelho"
+	else:
+		lado_vencedor = jogador_atual  # desempate
+
 	var vencedor: String
 	if Campeonato.campeonato_ativo:
-		vencedor = nome_jogador_azul if jogador_atual == "azul" else nome_jogador_vermelho
+		vencedor = nome_jogador_azul if lado_vencedor == "azul" else nome_jogador_vermelho
 	else:
-		vencedor = "Azul" if jogador_atual == "azul" else "Vermelho"
+		vencedor = "Azul" if lado_vencedor == "azul" else "Vermelho"
+
 	await get_tree().create_timer(1.5).timeout
 	if Campeonato.campeonato_ativo:
 		Campeonato.registrar_resultado(vencedor)

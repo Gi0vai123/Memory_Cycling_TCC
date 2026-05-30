@@ -18,6 +18,7 @@ var pode_animar := false
 var virada := false
 var virando := false
 var mouse_dentro := false
+var matched := false
 var z_original = 0
 
 signal carta_clicada(carta)
@@ -72,7 +73,7 @@ func carregar_sprite():
 
 func _on_mouse_entered():
 	mouse_dentro = true
-	if not pode_animar or virando:
+	if not pode_animar or virando or matched:
 		return
 	z_index = 100
 	if tween_hover: tween_hover.kill()
@@ -105,7 +106,7 @@ func parar_rotacao():
 
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
-		if not pode_animar:
+		if not pode_animar or matched:
 			return
 		virar()
 		emit_signal("carta_clicada", self)
@@ -165,7 +166,7 @@ func desfocar():
 	parar_rotacao()
 
 func selecionar():
-	if not pode_animar:
+	if not pode_animar or matched:
 		return
 	virar()
 	emit_signal("carta_clicada", self)
