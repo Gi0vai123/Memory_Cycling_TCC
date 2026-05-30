@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://djtfumtr2lppk"]
 
 [ext_resource type="Script" uid="uid://b2ixhphmkjujg" path="res://scripts/selecao_modo.gd" id="1_smdo1"]
+[ext_resource type="Texture2D" uid="uid://bicg75a8ai7ac" path="res://modos2.jpeg" id="2_4ni2v"]
+[ext_resource type="Texture2D" uid="uid://bgycglk1ypjjo" path="res://fundomenu.jpeg" id="3_5ikon"]
+
+[sub_resource type="SystemFont" id="SystemFont_5ikon"]
+font_names = PackedStringArray("Asteroid Blaster")
 
 [node name="SelecaoModo" type="Control" unique_id=1184998056]
 layout_mode = 3
@@ -11,19 +16,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_smdo1")
 
-[node name="Fundo" type="ColorRect" parent="." unique_id=1741136263]
-layout_mode = 0
-offset_right = 1280.0
-offset_bottom = 720.0
-mouse_filter = 2
-color = Color(0.07, 0.07, 0.14, 1)
+[node name="fundo" type="Sprite2D" parent="." unique_id=249094753]
+position = Vector2(637, 362)
+texture = ExtResource("2_4ni2v")
 
 [node name="Titulo" type="Label" parent="." unique_id=16180946]
 layout_mode = 0
 offset_top = 28.0
 offset_right = 1280.0
 offset_bottom = 70.0
-theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
+theme_override_colors/font_color = Color(0.8, 0.039215688, 0.2784314, 1)
+theme_override_fonts/font = SubResource("SystemFont_5ikon")
 theme_override_font_sizes/font_size = 34
 text = "ESCOLHA O MODO"
 horizontal_alignment = 1
@@ -43,7 +46,12 @@ offset_left = 16.0
 offset_top = 75.0
 offset_right = 316.0
 offset_bottom = 675.0
-color = Color(0.15, 0.15, 0.25, 1)
+color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="CardPadrao" unique_id=774539546]
+position = Vector2(148.62502, 300.375)
+scale = Vector2(0.37156248, 0.37671876)
+texture = ExtResource("3_5ikon")
 
 [node name="TituloModo" type="Label" parent="CardPadrao" unique_id=1194224411]
 layout_mode = 0
@@ -132,7 +140,12 @@ offset_left = 332.0
 offset_top = 75.0
 offset_right = 632.0
 offset_bottom = 675.0
-color = Color(0.15, 0.15, 0.25, 1)
+color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D2" type="Sprite2D" parent="CardCampeonato" unique_id=1217412]
+position = Vector2(151.49998, 300.375)
+scale = Vector2(0.37874994, 0.37671876)
+texture = ExtResource("3_5ikon")
 
 [node name="TituloModo" type="Label" parent="CardCampeonato" unique_id=1768616340]
 layout_mode = 0
@@ -258,7 +271,12 @@ offset_left = 648.0
 offset_top = 75.0
 offset_right = 948.0
 offset_bottom = 675.0
-color = Color(0.15, 0.15, 0.25, 1)
+color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D2" type="Sprite2D" parent="CardProgresso" unique_id=529829845]
+position = Vector2(151.5, 300.375)
+scale = Vector2(0.37874994, 0.37671876)
+texture = ExtResource("3_5ikon")
 
 [node name="TituloModo" type="Label" parent="CardProgresso" unique_id=316279045]
 layout_mode = 0
@@ -319,7 +337,12 @@ offset_left = 964.0
 offset_top = 75.0
 offset_right = 1264.0
 offset_bottom = 675.0
-color = Color(0.15, 0.15, 0.25, 1)
+color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D2" type="Sprite2D" parent="CardAdivinhacao" unique_id=1321462174]
+position = Vector2(151.5, 300.375)
+scale = Vector2(0.37874994, 0.37671876)
+texture = ExtResource("3_5ikon")
 
 [node name="TituloModo" type="Label" parent="CardAdivinhacao" unique_id=1683838228]
 layout_mode = 0
