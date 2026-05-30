@@ -39,7 +39,7 @@ offset_bottom = 43.0
 
 [node name="SpFrente" type="Sprite2D" parent="." unique_id=1718998932]
 visible = false
-scale = Vector2(0.11, 0.11)
+scale = Vector2(0.1127, 0.1127)
 texture = ExtResource("2_6pljl")
 
 [node name="SpCosta" type="Sprite2D" parent="." unique_id=1395399031]
