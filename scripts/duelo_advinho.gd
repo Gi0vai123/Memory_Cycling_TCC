@@ -18,6 +18,7 @@ var fase_escolha: String = ""
 
 var cartas_navegaveis: Array = []
 var cursor_index: int = 0
+var cursor_ativo: bool = false
 
 const DEBUG_UM_CONTROLE = true
 const DEADZONE = 0.5
@@ -58,17 +59,25 @@ func _input(event):
 			var device_permitido = 0 if turno_atual == "azul" else 1
 			if event.device != device_permitido:
 				return
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed("ui_accept") and cursor_ativo:
 		ao_clicar_carta(cartas_navegaveis[cursor_index])
 
 func mover_cursor(direcao: int):
+	if cartas_navegaveis.is_empty():
+		return
+	# Primeiro movimento do controle ativa o cursor sem aplicar direcao
+	if not cursor_ativo:
+		cursor_ativo = true
+		cartas_navegaveis[cursor_index].focar()
+		return
 	cartas_navegaveis[cursor_index].desfocar()
 	cursor_index = (cursor_index + direcao) % cartas_navegaveis.size()
 	cartas_navegaveis[cursor_index].focar()
 
 func atualizar_navegacao():
-	if not cartas_navegaveis.is_empty():
+	if cursor_ativo and not cartas_navegaveis.is_empty():
 		cartas_navegaveis[cursor_index].desfocar()
+	cursor_ativo = false
 
 	if fase_escolha == "propria":
 		cartas_navegaveis = todas_cartas.filter(func(c): return c.lado == turno_atual)
@@ -80,8 +89,6 @@ func atualizar_navegacao():
 		return
 
 	cursor_index = 0
-	if not cartas_navegaveis.is_empty():
-		cartas_navegaveis[cursor_index].focar()
 
 func iniciar_duelo():
 	limpar_cartas()
