@@ -142,20 +142,9 @@ func _on_adv_dificil_pressed() -> void:
 
 
 # ─────────────────────────────────────────────
-#  Modo Progresso — fases que crescem em pares
+#  Modo Progresso — fases que crescem em pares (sem dificuldade)
 # ─────────────────────────────────────────────
-func _on_prog_facil_pressed() -> void:
-	_aplicar_facil()
-	get_tree().change_scene_to_file(CENA_PROGRESSO)
-
-
-func _on_prog_normal_pressed() -> void:
-	_aplicar_normal()
-	get_tree().change_scene_to_file(CENA_PROGRESSO)
-
-
-func _on_prog_dificil_pressed() -> void:
-	_aplicar_dificil()
+func _on_prog_jogar_pressed() -> void:
 	get_tree().change_scene_to_file(CENA_PROGRESSO)
 
 
