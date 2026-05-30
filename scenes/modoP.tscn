@@ -31,7 +31,6 @@ scale = Vector2(0.815, 0.815)
 texture = ExtResource("3_aqhb2")
 
 [node name="equipe_vermelha" type="Sprite2D" parent="." unique_id=2083258543]
-visible = false
 position = Vector2(640, 97)
 scale = Vector2(2.415, 2.415)
 texture = ExtResource("4_qxw3i")
@@ -103,6 +102,7 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("7_vuhw6")
 
 [node name="PontosA" type="Label" parent="UImp" unique_id=1456905740]
+visible = false
 offset_left = 471.0
 offset_top = 61.0
 offset_right = 543.0
@@ -113,6 +113,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PontosV" type="Label" parent="UImp" unique_id=1310020654]
+visible = false
 offset_left = 729.0
 offset_top = 54.0
 offset_right = 801.0
@@ -121,3 +122,9 @@ text = "0"
 label_settings = SubResource("LabelSettings_j5ux4")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LabelJogador" type="Label" parent="UImp" unique_id=1546233386]
+offset_left = 586.0
+offset_top = 47.0
+offset_right = 689.0
+offset_bottom = 70.0
