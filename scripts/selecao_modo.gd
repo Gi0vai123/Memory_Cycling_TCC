@@ -127,35 +127,24 @@ func _on_camp_dificil_pressed() -> void:
 #  Modo Adivinhacao
 # ─────────────────────────────────────────────
 func _on_adv_facil_pressed() -> void:
-	_aplicar_facil()
+	Dificuldade.pares = 3
 	get_tree().change_scene_to_file(CENA_ADIVINHA)
 
 
 func _on_adv_normal_pressed() -> void:
-	_aplicar_normal()
+	Dificuldade.pares = 4
 	get_tree().change_scene_to_file(CENA_ADIVINHA)
 
 
 func _on_adv_dificil_pressed() -> void:
-	_aplicar_dificil()
+	Dificuldade.pares = 5
 	get_tree().change_scene_to_file(CENA_ADIVINHA)
 
 
 # ─────────────────────────────────────────────
-#  Modo Progresso — fases que crescem em pares
+#  Modo Progresso — fases que crescem em pares (sem dificuldade)
 # ─────────────────────────────────────────────
-func _on_prog_facil_pressed() -> void:
-	_aplicar_facil()
-	get_tree().change_scene_to_file(CENA_PROGRESSO)
-
-
-func _on_prog_normal_pressed() -> void:
-	_aplicar_normal()
-	get_tree().change_scene_to_file(CENA_PROGRESSO)
-
-
-func _on_prog_dificil_pressed() -> void:
-	_aplicar_dificil()
+func _on_prog_jogar_pressed() -> void:
 	get_tree().change_scene_to_file(CENA_PROGRESSO)
 
 

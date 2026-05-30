@@ -34,12 +34,21 @@ Button/colors/font_hover_pressed_color = Color(0.9529412, 0.019607844, 0.3058823
 Button/colors/font_pressed_color = Color(0.9529412, 0.019607844, 0.30588236, 1)
 Button/styles/hover = SubResource("StyleBoxFlat_5aq17")
 
+[sub_resource type="SystemFont" id="SystemFont_73fcp"]
+font_names = PackedStringArray("Asteroid Blaster")
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g2cvw"]
 bg_color = Color(0.86942613, 0.44246724, 0.57956946, 0.62352943)
 
 [sub_resource type="Theme" id="Theme_0m60l"]
 Button/icons/icon = ExtResource("2_sm2ni")
 Button/styles/pressed = SubResource("StyleBoxFlat_g2cvw")
+
+[sub_resource type="SystemFont" id="SystemFont_ar34o"]
+font_names = PackedStringArray("Asteroid Blaster")
+
+[sub_resource type="SystemFont" id="SystemFont_amt2q"]
+font_names = PackedStringArray("Asteroid Blaster")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ar34o"]
 bg_color = Color(1, 0, 0, 0.77254903)
@@ -118,6 +127,7 @@ offset_top = 369.0
 offset_right = 761.0
 offset_bottom = 446.0
 theme = SubResource("Theme_ar34o")
+theme_override_fonts/font = SubResource("SystemFont_73fcp")
 theme_override_font_sizes/font_size = 50
 text = "JOGAR"
 
@@ -135,11 +145,12 @@ autowrap_trim_flags = 0
 
 [node name="credits_btn" type="Button" parent="." unique_id=454171047]
 layout_mode = 0
-offset_left = 518.0
-offset_top = 464.0
-offset_right = 765.0
-offset_bottom = 541.0
+offset_left = 496.0
+offset_top = 463.0
+offset_right = 792.0
+offset_bottom = 539.0
 theme = SubResource("Theme_ar34o")
+theme_override_fonts/font = SubResource("SystemFont_ar34o")
 theme_override_font_sizes/font_size = 50
 text = "CRÉDITOS"
 
@@ -150,6 +161,7 @@ offset_top = 550.0
 offset_right = 761.0
 offset_bottom = 627.0
 theme = SubResource("Theme_ar34o")
+theme_override_fonts/font = SubResource("SystemFont_amt2q")
 theme_override_font_sizes/font_size = 50
 text = "SAIR"
 

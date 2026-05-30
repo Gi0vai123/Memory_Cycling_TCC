@@ -27,9 +27,12 @@ var pode_clicar = false
 var nome_jogador_azul: String = "Azul"
 var nome_jogador_vermelho: String = "Vermelho"
 
-const COLUNAS = 9
-const ESPACAMENTO_X = 130
-const ESPACAMENTO_Y = 150
+# Layout do grid — valores ajustados por dificuldade em _ajustar_layout()
+var colunas: int = 6
+var espacamento_x: int = 110
+var espacamento_y: int = 160
+var centro_y: int = 400
+
 const DEBUG_UM_CONTROLE = true
 const DEADZONE = 0.5
 const COOLDOWN_MOVIMENTO = 0.2
@@ -64,12 +67,12 @@ func _processar_analogico():
 	var v = Input.get_joy_axis(device, JOY_AXIS_LEFT_Y)
 
 	var total = cartas.size()
-	total_linhas = ceil(float(total) / float(COLUNAS))
-	var linha_atual = cursor_index / COLUNAS
-	var coluna_atual = cursor_index % COLUNAS
-	var cartas_ultima_linha = total % COLUNAS
+	total_linhas = ceil(float(total) / float(colunas))
+	var linha_atual = cursor_index / colunas
+	var coluna_atual = cursor_index % colunas
+	var cartas_ultima_linha = total % colunas
 	if cartas_ultima_linha == 0:
-		cartas_ultima_linha = COLUNAS
+		cartas_ultima_linha = colunas
 
 	if h > DEADZONE:
 		var novo = cursor_index + 1
@@ -84,15 +87,15 @@ func _processar_analogico():
 	elif v > DEADZONE:
 		var nova_linha = linha_atual + 1
 		if nova_linha < total_linhas:
-			var max_col = COLUNAS - 1
+			var max_col = colunas - 1
 			if nova_linha == total_linhas - 1:
 				max_col = cartas_ultima_linha - 1
-			_mover_cursor(nova_linha * COLUNAS + min(coluna_atual, max_col))
+			_mover_cursor(nova_linha * colunas + min(coluna_atual, max_col))
 		cooldown_timer = COOLDOWN_MOVIMENTO
 	elif v < -DEADZONE:
 		var nova_linha = linha_atual - 1
 		if nova_linha >= 0:
-			_mover_cursor(nova_linha * COLUNAS + coluna_atual)
+			_mover_cursor(nova_linha * colunas + coluna_atual)
 		cooldown_timer = COOLDOWN_MOVIMENTO
 
 func _input(event):
@@ -115,16 +118,6 @@ func _mover_cursor(novo_index: int):
 	if cursor_index < cartas.size() and is_instance_valid(cartas[cursor_index]):
 		cartas[cursor_index].focar()
 
-func contagem_regressiva(contador):
-	contador.visible = true
-	for n in [3, 2, 1]:
-		contador.text = str(n)
-		await get_tree().create_timer(1.0).timeout
-	contador.text = "VAI!"
-	await get_tree().create_timer(0.5).timeout
-	contador.text = ""
-	contador.visible = false
-
 # Ajusta o spacing e o centro do grid conforme a dificuldade
 func _ajustar_layout() -> void:
 	match quantidade_pares:
@@ -145,6 +138,16 @@ func _ajustar_layout() -> void:
 			espacamento_y = 160
 			centro_y = 400
 
+func contagem_regressiva(contador):
+	contador.visible = true
+	for n in [3, 2, 1]:
+		contador.text = str(n)
+		await get_tree().create_timer(1.0).timeout
+	contador.text = "VAI!"
+	await get_tree().create_timer(0.5).timeout
+	contador.text = ""
+	contador.visible = false
+
 func start_jogo() -> void:
 	if usar_contagem and contador_scene:
 		await contagem_regressiva(contador_scene)
@@ -163,27 +166,27 @@ func criar_cartas():
 	ids.shuffle()
 
 	var total = ids.size()
-	var linhas = ceil(float(total) / float(COLUNAS))
-	var altura_total = (linhas - 1) * ESPACAMENTO_Y
-	var centro = Vector2(640, 450)
+	var linhas = ceil(float(total) / float(colunas))
+	var altura_total = (linhas - 1) * espacamento_y
+	var centro = Vector2(640, centro_y)
 	var start_y = centro.y - altura_total / 2.0
 
 	cartas.clear()
 
 	var carta_roots = []
 	for i in range(total):
-		var row = i / COLUNAS
-		var col = i % COLUNAS
+		var row = i / colunas
+		var col = i % colunas
 
 		var cartas_nessa_linha: int
 		if row < linhas - 1:
-			cartas_nessa_linha = COLUNAS
+			cartas_nessa_linha = colunas
 		else:
-			cartas_nessa_linha = total % COLUNAS
+			cartas_nessa_linha = total % colunas
 			if cartas_nessa_linha == 0:
-				cartas_nessa_linha = COLUNAS
+				cartas_nessa_linha = colunas
 
-		var largura_linha = (cartas_nessa_linha - 1) * ESPACAMENTO_X
+		var largura_linha = (cartas_nessa_linha - 1) * espacamento_x
 		var start_x = centro.x - largura_linha / 2.0
 
 		var pos_final = Vector2(
@@ -388,5 +391,5 @@ func mostrar_sprite_equipe():
 			$equipe_vermelha.visible = true
 
 func atualizar_labels():
-	$UImp/PontosA.text = str(pontos_azul)
-	$UImp/PontosV.text = str(pontos_vermelho)
+	$UImp/PontosA.text =  str(pontos_azul)
+	$UImp/PontosV.text =  str(pontos_vermelho)

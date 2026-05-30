@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://7g3efslbkjt3" path="res://scripts/funcCarta.gd" id="1_6pljl"]
 [ext_resource type="Texture2D" uid="uid://dsyt5utpwuu6v" path="res://prefabs/frente-cartas/frente-carta-2.jpg" id="2_6pljl"]
-[ext_resource type="Texture2D" uid="uid://bpv0g2hw5f8j1" path="res://WhatsApp Image 2026-05-11 at 23.44.26.jpeg" id="3_6pljl"]
+[ext_resource type="Texture2D" uid="uid://duuudikxgug3j" path="res://verso.jpeg" id="3_6pljl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5a2ls"]
 size = Vector2(14.897961, 18.857145)

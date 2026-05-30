@@ -68,7 +68,7 @@ layout_mode = 0
 offset_left = 16.0
 offset_top = 65.0
 offset_right = 284.0
-offset_bottom = 240.0
+offset_bottom = 244.0
 mouse_filter = 2
 color = Color(0.25, 0.25, 0.35, 1)
 
@@ -162,7 +162,7 @@ layout_mode = 0
 offset_left = 16.0
 offset_top = 65.0
 offset_right = 284.0
-offset_bottom = 240.0
+offset_bottom = 244.0
 mouse_filter = 2
 color = Color(0.25, 0.25, 0.35, 1)
 
@@ -293,7 +293,7 @@ layout_mode = 0
 offset_left = 16.0
 offset_top = 65.0
 offset_right = 284.0
-offset_bottom = 240.0
+offset_bottom = 244.0
 mouse_filter = 2
 color = Color(0.25, 0.25, 0.35, 1)
 
@@ -322,42 +322,14 @@ text = "Fases progressivas: começa com 2 pares e a cada fase nova entram mais. 
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="DificuldadeLabel" type="Label" parent="CardProgresso" unique_id=626168746]
-layout_mode = 0
-offset_top = 460.0
-offset_right = 300.0
-offset_bottom = 478.0
-theme_override_colors/font_color = Color(0.75, 0.75, 0.9, 1)
-theme_override_font_sizes/font_size = 13
-text = "Dificuldade"
-horizontal_alignment = 1
-
-[node name="BtnFacil" type="Button" parent="CardProgresso" unique_id=975860402]
+[node name="BtnJogar" type="Button" parent="CardProgresso" unique_id=975860402]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 490.0
-offset_right = 100.0
-offset_bottom = 545.0
-theme_override_font_sizes/font_size = 15
-text = "Fácil"
-
-[node name="BtnNormal" type="Button" parent="CardProgresso" unique_id=1070984740]
-layout_mode = 0
-offset_left = 108.0
-offset_top = 490.0
-offset_right = 192.0
-offset_bottom = 545.0
-theme_override_font_sizes/font_size = 15
-text = "Normal"
-
-[node name="BtnDificil" type="Button" parent="CardProgresso" unique_id=1096635979]
-layout_mode = 0
-offset_left = 200.0
 offset_top = 490.0
 offset_right = 284.0
 offset_bottom = 545.0
 theme_override_font_sizes/font_size = 15
-text = "Difícil"
+text = "Jogar"
 
 [node name="CardAdivinhacao" type="ColorRect" parent="." unique_id=447153794]
 layout_mode = 0
@@ -387,7 +359,7 @@ layout_mode = 0
 offset_left = 16.0
 offset_top = 65.0
 offset_right = 284.0
-offset_bottom = 240.0
+offset_bottom = 244.0
 mouse_filter = 2
 color = Color(0.25, 0.25, 0.35, 1)
 
@@ -463,9 +435,7 @@ text = "Difícil"
 [connection signal="pressed" from="CardCampeonato/BtnFacil" to="." method="_on_camp_facil_pressed"]
 [connection signal="pressed" from="CardCampeonato/BtnNormal" to="." method="_on_camp_normal_pressed"]
 [connection signal="pressed" from="CardCampeonato/BtnDificil" to="." method="_on_camp_dificil_pressed"]
-[connection signal="pressed" from="CardProgresso/BtnFacil" to="." method="_on_prog_facil_pressed"]
-[connection signal="pressed" from="CardProgresso/BtnNormal" to="." method="_on_prog_normal_pressed"]
-[connection signal="pressed" from="CardProgresso/BtnDificil" to="." method="_on_prog_dificil_pressed"]
+[connection signal="pressed" from="CardProgresso/BtnJogar" to="." method="_on_prog_jogar_pressed"]
 [connection signal="pressed" from="CardAdivinhacao/BtnFacil" to="." method="_on_adv_facil_pressed"]
 [connection signal="pressed" from="CardAdivinhacao/BtnNormal" to="." method="_on_adv_normal_pressed"]
 [connection signal="pressed" from="CardAdivinhacao/BtnDificil" to="." method="_on_adv_dificil_pressed"]
