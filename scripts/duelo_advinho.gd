@@ -2,8 +2,9 @@ extends Node2D
 
 @onready var baralho_azul = $BaralhoA
 @onready var baralho_vermelho = $BaralhoV
-@onready var P_vermelho = $"CanvasLayer/Pontos Vermelhos"
-@onready var P_Azul = $"CanvasLayer/Pontos Azul"
+@onready var P_vermelho = $CanvasLayer/PontosV
+@onready var P_Azul = $CanvasLayer/PontosA
+@onready var Vencedor = $CanvasLayer/Vencedor
 
 var pontos_azul: int = 0
 var pontos_vermelho: int = 0
@@ -23,8 +24,13 @@ const DEADZONE = 0.5
 const COOLDOWN_MOVIMENTO = 0.2
 
 var cooldown_timer: float = 0.0
+var total_pares: int = 3
 
 func _ready():
+	match Dificuldade.pares:
+		4: total_pares = 4
+		5: total_pares = 5
+		_: total_pares = 3
 	iniciar_duelo()
 
 func _process(delta):
@@ -94,18 +100,21 @@ func limpar_cartas():
 	cartas_navegaveis.clear()
 
 func criar_cartas_duelo():
-	var ids = [1, 2, 3]
+	var ids = []
+	for i in range(1, total_pares + 1):
+		ids.append(i)
 
 	var base_azul = baralho_azul.get_child(0)
 	base_azul.visible = false
 
-	for i in range(3):
+	for i in range(total_pares):
 		var carta = base_azul.duplicate()
 		carta.visible = true
-		carta.card_id = ids[i]
 		carta.lado = "azul"
 		carta.global_position = baralho_azul.global_position
 		add_child(carta)
+		carta.card_id = ids[i]
+		carta.carregar_sprite()
 		todas_cartas.append(carta)
 		carta.connect("carta_clicada", Callable(self, "ao_clicar_carta"))
 		carta.atualizar_id_visual()
@@ -113,13 +122,14 @@ func criar_cartas_duelo():
 	var base_vermelho = baralho_vermelho.get_child(0)
 	base_vermelho.visible = false
 
-	for i in range(3):
+	for i in range(total_pares):
 		var carta = base_vermelho.duplicate()
 		carta.visible = true
-		carta.card_id = ids[i]
 		carta.lado = "vermelho"
 		carta.global_position = baralho_vermelho.global_position
 		add_child(carta)
+		carta.card_id = ids[i]
+		carta.carregar_sprite()
 		todas_cartas.append(carta)
 		carta.connect("carta_clicada", Callable(self, "ao_clicar_carta"))
 		carta.atualizar_id_visual()
@@ -127,13 +137,13 @@ func criar_cartas_duelo():
 func cuspir_cartas():
 	var espacamento = 150
 
-	for i in range(3):
+	for i in range(total_pares):
 		var carta_azul = todas_cartas[i]
-		var carta_vermelha = todas_cartas[i + 3]
+		var carta_vermelha = todas_cartas[i + total_pares]
 
 		var base_azul = baralho_azul.global_position
 		var base_vermelho = baralho_vermelho.global_position
-		var offset_x = (i - 1) * espacamento
+		var offset_x = (i - (total_pares / 2.0 - 0.5)) * espacamento
 
 		var pos_final_azul = Vector2(base_azul.x + offset_x, base_azul.y + 200)
 		var pos_final_vermelho = Vector2(base_vermelho.x + offset_x, base_vermelho.y - 200)
@@ -218,11 +228,21 @@ func resolver_duelo():
 		carta_propria.queue_free()
 		carta_oponente.queue_free()
 
-		if acertos >= 3:
+		if acertos >= total_pares:
 			acertos = 0
+			if turno_atual == "azul":
+				Vencedor.text = "Azul venceu!"
+				Vencedor.modulate = Color.CYAN
+			else:
+				Vencedor.text = "Vermelho venceu!"
+				Vencedor.modulate = Color.RED
+			Vencedor.visible = true
+			await get_tree().create_timer(2.5).timeout
+			Vencedor.visible = false
 			pontos_azul = 0
 			pontos_vermelho = 0
-			await get_tree().create_timer(0.5).timeout
+			P_Azul.text = "0"
+			P_vermelho.text = "0"
 			iniciar_duelo()
 		else:
 			await embaralhar_cartas()
