@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmx5iqsmmdai5"
-path="res://.godot/imported/progresso.jpeg-6cc4dd40a514c28ec0e26760f381eb0d.ctex"
+uid="uid://btyewf4juc8c3"
+path="res://.godot/imported/portempo.jpeg-6d148c7c785aca969844ac265e83f66d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://progresso.jpeg"
-dest_files=["res://.godot/imported/progresso.jpeg-6cc4dd40a514c28ec0e26760f381eb0d.ctex"]
+source_file="res://sprites/portempo.jpeg"
+dest_files=["res://.godot/imported/portempo.jpeg-6d148c7c785aca969844ac265e83f66d.ctex"]
 
 [params]
 

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c6hwm4spwpxfp" path="res://prefabs/carta.tscn" id="2_lkrqq"]
 [ext_resource type="PackedScene" uid="uid://df8fntwdh536s" path="res://scenes/cartas.tscn" id="2_rc5xx"]
 [ext_resource type="PackedScene" uid="uid://dvl4f6unww2oj" path="res://scenes/menu_pause.tscn" id="3_0j83w"]
-[ext_resource type="Texture2D" uid="uid://duf18iyss8bdy" path="res://WhatsApp Image 2026-05-14 at 20.16.23.jpeg" id="4_rc5xx"]
+[ext_resource type="Texture2D" uid="uid://duf18iyss8bdy" path="res://sprites/WhatsApp Image 2026-05-14 at 20.16.23.jpeg" id="4_rc5xx"]
 
 [node name="Node2D" type="Node2D" unique_id=1304687816]
 script = ExtResource("1_a7ww8")

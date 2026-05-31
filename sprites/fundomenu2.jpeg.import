@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wxke6jk25abv"
-path="res://.godot/imported/modos.jpeg-6e26ef05ac78452f4a59d44538541243.ctex"
+uid="uid://bxgbm2ynck551"
+path="res://.godot/imported/fundomenu2.jpeg-660016dfa2d840b51f00261cf0cdc872.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://modos.jpeg"
-dest_files=["res://.godot/imported/modos.jpeg-6e26ef05ac78452f4a59d44538541243.ctex"]
+source_file="res://sprites/fundomenu2.jpeg"
+dest_files=["res://.godot/imported/fundomenu2.jpeg-660016dfa2d840b51f00261cf0cdc872.ctex"]
 
 [params]
 

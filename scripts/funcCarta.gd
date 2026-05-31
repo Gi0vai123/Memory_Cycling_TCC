@@ -13,6 +13,8 @@ var tween_hover: Tween
 @onready var sp_frente = $SpFrente
 @onready var sp_costa = $SpCosta
 @onready var qualid = $id
+var som_virar: AudioStreamPlayer2D
+var som_desvirar: AudioStreamPlayer2D
 
 var pode_animar := false
 var virada := false
@@ -50,12 +52,12 @@ const SPRITES = {
 const SCALE_REPOUSO := Vector2(0.8, 0.8)
 const SCALE_HOVER   := Vector2(1.0, 1.0)
 
-# Cores do destaque do cursor (azul, vermelho ou os dois sobre a mesma carta)
 const COR_FOCO_AZUL := Color(0.55, 0.85, 1.0, 1.0)
 const COR_FOCO_VERMELHO := Color(1.0, 0.55, 0.7, 1.0)
 const COR_FOCO_AMBOS := Color(0.85, 0.6, 1.0, 1.0)
 
 var focado_por: Array = []
+
 
 
 func _ready():
@@ -66,6 +68,16 @@ func _ready():
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 
+	som_virar = AudioStreamPlayer2D.new()
+	som_virar.stream = load("res://sons/virar.mp3")
+	som_virar.volume_db = -20.0
+	add_child(som_virar)
+
+	som_desvirar = AudioStreamPlayer2D.new()
+	som_desvirar.stream = load("res://sons/desvirar.mp3")
+	som_desvirar.volume_db = -20.0
+	add_child(som_desvirar)
+	
 func carregar_sprite():
 	if not is_node_ready():
 		return
@@ -133,8 +145,12 @@ func virar():
 	await t1.finished
 	if virada:
 		mostrar_costas()
+		if is_instance_valid(som_desvirar):
+			som_desvirar.play()
 	else:
 		mostrar_frente()
+		if is_instance_valid(som_virar):
+			som_virar.play()
 	virada = !virada
 	var t2 = create_tween().set_parallel(true)
 	t2.tween_property(self, "scale", alvo, 0.12) \
@@ -170,7 +186,6 @@ func desfocar(jogador: String = "", ativo: bool = true):
 		focado_por.erase(jogador)
 	else:
 		focado_por.clear()
-	# Quem sai sendo o ativo abaixa a carta, mesmo se o outro ainda esta aqui
 	if ativo:
 		set_levantada(false)
 	if not focado_por.is_empty():
@@ -178,7 +193,6 @@ func desfocar(jogador: String = "", ativo: bool = true):
 		return
 	modulate = Color.WHITE
 
-# Sobe ou abaixa a carta visualmente (so o jogador da vez levanta)
 func set_levantada(levantada: bool):
 	if not pode_animar or virando:
 		return

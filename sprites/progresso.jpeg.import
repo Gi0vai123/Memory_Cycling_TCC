@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxgbm2ynck551"
-path="res://.godot/imported/fundomenu2.jpeg-02eb919105c574649b02466551a609c7.ctex"
+uid="uid://bmx5iqsmmdai5"
+path="res://.godot/imported/progresso.jpeg-47da46d9b422ebfd2c92a728047b6a65.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://fundomenu2.jpeg"
-dest_files=["res://.godot/imported/fundomenu2.jpeg-02eb919105c574649b02466551a609c7.ctex"]
+source_file="res://sprites/progresso.jpeg"
+dest_files=["res://.godot/imported/progresso.jpeg-47da46d9b422ebfd2c92a728047b6a65.ctex"]
 
 [params]
 

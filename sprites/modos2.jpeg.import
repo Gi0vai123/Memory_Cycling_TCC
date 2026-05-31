@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btyewf4juc8c3"
-path="res://.godot/imported/portempo.jpeg-dc065bd923a9134663625923dbaa3f25.ctex"
+uid="uid://bicg75a8ai7ac"
+path="res://.godot/imported/modos2.jpeg-e8f202713d518adc177974426220cb21.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://portempo.jpeg"
-dest_files=["res://.godot/imported/portempo.jpeg-dc065bd923a9134663625923dbaa3f25.ctex"]
+source_file="res://sprites/modos2.jpeg"
+dest_files=["res://.godot/imported/modos2.jpeg-e8f202713d518adc177974426220cb21.ctex"]
 
 [params]
 

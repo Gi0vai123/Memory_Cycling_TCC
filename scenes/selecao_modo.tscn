@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://djtfumtr2lppk"]
 
 [ext_resource type="Script" uid="uid://b2ixhphmkjujg" path="res://scripts/selecao_modo.gd" id="1_smdo1"]
-[ext_resource type="Texture2D" uid="uid://bicg75a8ai7ac" path="res://modos2.jpeg" id="2_4ni2v"]
-[ext_resource type="Texture2D" uid="uid://bgycglk1ypjjo" path="res://fundomenu.jpeg" id="3_5ikon"]
-[ext_resource type="Texture2D" uid="uid://btyewf4juc8c3" path="res://portempo.jpeg" id="4_7o37o"]
-[ext_resource type="Texture2D" uid="uid://suhv646quf64" path="res://campeonato.jpeg" id="5_a0x88"]
-[ext_resource type="Texture2D" uid="uid://bmx5iqsmmdai5" path="res://progresso.jpeg" id="6_caud3"]
-[ext_resource type="Texture2D" uid="uid://dvy0sn5mbtvcu" path="res://adivinho.jpeg" id="7_8dv0n"]
+[ext_resource type="Texture2D" uid="uid://bicg75a8ai7ac" path="res://sprites/modos2.jpeg" id="2_4ni2v"]
+[ext_resource type="Texture2D" uid="uid://bgycglk1ypjjo" path="res://sprites/fundomenu.jpeg" id="3_5ikon"]
+[ext_resource type="Texture2D" uid="uid://btyewf4juc8c3" path="res://sprites/portempo.jpeg" id="4_7o37o"]
+[ext_resource type="Texture2D" uid="uid://suhv646quf64" path="res://sprites/campeonato.jpeg" id="5_a0x88"]
+[ext_resource type="Texture2D" uid="uid://bmx5iqsmmdai5" path="res://sprites/progresso.jpeg" id="6_caud3"]
+[ext_resource type="Texture2D" uid="uid://dvy0sn5mbtvcu" path="res://sprites/adivinho.jpeg" id="7_8dv0n"]
 
 [sub_resource type="SystemFont" id="SystemFont_5ikon"]
 font_names = PackedStringArray("Asteroid Blaster")
