@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvy0sn5mbtvcu"
-path="res://.godot/imported/adivinho.jpeg-7a22fedaafbcae8bffa2a4b471c31444.ctex"
+uid="uid://bgycglk1ypjjo"
+path="res://.godot/imported/fundomenu.jpeg-60bc8c34a09553117c75b84e56bcec1a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://adivinho.jpeg"
-dest_files=["res://.godot/imported/adivinho.jpeg-7a22fedaafbcae8bffa2a4b471c31444.ctex"]
+source_file="res://sprites/fundomenu.jpeg"
+dest_files=["res://.godot/imported/fundomenu.jpeg-60bc8c34a09553117c75b84e56bcec1a.ctex"]
 
 [params]
 

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://djwyda2rhxlfq" path="res://imagens/menu/options.png" id="2_sm2ni"]
 [ext_resource type="Texture2D" uid="uid://npyvw1ov3nko" path="res://imagens/menu/qr_code.png" id="3_amt2q"]
 [ext_resource type="Theme" uid="uid://hucb486ifu68" path="res://style/botoes.tres" id="4_ar34o"]
-[ext_resource type="Texture2D" uid="uid://hdy2xeykqcr3" path="res://menuMC.png" id="5_73fcp"]
+[ext_resource type="Texture2D" uid="uid://hdy2xeykqcr3" path="res://sprites/menuMC.png" id="5_73fcp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0m60l"]
 bg_color = Color(0.8901961, 0.8901961, 0.8901961, 0.047058824)

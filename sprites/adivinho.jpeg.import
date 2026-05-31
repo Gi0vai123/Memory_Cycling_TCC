@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://suhv646quf64"
-path="res://.godot/imported/campeonato.jpeg-4675e8e683c7c23cdec73d2cda426e06.ctex"
+uid="uid://dvy0sn5mbtvcu"
+path="res://.godot/imported/adivinho.jpeg-6ba2066d80cdc417285f15ad455e1bd1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://campeonato.jpeg"
-dest_files=["res://.godot/imported/campeonato.jpeg-4675e8e683c7c23cdec73d2cda426e06.ctex"]
+source_file="res://sprites/adivinho.jpeg"
+dest_files=["res://.godot/imported/adivinho.jpeg-6ba2066d80cdc417285f15ad455e1bd1.ctex"]
 
 [params]
 

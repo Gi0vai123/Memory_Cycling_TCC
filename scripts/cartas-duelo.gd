@@ -7,19 +7,20 @@ var card_id: int = 0 :
 			carregar_sprite()
 			qualid.text = str(card_id)
 
-var lado: String = ""
-
 var tween_rotacao: Tween
 var tween_hover: Tween
 
 @onready var sp_frente = $SpFrente
 @onready var sp_costa = $SpCosta
 @onready var qualid = $id
+var som_virar: AudioStreamPlayer
+var som_desvirar: AudioStreamPlayer
 
 var pode_animar := false
 var virada := false
 var virando := false
 var mouse_dentro := false
+var matched := false
 var z_original = 0
 
 signal carta_clicada(carta)
@@ -48,15 +49,35 @@ const SPRITES = {
 	21: "res://prefabs/frente-cartas/frente-carta-21.jpg",
 }
 
+const SCALE_REPOUSO := Vector2(0.8, 0.8)
+const SCALE_HOVER   := Vector2(1.0, 1.0)
+
+const COR_FOCO_AZUL := Color(0.55, 0.85, 1.0, 1.0)
+const COR_FOCO_VERMELHO := Color(1.0, 0.55, 0.7, 1.0)
+const COR_FOCO_AMBOS := Color(0.85, 0.6, 1.0, 1.0)
+
+var focado_por: Array = []
+
+
+
 func _ready():
 	z_original = z_index
+	carregar_sprite()
+	qualid.text = str(card_id)
 	mostrar_costas()
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
-	await get_tree().process_frame
-	carregar_sprite()
-	qualid.text = str(card_id)
 
+	som_virar = AudioStreamPlayer.new()
+	som_virar.stream = load("res://sons/virar.mp3")
+	som_virar.volume_db = -20.0
+	add_child(som_virar)
+
+	som_desvirar = AudioStreamPlayer.new()
+	som_desvirar.stream = load("res://sons/desvirar.mp3")
+	som_desvirar.volume_db = -20.0
+	add_child(som_desvirar)
+	
 func carregar_sprite():
 	if not is_node_ready():
 		return
@@ -71,25 +92,23 @@ func carregar_sprite():
 
 func _on_mouse_entered():
 	mouse_dentro = true
-	if not pode_animar or virando:
+	if not pode_animar or virando or matched:
 		return
 	z_index = 100
 	if tween_hover: tween_hover.kill()
 	tween_hover = create_tween()
-	tween_hover.tween_property(self, "scale", Vector2(1, 1), 0.15)
+	tween_hover.tween_property(self, "scale", SCALE_HOVER, 0.15)
 	animar_loop_rotacao()
 
 func _on_mouse_exited():
 	mouse_dentro = false
 	z_index = z_original
-	var t = create_tween()
-	t.tween_property(self, "scale", Vector2(0.8, 0.8), 0.15)
 	parar_rotacao()
 	if virando:
 		return
 	if tween_hover: tween_hover.kill()
 	tween_hover = create_tween()
-	tween_hover.tween_property(self, "scale", Vector2(0.7, 0.7), 0.15)
+	tween_hover.tween_property(self, "scale", SCALE_REPOUSO, 0.15)
 
 func animar_loop_rotacao():
 	if tween_rotacao:
@@ -106,7 +125,7 @@ func parar_rotacao():
 
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
-		if not pode_animar:
+		if not pode_animar or matched:
 			return
 		virar()
 		emit_signal("carta_clicada", self)
@@ -126,8 +145,12 @@ func virar():
 	await t1.finished
 	if virada:
 		mostrar_costas()
+		if is_instance_valid(som_desvirar):
+			som_desvirar.play()
 	else:
 		mostrar_frente()
+		if is_instance_valid(som_virar):
+			som_virar.play()
 	virada = !virada
 	var t2 = create_tween().set_parallel(true)
 	t2.tween_property(self, "scale", alvo, 0.12) \
@@ -139,7 +162,7 @@ func virar():
 	if not mouse_dentro and scale != Vector2(0.7, 0.7):
 		if tween_hover: tween_hover.kill()
 		tween_hover = create_tween()
-		tween_hover.tween_property(self, "scale", Vector2(0.7, 0.7), 0.12)
+		tween_hover.tween_property(self, "scale", SCALE_REPOUSO, 0.12)
 
 func mostrar_frente():
 	sp_frente.visible = true
@@ -149,34 +172,55 @@ func mostrar_costas():
 	sp_frente.visible = false
 	sp_costa.visible = true
 
-func bloquear():
-	pode_animar = false
-
-func desbloquear():
-	pode_animar = true
-
-func focar():
+func focar(jogador: String = "", ativo: bool = true):
 	if not pode_animar or virando:
 		return
-	z_index = 100
-	if tween_hover: tween_hover.kill()
-	tween_hover = create_tween()
-	tween_hover.tween_property(self, "scale", Vector2(1, 1), 0.15)
-	animar_loop_rotacao()
+	if jogador != "" and not focado_por.has(jogador):
+		focado_por.append(jogador)
+	if ativo:
+		set_levantada(true)
+	_aplicar_cor_foco()
 
-func desfocar():
-	z_index = z_original
-	if tween_hover: tween_hover.kill()
-	tween_hover = create_tween()
-	tween_hover.tween_property(self, "scale", Vector2(0.7, 0.7), 0.15)
-	parar_rotacao()
+func desfocar(jogador: String = "", ativo: bool = true):
+	if jogador != "":
+		focado_por.erase(jogador)
+	else:
+		focado_por.clear()
+	if ativo:
+		set_levantada(false)
+	if not focado_por.is_empty():
+		_aplicar_cor_foco()
+		return
+	modulate = Color.WHITE
+
+func set_levantada(levantada: bool):
+	if not pode_animar or virando:
+		return
+	if levantada:
+		z_index = 100
+		if tween_hover: tween_hover.kill()
+		tween_hover = create_tween()
+		tween_hover.tween_property(self, "scale", Vector2(1, 1), 0.15)
+		animar_loop_rotacao()
+	else:
+		z_index = z_original
+		if tween_hover: tween_hover.kill()
+		tween_hover = create_tween()
+		tween_hover.tween_property(self, "scale", Vector2(0.7, 0.7), 0.15)
+		parar_rotacao()
+
+func _aplicar_cor_foco():
+	if focado_por.has("azul") and focado_por.has("vermelho"):
+		modulate = COR_FOCO_AMBOS
+	elif focado_por.has("azul"):
+		modulate = COR_FOCO_AZUL
+	elif focado_por.has("vermelho"):
+		modulate = COR_FOCO_VERMELHO
+	else:
+		modulate = Color.WHITE
 
 func selecionar():
-	if not pode_animar:
+	if not pode_animar or matched:
 		return
 	virar()
 	emit_signal("carta_clicada", self)
-
-func atualizar_id_visual():
-	if is_node_ready():
-		qualid.text = str(card_id)

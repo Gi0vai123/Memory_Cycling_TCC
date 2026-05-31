@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bnfob8tu5s7cb" path="res://scripts/cena.gd" id="1_woyb7"]
 [ext_resource type="PackedScene" uid="uid://df8fntwdh536s" path="res://scenes/cartas.tscn" id="2_048lv"]
 [ext_resource type="PackedScene" uid="uid://dvl4f6unww2oj" path="res://scenes/menu_pause.tscn" id="3_8kaiw"]
-[ext_resource type="Texture2D" uid="uid://duf18iyss8bdy" path="res://WhatsApp Image 2026-05-14 at 20.16.23.jpeg" id="3_aqhb2"]
+[ext_resource type="Texture2D" uid="uid://duf18iyss8bdy" path="res://sprites/WhatsApp Image 2026-05-14 at 20.16.23.jpeg" id="3_aqhb2"]
 [ext_resource type="Texture2D" uid="uid://ebreotoaqfu0" path="res://imagens/time-vermelho.png" id="4_qxw3i"]
 [ext_resource type="PackedScene" uid="uid://c6hwm4spwpxfp" path="res://prefabs/carta.tscn" id="5_1nxbq"]
 [ext_resource type="Texture2D" uid="uid://c3wcf08npu1ks" path="res://imagens/time-azul.png" id="5_7lspx"]
