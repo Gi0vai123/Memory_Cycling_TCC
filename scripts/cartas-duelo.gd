@@ -16,6 +16,7 @@ var tween_hover: Tween
 var som_virar: AudioStreamPlayer
 var som_desvirar: AudioStreamPlayer
 
+var lado: String = ""
 var pode_animar := false
 var virada := false
 var virando := false
@@ -224,3 +225,13 @@ func selecionar():
 		return
 	virar()
 	emit_signal("carta_clicada", self)
+
+func bloquear():
+	pode_animar = false
+
+func desbloquear():
+	pode_animar = true
+
+func atualizar_id_visual():
+	if is_node_ready():
+		qualid.text = str(card_id)
