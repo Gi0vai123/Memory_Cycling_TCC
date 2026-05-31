@@ -1,0 +1,17 @@
+[gd_resource type="Theme" format=3 uid="uid://hucb486ifu68"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jsmse"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kv378"]
+
+[resource]
+resource_name = "start"
+Button/colors/font_color = Color(0.9529412, 0.019607844, 0.30588236, 1)
+Button/colors/font_focus_color = Color(0.9529412, 0.019607844, 0.30588236, 1)
+Button/colors/font_hover_color = Color(0.9928003, 0.44977105, 0.57476205, 1)
+Button/colors/font_hover_pressed_color = Color(0.9529412, 0.019607844, 0.30588236, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0.9529412, 0.019607844, 0.30588236, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_jsmse")
+Button/styles/normal = SubResource("StyleBoxEmpty_kv378")

@@ -7,6 +7,7 @@ extends Node2D
 @onready var barra_vermelha = $UImp/ProgressBarV
 @onready var seta_azul = $UImp/ProgressBarA/setaazul
 @onready var seta_vermelha = $UImp/ProgressBarV/setavermelha
+@onready var menu_pause = $Pause
 
 var tempo_total = 90.0
 var tempo_azul = tempo_total
@@ -160,6 +161,11 @@ func _aplicar_movimento(h: float, v: float, jogador: String):
 		cooldown_vermelho = COOLDOWN_MOVIMENTO
 
 func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		if get_tree().paused:
+			menu_pause.despausar()
+		else:
+			menu_pause.pausar()
 	if not pode_clicar or cartas.is_empty():
 		return
 	# So o controle do jogador da vez consegue confirmar
