@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://dvl4f6unww2oj"]
+
+[ext_resource type="Theme" uid="uid://hucb486ifu68" path="res://style/botoes.tres" id="1_0o444"]
+[ext_resource type="Script" uid="uid://dvc72jsc3yvg1" path="res://scripts/menu_pause.gd" id="1_ajcle"]
+
+[sub_resource type="SystemFont" id="SystemFont_ajcle"]
+font_names = PackedStringArray("Asteroid Blaster")
+
+[sub_resource type="SystemFont" id="SystemFont_0o444"]
+font_names = PackedStringArray("Asteroid Blaster")
+
+[node name="Control" type="Control" unique_id=926771784]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ajcle")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1651296799]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=519289705]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.75
+offset_top = -305.44534
+offset_right = 190.75
+offset_bottom = 305.44534
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.40784314)
+
+[node name="Continuar" type="Button" parent="CanvasLayer/ColorRect" unique_id=2129735998]
+layout_mode = 0
+offset_left = 0.75
+offset_top = 205.44534
+offset_right = 382.5
+offset_bottom = 315.8907
+theme = ExtResource("1_0o444")
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = SubResource("SystemFont_ajcle")
+theme_override_font_sizes/font_size = 44
+text = "Continuar"
+
+[node name="titulo" type="Label" parent="CanvasLayer/ColorRect" unique_id=1288948144]
+layout_mode = 0
+offset_left = -0.25
+offset_top = 29.445343
+offset_right = 379.5
+offset_bottom = 152.89069
+theme_override_colors/font_color = Color(0.9529412, 0.019607844, 0.30588236, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = SubResource("SystemFont_0o444")
+theme_override_font_sizes/font_size = 67
+text = "- Pause -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Creditos" type="Button" parent="CanvasLayer/ColorRect" unique_id=1844933186]
+layout_mode = 0
+offset_left = 0.75
+offset_top = 292.44534
+offset_right = 382.5
+offset_bottom = 402.8907
+theme = ExtResource("1_0o444")
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = SubResource("SystemFont_ajcle")
+theme_override_font_sizes/font_size = 44
+text = "Creditos
+"
+
+[node name="Sair" type="Button" parent="CanvasLayer/ColorRect" unique_id=1255933076]
+layout_mode = 0
+offset_left = 0.75
+offset_top = 386.44534
+offset_right = 382.5
+offset_bottom = 496.8907
+theme = ExtResource("1_0o444")
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = SubResource("SystemFont_ajcle")
+theme_override_font_sizes/font_size = 44
+text = "Sair
+"

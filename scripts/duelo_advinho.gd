@@ -5,6 +5,7 @@ extends Node2D
 @onready var P_vermelho = $CanvasLayer/PontosV
 @onready var P_Azul = $CanvasLayer/PontosA
 @onready var Vencedor = $CanvasLayer/Vencedor
+@onready var menu_pause = $Pause
 
 var pontos_azul: int = 0
 var pontos_vermelho: int = 0
@@ -52,6 +53,11 @@ func _processar_analogico():
 		cooldown_timer = COOLDOWN_MOVIMENTO
 
 func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		if get_tree().paused:
+			menu_pause.despausar()
+		else:
+			menu_pause.pausar()
 	if cartas_navegaveis.is_empty():
 		return
 	if not DEBUG_UM_CONTROLE:

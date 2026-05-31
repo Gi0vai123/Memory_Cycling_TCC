@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://b2ixhphmkjujg" path="res://scripts/selecao_modo.gd" id="1_smdo1"]
 [ext_resource type="Texture2D" uid="uid://bicg75a8ai7ac" path="res://modos2.jpeg" id="2_4ni2v"]
 [ext_resource type="Texture2D" uid="uid://bgycglk1ypjjo" path="res://fundomenu.jpeg" id="3_5ikon"]
+[ext_resource type="Texture2D" uid="uid://btyewf4juc8c3" path="res://portempo.jpeg" id="4_7o37o"]
+[ext_resource type="Texture2D" uid="uid://suhv646quf64" path="res://campeonato.jpeg" id="5_a0x88"]
+[ext_resource type="Texture2D" uid="uid://bmx5iqsmmdai5" path="res://progresso.jpeg" id="6_caud3"]
+[ext_resource type="Texture2D" uid="uid://dvy0sn5mbtvcu" path="res://adivinho.jpeg" id="7_8dv0n"]
 
 [sub_resource type="SystemFont" id="SystemFont_5ikon"]
 font_names = PackedStringArray("Asteroid Blaster")
@@ -72,18 +76,10 @@ offset_bottom = 244.0
 mouse_filter = 2
 color = Color(0.25, 0.25, 0.35, 1)
 
-[node name="ImagemLabel" type="Label" parent="CardPadrao/Imagem" unique_id=1537051867]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.6, 0.6, 0.7, 1)
-theme_override_font_sizes/font_size = 14
-text = "[ imagem em breve ]"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="ilustr" type="Sprite2D" parent="CardPadrao/Imagem" unique_id=1668083394]
+position = Vector2(132.00002, 93)
+scale = Vector2(0.18066406, 0.18066406)
+texture = ExtResource("4_7o37o")
 
 [node name="Descricao" type="Label" parent="CardPadrao" unique_id=1653163680]
 layout_mode = 0
@@ -166,18 +162,10 @@ offset_bottom = 244.0
 mouse_filter = 2
 color = Color(0.25, 0.25, 0.35, 1)
 
-[node name="ImagemLabel" type="Label" parent="CardCampeonato/Imagem" unique_id=524711530]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.6, 0.6, 0.7, 1)
-theme_override_font_sizes/font_size = 14
-text = "[ imagem em breve ]"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="ilustr" type="Sprite2D" parent="CardCampeonato/Imagem" unique_id=1666760694]
+position = Vector2(137.00002, 93)
+scale = Vector2(0.18066406, 0.18066406)
+texture = ExtResource("5_a0x88")
 
 [node name="Descricao" type="Label" parent="CardCampeonato" unique_id=944352312]
 layout_mode = 0
@@ -297,18 +285,10 @@ offset_bottom = 244.0
 mouse_filter = 2
 color = Color(0.25, 0.25, 0.35, 1)
 
-[node name="ImagemLabel" type="Label" parent="CardProgresso/Imagem" unique_id=236466310]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.6, 0.6, 0.7, 1)
-theme_override_font_sizes/font_size = 14
-text = "[ imagem em breve ]"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="ilustr" type="Sprite2D" parent="CardProgresso/Imagem" unique_id=1722343890]
+position = Vector2(138.00002, 92)
+scale = Vector2(0.18066406, 0.18066406)
+texture = ExtResource("6_caud3")
 
 [node name="Descricao" type="Label" parent="CardProgresso" unique_id=328553215]
 layout_mode = 0
@@ -363,18 +343,10 @@ offset_bottom = 244.0
 mouse_filter = 2
 color = Color(0.25, 0.25, 0.35, 1)
 
-[node name="ImagemLabel" type="Label" parent="CardAdivinhacao/Imagem" unique_id=1944445369]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.6, 0.6, 0.7, 1)
-theme_override_font_sizes/font_size = 14
-text = "[ imagem em breve ]"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="ilustr" type="Sprite2D" parent="CardAdivinhacao/Imagem" unique_id=263762481]
+position = Vector2(137, 93)
+scale = Vector2(0.18066406, 0.18066406)
+texture = ExtResource("7_8dv0n")
 
 [node name="Descricao" type="Label" parent="CardAdivinhacao" unique_id=555979965]
 layout_mode = 0

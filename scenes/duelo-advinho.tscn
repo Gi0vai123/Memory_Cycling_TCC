@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bnm4ygixt21pq" path="res://scripts/cartas-duelo.gd" id="1_16rjy"]
 [ext_resource type="Script" uid="uid://b7skr5iud5hut" path="res://scripts/duelo_advinho.gd" id="1_kedrr"]
+[ext_resource type="PackedScene" uid="uid://dvl4f6unww2oj" path="res://scenes/menu_pause.tscn" id="2_6hb1j"]
 [ext_resource type="Texture2D" uid="uid://co80b524sig6q" path="res://imagens/cards_do_jogo_frente.png" id="2_kedrr"]
 [ext_resource type="Texture2D" uid="uid://duuudikxgug3j" path="res://verso.jpeg" id="4_mgnuq"]
 [ext_resource type="Texture2D" uid="uid://duf18iyss8bdy" path="res://WhatsApp Image 2026-05-14 at 20.16.23.jpeg" id="5_mgnuq"]
@@ -21,6 +22,9 @@ font_size = 34
 
 [node name="Node2D" type="Node2D" unique_id=866754891]
 script = ExtResource("1_kedrr")
+
+[node name="Pause" parent="." unique_id=926771784 instance=ExtResource("2_6hb1j")]
+visible = false
 
 [node name="back" type="Sprite2D" parent="." unique_id=240433473]
 position = Vector2(641.00006, 369.00003)
