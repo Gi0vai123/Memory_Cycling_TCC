@@ -1,5 +1,6 @@
 extends Area2D
 
+var lado: String = ""
 var card_id: int = 0 :
 	set(value):
 		card_id = value
@@ -9,6 +10,7 @@ var card_id: int = 0 :
 
 var tween_rotacao: Tween
 var tween_hover: Tween
+
 
 @onready var sp_frente = $SpFrente
 @onready var sp_costa = $SpCosta

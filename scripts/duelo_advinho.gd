@@ -7,6 +7,7 @@ extends Node2D
 @onready var Vencedor = $CanvasLayer/Vencedor
 @onready var menu_pause = $Pause
 
+
 var pontos_azul: int = 0
 var pontos_vermelho: int = 0
 
