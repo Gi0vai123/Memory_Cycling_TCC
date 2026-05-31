@@ -6,12 +6,16 @@
 [ext_resource type="Texture2D" uid="uid://ebreotoaqfu0" path="res://imagens/time-vermelho.png" id="4_qxw3i"]
 [ext_resource type="PackedScene" uid="uid://c6hwm4spwpxfp" path="res://prefabs/carta.tscn" id="5_1nxbq"]
 [ext_resource type="Texture2D" uid="uid://c3wcf08npu1ks" path="res://imagens/time-azul.png" id="5_7lspx"]
-[ext_resource type="Texture2D" uid="uid://efcs2ni5uxd4" path="res://imagens/barra2.png" id="6_woyb7"]
+[ext_resource type="Texture2D" uid="uid://bykm7gmyeo0wt" path="res://imagens/barra1Att.jpg" id="7_j5ux4"]
 [ext_resource type="Texture2D" uid="uid://gh7vjn47kmtd" path="res://imagens/setaazul.png" id="7_vuhw6"]
 [ext_resource type="Texture2D" uid="uid://dejc4cc0pvye1" path="res://imagens/setavermelho.png" id="8_qxw3i"]
+[ext_resource type="Texture2D" uid="uid://bb11ojy43okj1" path="res://imagens/barra2Att.jpg" id="9_8kaiw"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j5ux4"]
+texture = ExtResource("9_8kaiw")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_048lv"]
-texture = ExtResource("6_woyb7")
+texture = ExtResource("7_j5ux4")
 
 [sub_resource type="LabelSettings" id="LabelSettings_aqhb2"]
 font_size = 62
@@ -69,56 +73,57 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ProgressBarV" type="ProgressBar" parent="UImp" unique_id=309401788]
-offset_right = 1277.0
+offset_right = 1283.0
 offset_bottom = 39.0
-theme_override_styles/fill = SubResource("StyleBoxTexture_048lv")
+theme_override_styles/fill = SubResource("StyleBoxTexture_j5ux4")
 value = 100.0
 show_percentage = false
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="UImp/ProgressBarV" unique_id=1273403973]
 layout_mode = 0
-offset_right = 1273.0
+offset_right = 1283.0
 offset_bottom = 40.0
 
 [node name="setavermelha" type="Sprite2D" parent="UImp/ProgressBarV" unique_id=184901114]
-position = Vector2(1272, 65)
+position = Vector2(1278, 65)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("8_qxw3i")
 
 [node name="ProgressBarA" type="ProgressBar" parent="UImp" unique_id=1671045228]
-offset_right = 1278.0
+offset_right = 1283.0
 offset_bottom = 39.0
 theme_override_styles/fill = SubResource("StyleBoxTexture_048lv")
 value = 100.0
 show_percentage = false
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="UImp/ProgressBarA" unique_id=1347444853]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.007794232
 offset_right = 1273.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
 [node name="setaazul" type="Sprite2D" parent="UImp/ProgressBarA" unique_id=888987748]
-position = Vector2(1272, 65)
+position = Vector2(1279, 65)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("7_vuhw6")
 
 [node name="PontosA" type="Label" parent="UImp" unique_id=1456905740]
-visible = false
-offset_left = 472.0
-offset_top = 42.0
-offset_right = 544.0
-offset_bottom = 128.0
+offset_left = 32.0
+offset_top = 68.0
+offset_right = 104.0
+offset_bottom = 154.0
 text = "0"
 label_settings = SubResource("LabelSettings_aqhb2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PontosV" type="Label" parent="UImp" unique_id=1310020654]
-visible = false
-offset_left = 729.0
-offset_top = 41.0
-offset_right = 801.0
-offset_bottom = 127.0
+offset_left = 1185.0
+offset_top = 71.0
+offset_right = 1257.0
+offset_bottom = 157.0
 text = "0"
 label_settings = SubResource("LabelSettings_j5ux4")
 horizontal_alignment = 1
@@ -129,3 +134,10 @@ offset_left = 55.0
 offset_top = 672.0
 offset_right = 95.0
 offset_bottom = 695.0
+
+[node name="LinhaChegada" type="ColorRect" parent="UImp" unique_id=1502773841]
+anchors_preset = -1
+anchor_right = 0.00234375
+offset_right = 8.0
+offset_bottom = 39.0
+metadata/_edit_use_anchors_ = true

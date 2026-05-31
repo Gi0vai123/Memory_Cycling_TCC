@@ -50,6 +50,13 @@ const SPRITES = {
 const SCALE_REPOUSO := Vector2(0.8, 0.8)
 const SCALE_HOVER   := Vector2(1.0, 1.0)
 
+# Cores do destaque do cursor (azul, vermelho ou os dois sobre a mesma carta)
+const COR_FOCO_AZUL := Color(0.55, 0.85, 1.0, 1.0)
+const COR_FOCO_VERMELHO := Color(1.0, 0.55, 0.7, 1.0)
+const COR_FOCO_AMBOS := Color(0.85, 0.6, 1.0, 1.0)
+
+var focado_por: Array = []
+
 
 func _ready():
 	z_original = z_index
@@ -149,21 +156,54 @@ func mostrar_costas():
 	sp_frente.visible = false
 	sp_costa.visible = true
 
-func focar():
+func focar(jogador: String = "", ativo: bool = true):
 	if not pode_animar or virando:
 		return
-	z_index = 100
-	if tween_hover: tween_hover.kill()
-	tween_hover = create_tween()
-	tween_hover.tween_property(self, "scale", Vector2(1, 1), 0.15)
-	animar_loop_rotacao()
+	if jogador != "" and not focado_por.has(jogador):
+		focado_por.append(jogador)
+	if ativo:
+		set_levantada(true)
+	_aplicar_cor_foco()
 
-func desfocar():
-	z_index = z_original
-	if tween_hover: tween_hover.kill()
-	tween_hover = create_tween()
-	tween_hover.tween_property(self, "scale", Vector2(0.7, 0.7), 0.15)
-	parar_rotacao()
+func desfocar(jogador: String = "", ativo: bool = true):
+	if jogador != "":
+		focado_por.erase(jogador)
+	else:
+		focado_por.clear()
+	# Quem sai sendo o ativo abaixa a carta, mesmo se o outro ainda esta aqui
+	if ativo:
+		set_levantada(false)
+	if not focado_por.is_empty():
+		_aplicar_cor_foco()
+		return
+	modulate = Color.WHITE
+
+# Sobe ou abaixa a carta visualmente (so o jogador da vez levanta)
+func set_levantada(levantada: bool):
+	if not pode_animar or virando:
+		return
+	if levantada:
+		z_index = 100
+		if tween_hover: tween_hover.kill()
+		tween_hover = create_tween()
+		tween_hover.tween_property(self, "scale", Vector2(1, 1), 0.15)
+		animar_loop_rotacao()
+	else:
+		z_index = z_original
+		if tween_hover: tween_hover.kill()
+		tween_hover = create_tween()
+		tween_hover.tween_property(self, "scale", Vector2(0.7, 0.7), 0.15)
+		parar_rotacao()
+
+func _aplicar_cor_foco():
+	if focado_por.has("azul") and focado_por.has("vermelho"):
+		modulate = COR_FOCO_AMBOS
+	elif focado_por.has("azul"):
+		modulate = COR_FOCO_AZUL
+	elif focado_por.has("vermelho"):
+		modulate = COR_FOCO_VERMELHO
+	else:
+		modulate = Color.WHITE
 
 func selecionar():
 	if not pode_animar or matched:

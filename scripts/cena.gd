@@ -8,7 +8,7 @@ extends Node2D
 @onready var seta_azul = $UImp/ProgressBarA/setaazul
 @onready var seta_vermelha = $UImp/ProgressBarV/setavermelha
 
-var tempo_total = 100.0
+var tempo_total = 90.0
 var tempo_azul = tempo_total
 var tempo_vermelho = tempo_total
 var tempo_ativo = false
@@ -38,10 +38,24 @@ const DEBUG_UM_CONTROLE = true
 const DEADZONE = 0.5
 const COOLDOWN_MOVIMENTO = 0.2
 
+# Cores do fundo de cada barra
+const COR_FUNDO_AZUL := Color(0.04, 0.12, 0.22, 1.0)
+const COR_FUNDO_VERMELHO := Color(0.22, 0.04, 0.12, 1.0)
+
+var fundo_barra_a: StyleBoxFlat
+var fundo_barra_v: StyleBoxFlat
+
 var quantidade_pares: int = 15
-var cursor_index: int = 0
 var total_linhas: int = 0
-var cooldown_timer: float = 0.0
+
+# Cada jogador tem seu proprio cursor e cooldown — em DEBUG so o ativo aparece.
+# O cursor so aparece depois que o jogador encostar no controle (mouse nao ativa)
+var cursor_azul: int = 0
+var cursor_vermelho: int = 0
+var cooldown_azul: float = 0.0
+var cooldown_vermelho: float = 0.0
+var cursor_azul_ativo: bool = false
+var cursor_vermelho_ativo: bool = false
 
 func _ready():
 	randomize()
@@ -49,75 +63,132 @@ func _ready():
 	quantidade_pares = Dificuldade.pares
 	colunas = Dificuldade.colunas
 	_ajustar_layout()
+	_preparar_fundo_barras()
 	if Campeonato.campeonato_ativo:
 		nome_jogador_azul = Campeonato.jogador_a
 		nome_jogador_vermelho = Campeonato.jogador_b
 	start_jogo()
 
+# Define a cor de fundo fixa de cada barra (azul e vermelha)
+func _preparar_fundo_barras():
+	fundo_barra_a = StyleBoxFlat.new()
+	fundo_barra_a.bg_color = COR_FUNDO_AZUL
+	barra_azul.add_theme_stylebox_override("background", fundo_barra_a)
+	fundo_barra_v = StyleBoxFlat.new()
+	fundo_barra_v.bg_color = COR_FUNDO_VERMELHO
+	barra_vermelha.add_theme_stylebox_override("background", fundo_barra_v)
+
 func _process(delta):
 	if tempo_ativo:
 		timer_bar(delta)
-	if cooldown_timer > 0:
-		cooldown_timer -= delta
-	if pode_clicar and not cartas.is_empty() and cooldown_timer <= 0:
+	cooldown_azul = max(0.0, cooldown_azul - delta)
+	cooldown_vermelho = max(0.0, cooldown_vermelho - delta)
+	if pode_clicar and not cartas.is_empty():
 		_processar_analogico()
 
 func _processar_analogico():
-	var device = 0 if DEBUG_UM_CONTROLE else (0 if jogador_atual == "azul" else 1)
+	if DEBUG_UM_CONTROLE:
+		# 1 controle: o device 0 controla sempre o cursor do jogador da vez
+		_processar_controle(0, jogador_atual)
+	else:
+		# 2 controles: cada um move o cursor do seu jogador o tempo todo
+		_processar_controle(0, "azul")
+		_processar_controle(1, "vermelho")
+
+func _processar_controle(device: int, jogador: String):
 	var h = Input.get_joy_axis(device, JOY_AXIS_LEFT_X)
 	var v = Input.get_joy_axis(device, JOY_AXIS_LEFT_Y)
+	_aplicar_movimento(h, v, jogador)
 
+func _aplicar_movimento(h: float, v: float, jogador: String):
+	var cooldown = cooldown_azul if jogador == "azul" else cooldown_vermelho
+	if cooldown > 0:
+		return
+	if abs(h) < DEADZONE and abs(v) < DEADZONE:
+		return
+
+	# Primeiro toque no controle so ativa o cursor e mostra o destaque, sem mover
+	var ativo_flag = cursor_azul_ativo if jogador == "azul" else cursor_vermelho_ativo
+	if not ativo_flag:
+		if jogador == "azul":
+			cursor_azul_ativo = true
+			cooldown_azul = COOLDOWN_MOVIMENTO
+		else:
+			cursor_vermelho_ativo = true
+			cooldown_vermelho = COOLDOWN_MOVIMENTO
+		var pos = cursor_azul if jogador == "azul" else cursor_vermelho
+		if pos < cartas.size() and is_instance_valid(cartas[pos]):
+			cartas[pos].focar(jogador, jogador == jogador_atual)
+		return
+
+	var cursor = cursor_azul if jogador == "azul" else cursor_vermelho
 	var total = cartas.size()
 	total_linhas = ceil(float(total) / float(colunas))
-	var linha_atual = cursor_index / colunas
-	var coluna_atual = cursor_index % colunas
+	var linha_atual = cursor / colunas
+	var coluna_atual = cursor % colunas
 	var cartas_ultima_linha = total % colunas
 	if cartas_ultima_linha == 0:
 		cartas_ultima_linha = colunas
 
+	var novo: int = -1
 	if h > DEADZONE:
-		var novo = cursor_index + 1
-		if novo < total:
-			_mover_cursor(novo)
-		cooldown_timer = COOLDOWN_MOVIMENTO
+		var n = cursor + 1
+		if n < total:
+			novo = n
 	elif h < -DEADZONE:
-		var novo = cursor_index - 1
-		if novo >= 0:
-			_mover_cursor(novo)
-		cooldown_timer = COOLDOWN_MOVIMENTO
+		var n = cursor - 1
+		if n >= 0:
+			novo = n
 	elif v > DEADZONE:
 		var nova_linha = linha_atual + 1
 		if nova_linha < total_linhas:
 			var max_col = colunas - 1
 			if nova_linha == total_linhas - 1:
 				max_col = cartas_ultima_linha - 1
-			_mover_cursor(nova_linha * colunas + min(coluna_atual, max_col))
-		cooldown_timer = COOLDOWN_MOVIMENTO
+			novo = nova_linha * colunas + min(coluna_atual, max_col)
 	elif v < -DEADZONE:
 		var nova_linha = linha_atual - 1
 		if nova_linha >= 0:
-			_mover_cursor(nova_linha * colunas + coluna_atual)
-		cooldown_timer = COOLDOWN_MOVIMENTO
+			novo = nova_linha * colunas + coluna_atual
+
+	if novo == -1:
+		return
+	_mover_cursor_jogador(novo, jogador)
+	if jogador == "azul":
+		cooldown_azul = COOLDOWN_MOVIMENTO
+	else:
+		cooldown_vermelho = COOLDOWN_MOVIMENTO
 
 func _input(event):
 	if not pode_clicar or cartas.is_empty():
 		return
-	if not DEBUG_UM_CONTROLE:
-		if event is InputEventJoypadButton:
-			var device_permitido = 0 if jogador_atual == "azul" else 1
-			if event.device != device_permitido:
-				return
+	# So o controle do jogador da vez consegue confirmar
+	var device_ativo = 0 if DEBUG_UM_CONTROLE else (0 if jogador_atual == "azul" else 1)
+	if event is InputEventJoypadButton and event.device != device_ativo:
+		return
 	if event.is_action_pressed("ui_accept"):
-		var carta = cartas[cursor_index]
+		# So confirma se o cursor do jogador ja foi ativado pelo controle
+		var ativo = cursor_azul_ativo if jogador_atual == "azul" else cursor_vermelho_ativo
+		if not ativo:
+			return
+		var cursor = cursor_azul if jogador_atual == "azul" else cursor_vermelho
+		if cursor >= cartas.size():
+			return
+		var carta = cartas[cursor]
 		if is_instance_valid(carta) and not carta.virada:
 			carta.selecionar()
 
-func _mover_cursor(novo_index: int):
-	if cursor_index < cartas.size() and is_instance_valid(cartas[cursor_index]):
-		cartas[cursor_index].desfocar()
-	cursor_index = novo_index
-	if cursor_index < cartas.size() and is_instance_valid(cartas[cursor_index]):
-		cartas[cursor_index].focar()
+func _mover_cursor_jogador(novo_index: int, jogador: String):
+	var cursor_atual = cursor_azul if jogador == "azul" else cursor_vermelho
+	var ativo = jogador == jogador_atual
+	if cursor_atual < cartas.size() and is_instance_valid(cartas[cursor_atual]):
+		cartas[cursor_atual].desfocar(jogador, ativo)
+	if jogador == "azul":
+		cursor_azul = novo_index
+	else:
+		cursor_vermelho = novo_index
+	if novo_index < cartas.size() and is_instance_valid(cartas[novo_index]):
+		cartas[novo_index].focar(jogador, ativo)
 
 # Ajusta o spacing e o centro do grid conforme a dificuldade
 func _ajustar_layout() -> void:
@@ -153,7 +224,6 @@ func start_jogo() -> void:
 	if usar_contagem and contador_scene:
 		await contagem_regressiva(contador_scene)
 	textJ()
-	mostrar_sprite_equipe()
 	atualizar_labels()
 	tempo_azul = tempo_total
 	tempo_vermelho = tempo_total
@@ -221,9 +291,11 @@ func criar_cartas():
 	for c in cartas:
 		c.pode_animar = true
 
-	cursor_index = 0
-	if not cartas.is_empty():
-		cartas[0].focar()
+	cursor_azul = 0
+	cursor_vermelho = max(0, cartas.size() - 1)
+	cursor_azul_ativo = false
+	cursor_vermelho_ativo = false
+	# Nao focar nada agora — o cursor so aparece no primeiro toque do controle
 
 func mostrar_cartas_inicial():
 	tempo_ativo = false
@@ -258,8 +330,7 @@ func reembaralhar():
 	pode_clicar = false
 	_set_collision(true)
 
-	# Espera qualquer flip em andamento terminar (a 2a carta do ultimo par
-	# pode estar no meio da animacao quando o match dispara reembaralhar)
+	# Espera qualquer flip em andamento terminar
 	await get_tree().create_timer(0.3).timeout
 
 	# Vira tudo pra costa e libera o matched pra proxima rodada
@@ -289,6 +360,8 @@ func reembaralhar():
 		c.position = Vector2.ZERO
 		c.rotation_degrees = 0
 		c.z_index = c.z_original
+		c.modulate = Color.WHITE
+		c.focado_por.clear()
 
 	# Embaralha os IDs e recarrega o sprite de cada carta
 	var ids = []
@@ -326,6 +399,17 @@ func reembaralhar():
 	_set_collision(false)
 	tempo_ativo = true
 	pode_clicar = true
+	# Refoca os cursores ja ativados depois do reembaralho
+	if DEBUG_UM_CONTROLE:
+		var idx = cursor_azul if jogador_atual == "azul" else cursor_vermelho
+		var ativo = cursor_azul_ativo if jogador_atual == "azul" else cursor_vermelho_ativo
+		if ativo and idx < cartas.size():
+			cartas[idx].focar(jogador_atual)
+	else:
+		if cursor_azul_ativo and cursor_azul < cartas.size():
+			cartas[cursor_azul].focar("azul", jogador_atual == "azul")
+		if cursor_vermelho_ativo and cursor_vermelho < cartas.size():
+			cartas[cursor_vermelho].focar("vermelho", jogador_atual == "vermelho")
 
 func timer_bar(delta):
 	if jogador_atual == "azul":
@@ -350,13 +434,18 @@ func timer_bar(delta):
 func atualizar_barra_jogador():
 	barra_azul.visible = true
 	barra_vermelha.visible = true
+	# So a barra do jogador da vez aparece, a outra some com fade.
+	# Usa self_modulate pra nao afetar as setas (filhas) — elas ficam sempre visiveis
+	var alpha_a := 1.0 if jogador_atual == "azul" else 0.0
+	var alpha_v := 1.0 if jogador_atual == "vermelho" else 0.0
+	var tw = create_tween().set_parallel(true)
+	tw.tween_property(barra_azul, "self_modulate:a", alpha_a, 0.4) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tw.tween_property(barra_vermelha, "self_modulate:a", alpha_v, 0.4) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	if jogador_atual == "azul":
-		barra_azul.modulate.a = 1.0
-		barra_vermelha.modulate.a = 0.5
 		barra_azul.value = (tempo_azul / tempo_total) * barra_azul.max_value
 	else:
-		barra_azul.modulate.a = 0.5
-		barra_vermelha.modulate.a = 1.0
 		barra_vermelha.value = (tempo_vermelho / tempo_total) * barra_vermelha.max_value
 
 func atualizar_setas(diferenca):
@@ -403,7 +492,6 @@ func verificar_carta(carta):
 			primeira_carta = null
 			segunda_carta = null
 			_set_collision(false)
-			mostrar_sprite_equipe()
 			pode_clicar = true
 
 func ganhou():
@@ -466,9 +554,29 @@ func textJ():
 		$UImp/LabelJogador.text = jogador_atual
 
 func mudando_atual():
+	var jogador_anterior = jogador_atual
 	jogador_atual = lado_oposto(jogador_atual)
 	textJ()
 	atualizar_barra_jogador()
+	if cartas.is_empty():
+		return
+	var ativo_ant = cursor_azul_ativo if jogador_anterior == "azul" else cursor_vermelho_ativo
+	var ativo_novo = cursor_azul_ativo if jogador_atual == "azul" else cursor_vermelho_ativo
+	var idx_ant = cursor_azul if jogador_anterior == "azul" else cursor_vermelho
+	var idx_novo = cursor_azul if jogador_atual == "azul" else cursor_vermelho
+	if DEBUG_UM_CONTROLE:
+		# 1 cursor: tira o destaque do anterior e mostra o do novo (se ja foram ativados)
+		if ativo_ant and idx_ant < cartas.size() and is_instance_valid(cartas[idx_ant]):
+			cartas[idx_ant].desfocar(jogador_anterior)
+		if ativo_novo and idx_novo < cartas.size() and is_instance_valid(cartas[idx_novo]):
+			cartas[idx_novo].focar(jogador_atual)
+	else:
+		# 2 cursores: abaixa a carta do antigo ativo e levanta a do novo
+		if idx_ant != idx_novo:
+			if ativo_ant and idx_ant < cartas.size() and is_instance_valid(cartas[idx_ant]):
+				cartas[idx_ant].set_levantada(false)
+			if ativo_novo and idx_novo < cartas.size() and is_instance_valid(cartas[idx_novo]):
+				cartas[idx_novo].set_levantada(true)
 
 func pontos_ganhos():
 	pares_encontrados += 1
@@ -478,15 +586,6 @@ func pontos_ganhos():
 		"vermelho":
 			pontos_vermelho += 1
 	atualizar_labels()
-
-func mostrar_sprite_equipe():
-	match jogador_atual:
-		"azul":
-			$equipe_azul.visible = true
-			$equipe_vermelha.visible = false
-		"vermelho":
-			$equipe_azul.visible = false
-			$equipe_vermelha.visible = true
 
 func atualizar_labels():
 	$UImp/PontosA.text =  str(pontos_azul)
