@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://21bm27kpaagx" path="res://imagens/menu/Pixeled.ttf" id="2_ar34o"]
 [ext_resource type="Texture2D" uid="uid://djwyda2rhxlfq" path="res://imagens/menu/options.png" id="2_sm2ni"]
 [ext_resource type="Texture2D" uid="uid://npyvw1ov3nko" path="res://imagens/menu/qr_code.png" id="3_amt2q"]
+[ext_resource type="Theme" uid="uid://hucb486ifu68" path="res://style/botoes.tres" id="4_ar34o"]
 [ext_resource type="Texture2D" uid="uid://hdy2xeykqcr3" path="res://menuMC.png" id="5_73fcp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0m60l"]
@@ -21,18 +22,6 @@ Label/colors/font_outline_color = Color(0.38745674, 0.30340275, 0.8201914, 1)
 Label/constants/outline_size = 12
 Label/font_sizes/font_size = 22
 Label/fonts/font = ExtResource("2_ar34o")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5aq17"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="Theme" id="Theme_ar34o"]
-resource_name = "start"
-Button/colors/font_color = Color(0.9529412, 0.019607844, 0.30588236, 1)
-Button/colors/font_focus_color = Color(0.9529412, 0.019607844, 0.30588236, 1)
-Button/colors/font_hover_color = Color(0.9647059, 0.14509805, 0.43529412, 1)
-Button/colors/font_hover_pressed_color = Color(0.9529412, 0.019607844, 0.30588236, 1)
-Button/colors/font_pressed_color = Color(0.9529412, 0.019607844, 0.30588236, 1)
-Button/styles/hover = SubResource("StyleBoxFlat_5aq17")
 
 [sub_resource type="SystemFont" id="SystemFont_73fcp"]
 font_names = PackedStringArray("Asteroid Blaster")
@@ -126,7 +115,7 @@ offset_left = 518.0
 offset_top = 369.0
 offset_right = 761.0
 offset_bottom = 446.0
-theme = SubResource("Theme_ar34o")
+theme = ExtResource("4_ar34o")
 theme_override_fonts/font = SubResource("SystemFont_73fcp")
 theme_override_font_sizes/font_size = 50
 text = "JOGAR"
@@ -149,7 +138,7 @@ offset_left = 496.0
 offset_top = 463.0
 offset_right = 792.0
 offset_bottom = 539.0
-theme = SubResource("Theme_ar34o")
+theme = ExtResource("4_ar34o")
 theme_override_fonts/font = SubResource("SystemFont_ar34o")
 theme_override_font_sizes/font_size = 50
 text = "CRÉDITOS"
@@ -160,7 +149,7 @@ offset_left = 518.0
 offset_top = 550.0
 offset_right = 761.0
 offset_bottom = 627.0
-theme = SubResource("Theme_ar34o")
+theme = ExtResource("4_ar34o")
 theme_override_fonts/font = SubResource("SystemFont_amt2q")
 theme_override_font_sizes/font_size = 50
 text = "SAIR"
