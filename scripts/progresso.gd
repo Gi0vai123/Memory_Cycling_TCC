@@ -7,6 +7,7 @@ extends Node2D
 @onready var label_jogador = $LabelJogador
 @onready var pontos_label = $PontosA
 @onready var fase_label = $FaseLabel
+@onready var menu_pause = $Pause
 
 const ESPACAMENTO_X = 150
 const ESPACAMENTO_Y = 200
@@ -82,6 +83,11 @@ func _processar_analogico():
 		cooldown_timer = COOLDOWN_MOVIMENTO
 
 func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		if get_tree().paused:
+			menu_pause.despausar()
+		else:
+			menu_pause.pausar()
 	if not pode_virar or cartas.is_empty():
 		return
 	if not DEBUG_UM_CONTROLE:
