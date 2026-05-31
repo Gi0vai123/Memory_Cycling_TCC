@@ -61,7 +61,7 @@ func _montar_bracket() -> void:
 		var lbl = Label.new()
 		lbl.text = headers[r]
 		lbl.add_theme_font_size_override("font_size", 14)
-		lbl.modulate = Color(0.55, 0.75, 1.0)
+		lbl.modulate = Color(0.85, 0.85, 0.95)
 		lbl.position = Vector2(X_INICIO + r * COLUNA_LARGURA, 72)
 		bracket.add_child(lbl)
 
@@ -131,14 +131,14 @@ func _criar_caixa_partida(idx: int, pos: Vector2) -> void:
 	var lbl_num = Label.new()
 	lbl_num.text = "P" + str(idx + 1)
 	lbl_num.add_theme_font_size_override("font_size", 11)
-	lbl_num.modulate = Color(0.5, 0.5, 0.5)
+	lbl_num.modulate = Color(0.6, 0.6, 0.7)
 	lbl_num.position = pos + Vector2(4, 4)
 	bracket.add_child(lbl_num)
 
 	var lbl_a = Label.new()
 	lbl_a.text = "???"
 	lbl_a.add_theme_font_size_override("font_size", 16)
-	lbl_a.modulate = Color(0.55, 0.75, 1.0)
+	lbl_a.modulate = Color(0.55, 0.85, 1.0)
 	lbl_a.position = pos + Vector2(8, 18)
 	lbl_a.size = Vector2(240, 26)
 	bracket.add_child(lbl_a)
@@ -146,14 +146,14 @@ func _criar_caixa_partida(idx: int, pos: Vector2) -> void:
 	var lbl_vs = Label.new()
 	lbl_vs.text = "— vs —"
 	lbl_vs.add_theme_font_size_override("font_size", 11)
-	lbl_vs.modulate = Color(0.45, 0.45, 0.45)
+	lbl_vs.modulate = Color(0.6, 0.6, 0.7)
 	lbl_vs.position = pos + Vector2(8, 44)
 	bracket.add_child(lbl_vs)
 
 	var lbl_b = Label.new()
 	lbl_b.text = "???"
 	lbl_b.add_theme_font_size_override("font_size", 16)
-	lbl_b.modulate = Color(1.0, 0.5, 0.5)
+	lbl_b.modulate = Color(1.0, 0.55, 0.7)
 	lbl_b.position = pos + Vector2(8, 58)
 	lbl_b.size = Vector2(240, 26)
 	bracket.add_child(lbl_b)
@@ -186,7 +186,7 @@ func _desenhar_conector(src_idx: int, dst_idx: int) -> void:
 # ─────────────────────────────────────────────
 func _criar_conector(de: Vector2, para: Vector2) -> void:
 	var linha = ColorRect.new()
-	linha.color = Color(0.3, 0.3, 0.5, 0.7)
+	linha.color = Color(0.5, 0.4, 0.6, 0.7)
 
 	if abs(de.x - para.x) > abs(de.y - para.y):
 		linha.position = Vector2(min(de.x, para.x), de.y - 1)
@@ -213,24 +213,24 @@ func _atualizar_chave() -> void:
 		refs.lbl_b.text = p.jogadorB if p.jogadorB != "" else "???"
 
 		if idx == prox_idx:
-			refs.panel.modulate = Color(1.2, 1.2, 0.4)
+			refs.panel.modulate = Color(1.3, 1.1, 0.5)
 		elif p.vencedor != "":
-			refs.panel.modulate = Color(0.5, 0.5, 0.5)
+			refs.panel.modulate = Color(0.55, 0.55, 0.65)
 		else:
 			refs.panel.modulate = Color(1.0, 1.0, 1.0)
 
 		if p.vencedor != "":
 			if refs.lbl_a.text == p.vencedor:
-				refs.lbl_a.modulate = Color(0.2, 1.0, 0.4)
-				refs.lbl_b.modulate = Color(0.35, 0.35, 0.35)
+				refs.lbl_a.modulate = Color(0.95, 0.78, 0.3)
+				refs.lbl_b.modulate = Color(0.45, 0.45, 0.5)
 			else:
-				refs.lbl_b.modulate = Color(0.2, 1.0, 0.4)
-				refs.lbl_a.modulate = Color(0.35, 0.35, 0.35)
+				refs.lbl_b.modulate = Color(0.95, 0.78, 0.3)
+				refs.lbl_a.modulate = Color(0.45, 0.45, 0.5)
 
 	var campeao = Campeonato.campeao()
 	if campeao != "":
 		label_campeao.text = "🏆\n" + campeao
-		label_campeao.modulate = Color(1.0, 0.85, 0.2)
+		label_campeao.modulate = Color(0.95, 0.78, 0.3)
 		btn_jogar.visible = false
 		label_status.text = "Campeonato encerrado! Campeão: " + campeao
 	else:

@@ -7,6 +7,9 @@ extends Node2D
 @onready var barra_vermelha = $UImp/ProgressBarV
 @onready var seta_azul = $UImp/ProgressBarA/setaazul
 @onready var seta_vermelha = $UImp/ProgressBarV/setavermelha
+@onready var painel_vitoria = $UImp/PainelVitoria
+@onready var lbl_vitoria_vencedor = $UImp/PainelVitoria/LblVencedor
+@onready var btn_vitoria_continuar = $UImp/PainelVitoria/BtnContinuar
 
 var tempo_total = 90.0
 var tempo_azul = tempo_total
@@ -27,6 +30,9 @@ var pode_clicar = false
 
 var nome_jogador_azul: String = "Azul"
 var nome_jogador_vermelho: String = "Vermelho"
+
+# Guarda o nome do vencedor enquanto a tela de vitoria esta na frente
+var ultimo_vencedor: String = ""
 
 # Layout do grid — valores ajustados por dificuldade em _ajustar_layout()
 var colunas: int = 6
@@ -513,15 +519,19 @@ func ganhou():
 	else:
 		vencedor = "Azul" if lado_vencedor == "azul" else "Vermelho"
 
-	await get_tree().create_timer(1.5).timeout
+	ultimo_vencedor = vencedor
+	lbl_vitoria_vencedor.text = vencedor
+	var cor_vencedor = Color(0.02, 0.66, 0.87) if lado_vencedor == "azul" else Color(0.94, 0.2, 0.53)
+	lbl_vitoria_vencedor.add_theme_color_override("font_color", cor_vencedor)
+	painel_vitoria.visible = true
+	btn_vitoria_continuar.grab_focus()
+
+func _on_btn_continuar_vitoria_pressed():
 	if Campeonato.campeonato_ativo:
-		Campeonato.registrar_resultado(vencedor)
+		Campeonato.registrar_resultado(ultimo_vencedor)
 		get_tree().change_scene_to_file("res://scenes/chave_campeonato.tscn")
 	else:
-		reiniciar_jogo()
-
-func reiniciar_jogo():
-	get_tree().reload_current_scene()
+		get_tree().change_scene_to_file("res://scenes/selecao_modo.tscn")
 
 func bloqueio_de_cartas():
 	if primeira_carta != null:

@@ -25,6 +25,50 @@ font_color = Color(0.01860215, 0.6626679, 0.86545706, 1)
 font_size = 62
 font_color = Color(0.9427613, 0.19937798, 0.5272031, 1)
 
+[sub_resource type="StyleBoxFlat" id="VitoriaPanel"]
+bg_color = Color(0.05, 0.05, 0.08, 0.96)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.95, 0.78, 0.3, 0.85)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="BtnContinuarNormal"]
+content_margin_left = 22.0
+content_margin_top = 10.0
+content_margin_right = 22.0
+content_margin_bottom = 10.0
+bg_color = Color(0.95, 0.78, 0.3, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1.0, 0.92, 0.55, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="BtnContinuarHover"]
+content_margin_left = 22.0
+content_margin_top = 10.0
+content_margin_right = 22.0
+content_margin_bottom = 10.0
+bg_color = Color(1.0, 0.88, 0.45, 1.0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1.0, 1.0, 0.75, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="Node2D" type="Node2D" unique_id=554399099]
 script = ExtResource("1_woyb7")
 card_scene = ExtResource("2_048lv")
@@ -141,3 +185,46 @@ anchor_right = 0.00234375
 offset_right = 8.0
 offset_bottom = 39.0
 metadata/_edit_use_anchors_ = true
+
+[node name="PainelVitoria" type="Panel" parent="UImp" unique_id=1872544011]
+visible = false
+offset_left = 340.0
+offset_top = 200.0
+offset_right = 940.0
+offset_bottom = 520.0
+theme_override_styles/panel = SubResource("VitoriaPanel")
+
+[node name="LblTitulo" type="Label" parent="UImp/PainelVitoria" unique_id=1872544012]
+layout_mode = 0
+offset_top = 30.0
+offset_right = 600.0
+offset_bottom = 100.0
+theme_override_colors/font_color = Color(0.95, 0.78, 0.3, 1)
+theme_override_font_sizes/font_size = 56
+text = "VITÓRIA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LblVencedor" type="Label" parent="UImp/PainelVitoria" unique_id=1872544013]
+layout_mode = 0
+offset_top = 130.0
+offset_right = 600.0
+offset_bottom = 210.0
+theme_override_font_sizes/font_size = 38
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnContinuar" type="Button" parent="UImp/PainelVitoria" unique_id=1872544014]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 240.0
+offset_right = 400.0
+offset_bottom = 290.0
+theme_override_colors/font_color = Color(0.15, 0.1, 0.05, 1)
+theme_override_colors/font_hover_color = Color(0.15, 0.1, 0.05, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("BtnContinuarNormal")
+theme_override_styles/hover = SubResource("BtnContinuarHover")
+text = "CONTINUAR"
+
+[connection signal="pressed" from="UImp/PainelVitoria/BtnContinuar" to="." method="_on_btn_continuar_vitoria_pressed"]

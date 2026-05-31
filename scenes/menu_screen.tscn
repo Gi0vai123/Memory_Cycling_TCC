@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dhvp0u7hdib1t" path="res://scripts/menu_screen.gd" id="1_sm2ni"]
 [ext_resource type="FontFile" uid="uid://21bm27kpaagx" path="res://imagens/menu/Pixeled.ttf" id="2_ar34o"]
-[ext_resource type="Texture2D" uid="uid://djwyda2rhxlfq" path="res://imagens/menu/options.png" id="2_sm2ni"]
 [ext_resource type="Texture2D" uid="uid://npyvw1ov3nko" path="res://imagens/menu/qr_code.png" id="3_amt2q"]
 [ext_resource type="Texture2D" uid="uid://hdy2xeykqcr3" path="res://menuMC.png" id="5_73fcp"]
 
@@ -37,32 +36,11 @@ Button/styles/hover = SubResource("StyleBoxFlat_5aq17")
 [sub_resource type="SystemFont" id="SystemFont_73fcp"]
 font_names = PackedStringArray("Asteroid Blaster")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g2cvw"]
-bg_color = Color(0.86942613, 0.44246724, 0.57956946, 0.62352943)
-
-[sub_resource type="Theme" id="Theme_0m60l"]
-Button/icons/icon = ExtResource("2_sm2ni")
-Button/styles/pressed = SubResource("StyleBoxFlat_g2cvw")
-
 [sub_resource type="SystemFont" id="SystemFont_ar34o"]
 font_names = PackedStringArray("Asteroid Blaster")
 
 [sub_resource type="SystemFont" id="SystemFont_amt2q"]
 font_names = PackedStringArray("Asteroid Blaster")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ar34o"]
-bg_color = Color(1, 0, 0, 0.77254903)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amt2q"]
-bg_color = Color(0.6666667, 0, 0, 0.77254903)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gld7y"]
-bg_color = Color(0.57254905, 0, 0, 0.77254903)
-
-[sub_resource type="Theme" id="Theme_g2cvw"]
-Button/styles/hover = SubResource("StyleBoxFlat_ar34o")
-Button/styles/normal = SubResource("StyleBoxFlat_amt2q")
-Button/styles/pressed = SubResource("StyleBoxFlat_gld7y")
 
 [sub_resource type="InputEventKey" id="InputEventKey_ar34o"]
 device = -1
@@ -71,6 +49,8 @@ keycode = 4194305
 
 [sub_resource type="Shortcut" id="Shortcut_amt2q"]
 events = [SubResource("InputEventKey_ar34o")]
+
+[sub_resource type="SystemFont" id="SystemFont_sm2ni"]
 
 [node name="MenuScreen" type="Control" unique_id=533891381]
 z_index = 1
@@ -131,18 +111,6 @@ theme_override_fonts/font = SubResource("SystemFont_73fcp")
 theme_override_font_sizes/font_size = 50
 text = "JOGAR"
 
-[node name="options_btn" type="Button" parent="." unique_id=208893447]
-layout_mode = 0
-offset_left = 1139.0
-offset_top = 587.0
-offset_right = 2347.0
-offset_bottom = 1795.0
-scale = Vector2(0.07753759, 0.07753759)
-theme = SubResource("Theme_0m60l")
-action_mode = 0
-flat = true
-autowrap_trim_flags = 0
-
 [node name="credits_btn" type="Button" parent="." unique_id=454171047]
 layout_mode = 0
 offset_left = 496.0
@@ -165,16 +133,6 @@ theme_override_fonts/font = SubResource("SystemFont_amt2q")
 theme_override_font_sizes/font_size = 50
 text = "SAIR"
 
-[node name="donate_btn" type="Button" parent="." unique_id=1560253485]
-layout_mode = 0
-offset_left = 96.0
-offset_top = 548.0
-offset_right = 348.0
-offset_bottom = 617.0
-theme = SubResource("Theme_g2cvw")
-theme_override_font_sizes/font_size = 50
-text = "APOIA-SE"
-
 [node name="background" type="TextureRect" parent="." unique_id=228863308]
 z_index = -1
 layout_mode = 0
@@ -184,34 +142,6 @@ mouse_filter = 2
 texture = ExtResource("5_73fcp")
 expand_mode = 2
 metadata/_edit_lock_ = true
-
-[node name="option_menu" type="ColorRect" parent="." unique_id=902716385]
-visible = false
-layout_mode = 0
-offset_left = 234.0
-offset_top = 125.0
-offset_right = 1113.0
-offset_bottom = 638.0
-color = Color(0.008500001, 0.021641675, 0.05, 1)
-
-[node name="exit_option_btn" type="Button" parent="option_menu" unique_id=1064342601]
-z_index = 3
-layout_mode = 0
-offset_left = 822.0
-offset_top = -8.0
-offset_right = 866.0
-offset_bottom = 84.0
-scale = Vector2(1.2547376, 0.63649136)
-theme = SubResource("Theme_5aq17")
-text = "X"
-flat = true
-
-[node name="Label" type="Label" parent="option_menu" unique_id=2114857638]
-layout_mode = 0
-offset_left = -234.0
-offset_top = -125.0
-offset_right = -194.0
-offset_bottom = -102.0
 
 [node name="credits" type="ColorRect" parent="." unique_id=1477912396]
 visible = false
@@ -228,11 +158,105 @@ action_mode = 0
 button_mask = 0
 shortcut = SubResource("Shortcut_amt2q")
 
+[node name="TituloCreditos" type="Label" parent="credits" unique_id=1750102001]
+layout_mode = 0
+offset_top = 70.0
+offset_right = 1280.0
+offset_bottom = 150.0
+theme_override_colors/font_color = Color(0.94, 0.2, 0.53, 1)
+theme_override_fonts/font = SubResource("SystemFont_sm2ni")
+theme_override_font_sizes/font_size = 48
+text = "CRÉDITOS"
+horizontal_alignment = 1
+
+[node name="NomeVitor" type="Label" parent="credits" unique_id=1750102002]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 210.0
+offset_right = 1200.0
+offset_bottom = 250.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_sm2ni")
+theme_override_font_sizes/font_size = 22
+text = "Vitor Edmilson Duarte Santos"
+horizontal_alignment = 1
+
+[node name="FuncaoVitor" type="Label" parent="credits" unique_id=1750102003]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 250.0
+offset_right = 1200.0
+offset_bottom = 280.0
+theme_override_colors/font_color = Color(0.55, 0.85, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_sm2ni")
+theme_override_font_sizes/font_size = 16
+text = "Coordenação e Desenvolvimento"
+horizontal_alignment = 1
+
+[node name="NomePedro" type="Label" parent="credits" unique_id=1750102004]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 330.0
+offset_right = 1200.0
+offset_bottom = 370.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_sm2ni")
+theme_override_font_sizes/font_size = 22
+text = "Pedro Henrique Cervinski Uchoa"
+horizontal_alignment = 1
+
+[node name="FuncaoPedro" type="Label" parent="credits" unique_id=1750102005]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 370.0
+offset_right = 1200.0
+offset_bottom = 400.0
+theme_override_colors/font_color = Color(1, 0.55, 0.7, 1)
+theme_override_fonts/font = SubResource("SystemFont_sm2ni")
+theme_override_font_sizes/font_size = 16
+text = "Design Visual e Conceito"
+horizontal_alignment = 1
+
+[node name="NomeGiovani" type="Label" parent="credits" unique_id=1750102006]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 450.0
+offset_right = 1200.0
+offset_bottom = 490.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_sm2ni")
+theme_override_font_sizes/font_size = 22
+text = "Giovani Ribeiro Lima"
+horizontal_alignment = 1
+
+[node name="FuncaoGiovani" type="Label" parent="credits" unique_id=1750102007]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 490.0
+offset_right = 1200.0
+offset_bottom = 520.0
+theme_override_colors/font_color = Color(0.95, 0.78, 0.3, 1)
+theme_override_fonts/font = SubResource("SystemFont_sm2ni")
+theme_override_font_sizes/font_size = 16
+text = "Desenvolvimento dos modos de jogo"
+horizontal_alignment = 1
+
+[node name="VoltarCreditos" type="Button" parent="credits" unique_id=1750102008]
+layout_mode = 0
+offset_left = 540.0
+offset_top = 600.0
+offset_right = 740.0
+offset_bottom = 660.0
+theme_override_colors/font_color = Color(0.94, 0.2, 0.53, 1)
+theme_override_colors/font_hover_color = Color(1, 0.32, 0.62, 1)
+theme_override_fonts/font = ExtResource("2_ar34o")
+theme_override_font_sizes/font_size = 28
+text = "VOLTAR"
+flat = true
+
 [connection signal="pressed" from="qr_code/exit_donate_btn" to="." method="_on_exit_donate_btn_pressed"]
 [connection signal="pressed" from="start_btn" to="." method="_on_start_btn_pressed"]
-[connection signal="pressed" from="options_btn" to="." method="_on_options_btn_pressed"]
 [connection signal="pressed" from="credits_btn" to="." method="_on_credits_btn_pressed"]
 [connection signal="pressed" from="exit_btn" to="." method="_on_exit_btn_pressed"]
-[connection signal="pressed" from="donate_btn" to="." method="_on_donate_btn_pressed"]
-[connection signal="pressed" from="option_menu/exit_option_btn" to="." method="_on_exit_option_btn_pressed"]
 [connection signal="pressed" from="credits/credits_exit" to="." method="_on_credits_exit_pressed"]
+[connection signal="pressed" from="credits/VoltarCreditos" to="." method="_on_credits_exit_pressed"]

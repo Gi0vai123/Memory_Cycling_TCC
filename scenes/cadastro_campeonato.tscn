@@ -1,6 +1,131 @@
 [gd_scene format=3 uid="uid://5mmhsbu8tg7x"]
 
 [ext_resource type="Script" uid="uid://b6ok40dt4mvc7" path="res://scripts/cadastro_campeonato.gd" id="1_cad01"]
+[ext_resource type="Texture2D" uid="uid://bicg75a8ai7ac" path="res://modos2.jpeg" id="2_3i0m5"]
+
+[sub_resource type="StyleBoxFlat" id="PainelForm"]
+bg_color = Color(0.05, 0.05, 0.08, 0.55)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.94, 0.2, 0.53, 0.35)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="LineEditNormal"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.12, 0.1, 0.14, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.94, 0.2, 0.53, 0.55)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="LineEditFocus"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.16, 0.13, 0.18, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.94, 0.2, 0.53, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="BtnGerarNormal"]
+content_margin_left = 24.0
+content_margin_top = 12.0
+content_margin_right = 24.0
+content_margin_bottom = 12.0
+bg_color = Color(0.94, 0.2, 0.53, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.55, 0.7, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="BtnGerarPressed"]
+content_margin_left = 24.0
+content_margin_top = 12.0
+content_margin_right = 24.0
+content_margin_bottom = 12.0
+bg_color = Color(0.78, 0.15, 0.42, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.55, 0.7, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="BtnGerarHover"]
+content_margin_left = 24.0
+content_margin_top = 12.0
+content_margin_right = 24.0
+content_margin_bottom = 12.0
+bg_color = Color(1, 0.32, 0.62, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.78, 0.88, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="BtnVoltarNormal"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.15, 0.13, 0.18, 0.7)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.65, 0.65, 0.75, 0.5)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="BtnVoltarHover"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.22, 0.18, 0.26, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.94, 0.2, 0.53, 0.7)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [node name="CadastroCampeonato" type="Control" unique_id=1086430687]
 layout_mode = 3
@@ -11,19 +136,24 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cad01")
 
-[node name="Fundo" type="ColorRect" parent="." unique_id=264087215]
+[node name="fundo" type="Sprite2D" parent="." unique_id=1734485776]
+position = Vector2(637, 362)
+texture = ExtResource("2_3i0m5")
+
+[node name="PainelCentral" type="Panel" parent="." unique_id=1909283746]
 layout_mode = 0
-offset_right = 1280.0
-offset_bottom = 720.0
-mouse_filter = 2
-color = Color(0.07, 0.07, 0.14, 1)
+offset_left = 180.0
+offset_top = 110.0
+offset_right = 1100.0
+offset_bottom = 460.0
+theme_override_styles/panel = SubResource("PainelForm")
 
 [node name="Titulo" type="Label" parent="." unique_id=1722288560]
 layout_mode = 0
 offset_top = 24.0
 offset_right = 1280.0
 offset_bottom = 70.0
-theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
+theme_override_colors/font_color = Color(0.94, 0.2, 0.53, 1)
 theme_override_font_sizes/font_size = 30
 text = "CAMPEONATO — CADASTRO DE 8 JOGADORES"
 horizontal_alignment = 1
@@ -33,7 +163,7 @@ layout_mode = 0
 offset_top = 72.0
 offset_right = 1280.0
 offset_bottom = 102.0
-theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_colors/font_color = Color(0.874, 0.874, 0.95, 1)
 theme_override_font_sizes/font_size = 16
 text = "Preencha os 8 nomes. Campos em branco viram 'Jogador N'."
 horizontal_alignment = 1
@@ -44,7 +174,7 @@ offset_left = 240.0
 offset_top = 130.0
 offset_right = 420.0
 offset_bottom = 158.0
-theme_override_colors/font_color = Color(0.85, 0.85, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 text = "Jogador 1:"
 
@@ -54,7 +184,12 @@ offset_left = 240.0
 offset_top = 158.0
 offset_right = 540.0
 offset_bottom = 198.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.65, 0.65, 0.75, 1)
+theme_override_colors/caret_color = Color(0.94, 0.2, 0.53, 1)
 theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("LineEditNormal")
+theme_override_styles/focus = SubResource("LineEditFocus")
 placeholder_text = "Nome do jogador 1"
 
 [node name="LblJog2" type="Label" parent="." unique_id=185953785]
@@ -63,7 +198,7 @@ offset_left = 240.0
 offset_top = 210.0
 offset_right = 420.0
 offset_bottom = 238.0
-theme_override_colors/font_color = Color(0.85, 0.85, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 text = "Jogador 2:"
 
@@ -73,7 +208,12 @@ offset_left = 240.0
 offset_top = 238.0
 offset_right = 540.0
 offset_bottom = 278.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.65, 0.65, 0.75, 1)
+theme_override_colors/caret_color = Color(0.94, 0.2, 0.53, 1)
 theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("LineEditNormal")
+theme_override_styles/focus = SubResource("LineEditFocus")
 placeholder_text = "Nome do jogador 2"
 
 [node name="LblJog3" type="Label" parent="." unique_id=66775748]
@@ -82,7 +222,7 @@ offset_left = 240.0
 offset_top = 290.0
 offset_right = 420.0
 offset_bottom = 318.0
-theme_override_colors/font_color = Color(0.85, 0.85, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 text = "Jogador 3:"
 
@@ -92,7 +232,12 @@ offset_left = 240.0
 offset_top = 318.0
 offset_right = 540.0
 offset_bottom = 358.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.65, 0.65, 0.75, 1)
+theme_override_colors/caret_color = Color(0.94, 0.2, 0.53, 1)
 theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("LineEditNormal")
+theme_override_styles/focus = SubResource("LineEditFocus")
 placeholder_text = "Nome do jogador 3"
 
 [node name="LblJog4" type="Label" parent="." unique_id=283482394]
@@ -101,7 +246,7 @@ offset_left = 240.0
 offset_top = 370.0
 offset_right = 420.0
 offset_bottom = 398.0
-theme_override_colors/font_color = Color(0.85, 0.85, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 text = "Jogador 4:"
 
@@ -111,7 +256,12 @@ offset_left = 240.0
 offset_top = 398.0
 offset_right = 540.0
 offset_bottom = 438.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.65, 0.65, 0.75, 1)
+theme_override_colors/caret_color = Color(0.94, 0.2, 0.53, 1)
 theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("LineEditNormal")
+theme_override_styles/focus = SubResource("LineEditFocus")
 placeholder_text = "Nome do jogador 4"
 
 [node name="LblJog5" type="Label" parent="." unique_id=911589528]
@@ -120,7 +270,7 @@ offset_left = 720.0
 offset_top = 130.0
 offset_right = 900.0
 offset_bottom = 158.0
-theme_override_colors/font_color = Color(0.85, 0.85, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 text = "Jogador 5:"
 
@@ -130,7 +280,12 @@ offset_left = 720.0
 offset_top = 158.0
 offset_right = 1020.0
 offset_bottom = 198.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.65, 0.65, 0.75, 1)
+theme_override_colors/caret_color = Color(0.94, 0.2, 0.53, 1)
 theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("LineEditNormal")
+theme_override_styles/focus = SubResource("LineEditFocus")
 placeholder_text = "Nome do jogador 5"
 
 [node name="LblJog6" type="Label" parent="." unique_id=690369337]
@@ -139,7 +294,7 @@ offset_left = 720.0
 offset_top = 210.0
 offset_right = 900.0
 offset_bottom = 238.0
-theme_override_colors/font_color = Color(0.85, 0.85, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 text = "Jogador 6:"
 
@@ -149,7 +304,12 @@ offset_left = 720.0
 offset_top = 238.0
 offset_right = 1020.0
 offset_bottom = 278.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.65, 0.65, 0.75, 1)
+theme_override_colors/caret_color = Color(0.94, 0.2, 0.53, 1)
 theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("LineEditNormal")
+theme_override_styles/focus = SubResource("LineEditFocus")
 placeholder_text = "Nome do jogador 6"
 
 [node name="LblJog7" type="Label" parent="." unique_id=1679101498]
@@ -158,7 +318,7 @@ offset_left = 720.0
 offset_top = 290.0
 offset_right = 900.0
 offset_bottom = 318.0
-theme_override_colors/font_color = Color(0.85, 0.85, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 text = "Jogador 7:"
 
@@ -168,7 +328,12 @@ offset_left = 720.0
 offset_top = 318.0
 offset_right = 1020.0
 offset_bottom = 358.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.65, 0.65, 0.75, 1)
+theme_override_colors/caret_color = Color(0.94, 0.2, 0.53, 1)
 theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("LineEditNormal")
+theme_override_styles/focus = SubResource("LineEditFocus")
 placeholder_text = "Nome do jogador 7"
 
 [node name="LblJog8" type="Label" parent="." unique_id=235380153]
@@ -177,7 +342,7 @@ offset_left = 720.0
 offset_top = 370.0
 offset_right = 900.0
 offset_bottom = 398.0
-theme_override_colors/font_color = Color(0.85, 0.85, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 text = "Jogador 8:"
 
@@ -187,7 +352,12 @@ offset_left = 720.0
 offset_top = 398.0
 offset_right = 1020.0
 offset_bottom = 438.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.65, 0.65, 0.75, 1)
+theme_override_colors/caret_color = Color(0.94, 0.2, 0.53, 1)
 theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("LineEditNormal")
+theme_override_styles/focus = SubResource("LineEditFocus")
 placeholder_text = "Nome do jogador 8"
 
 [node name="Aviso" type="Label" parent="." unique_id=1765385968]
@@ -195,7 +365,7 @@ layout_mode = 0
 offset_top = 490.0
 offset_right = 1280.0
 offset_bottom = 520.0
-theme_override_colors/font_color = Color(1, 0.3, 0.3, 1)
+theme_override_colors/font_color = Color(1, 0.55, 0.7, 1)
 theme_override_font_sizes/font_size = 17
 horizontal_alignment = 1
 
@@ -205,7 +375,13 @@ offset_left = 490.0
 offset_top = 540.0
 offset_right = 790.0
 offset_bottom = 595.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.9, 0.95, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("BtnGerarNormal")
+theme_override_styles/pressed = SubResource("BtnGerarPressed")
+theme_override_styles/hover = SubResource("BtnGerarHover")
 text = "GERAR CHAVE"
 
 [node name="BtnVoltar" type="Button" parent="." unique_id=2000562711]
@@ -214,7 +390,11 @@ offset_left = 40.0
 offset_top = 650.0
 offset_right = 180.0
 offset_bottom = 694.0
+theme_override_colors/font_color = Color(0.85, 0.85, 0.95, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("BtnVoltarNormal")
+theme_override_styles/hover = SubResource("BtnVoltarHover")
 text = "← Voltar"
 
 [connection signal="pressed" from="BtnGerarChave" to="." method="_on_btn_gerar_chave_pressed"]
