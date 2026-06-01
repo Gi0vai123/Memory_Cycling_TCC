@@ -50,7 +50,7 @@ const SPRITES = {
 	21: "res://prefabs/frente-cartas/frente-carta-21.jpg",
 }
 
-const SCALE_REPOUSO := Vector2(0.7, 0.7)
+const SCALE_REPOUSO := Vector2(0.8, 0.8)
 const SCALE_HOVER   := Vector2(1.0, 1.0)
 
 const COR_FOCO_AZUL := Color(0.55, 0.85, 1.0, 1.0)
@@ -160,7 +160,7 @@ func virar():
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	await t2.finished
 	virando = false
-	if not mouse_dentro and scale != SCALE_REPOUSO:
+	if not mouse_dentro and scale != Vector2(0.7, 0.7):
 		if tween_hover: tween_hover.kill()
 		tween_hover = create_tween()
 		tween_hover.tween_property(self, "scale", SCALE_REPOUSO, 0.12)
@@ -207,7 +207,7 @@ func set_levantada(levantada: bool):
 		z_index = z_original
 		if tween_hover: tween_hover.kill()
 		tween_hover = create_tween()
-		tween_hover.tween_property(self, "scale", SCALE_REPOUSO, 0.15)
+		tween_hover.tween_property(self, "scale", Vector2(0.7, 0.7), 0.15)
 		parar_rotacao()
 
 func _aplicar_cor_foco():
