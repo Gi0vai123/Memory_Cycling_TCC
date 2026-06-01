@@ -50,7 +50,7 @@ const SPRITES = {
 	21: "res://prefabs/frente-cartas/frente-carta-21.jpg",
 }
 
-const SCALE_REPOUSO := Vector2(0.8, 0.8)
+const SCALE_REPOUSO := Vector2(0.7, 0.7)
 const SCALE_HOVER   := Vector2(1.0, 1.0)
 
 const COR_FOCO_AZUL := Color(0.55, 0.85, 1.0, 1.0)

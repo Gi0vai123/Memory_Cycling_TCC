@@ -34,7 +34,7 @@ func _ready() -> void:
 	titulo.text = "CAMPEONATO (%d JOGADORES)" % Campeonato.num_jogadores
 	_montar_bracket()
 	_atualizar_chave()
-
+	$BtnVoltar.grab_focus()
 
 # ─────────────────────────────────────────────
 #  Constroi o bracket dentro do BracketContainer
@@ -262,3 +262,4 @@ func _on_btn_jogar_pressed() -> void:
 func _on_btn_voltar_pressed() -> void:
 	Campeonato.resetar()
 	get_tree().change_scene_to_file("res://scenes/menu_screen.tscn")
+	

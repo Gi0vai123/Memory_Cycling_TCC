@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://5mmhsbu8tg7x"]
 
 [ext_resource type="Script" uid="uid://b6ok40dt4mvc7" path="res://scripts/cadastro_campeonato.gd" id="1_cad01"]
-[ext_resource type="Texture2D" uid="uid://bicg75a8ai7ac" path="res://modos2.jpeg" id="2_3i0m5"]
+[ext_resource type="Texture2D" uid="uid://bicg75a8ai7ac" path="res://sprites/modos2.jpeg" id="2_3i0m5"]
 
 [sub_resource type="StyleBoxFlat" id="PainelForm"]
 bg_color = Color(0.05, 0.05, 0.08, 0.55)

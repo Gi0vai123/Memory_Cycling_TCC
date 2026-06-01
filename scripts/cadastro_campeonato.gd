@@ -23,7 +23,7 @@ func _ready() -> void:
 		campos.append(get_node("CampoJog" + str(i)))
 
 	_ajustar_para_n_jogadores()
-
+	$BtnVoltar.grab_focus()
 
 # ─────────────────────────────────────────────
 #  Ajusta titulo/subtitulo, visibilidade e posicao
