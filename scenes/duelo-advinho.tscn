@@ -2,10 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bnm4ygixt21pq" path="res://scripts/cartas-duelo.gd" id="1_16rjy"]
 [ext_resource type="Script" uid="uid://b7skr5iud5hut" path="res://scripts/duelo_advinho.gd" id="1_kedrr"]
-[ext_resource type="PackedScene" uid="uid://dvl4f6unww2oj" path="res://scenes/menu_pause.tscn" id="2_6hb1j"]
+[ext_resource type="PackedScene" uid="uid://buhjxv83nlw4g" path="res://scenes/menu_pause.tscn" id="2_6hb1j"]
 [ext_resource type="Texture2D" uid="uid://co80b524sig6q" path="res://imagens/cards_do_jogo_frente.png" id="2_kedrr"]
 [ext_resource type="Texture2D" uid="uid://duuudikxgug3j" path="res://sprites/verso.jpeg" id="4_mgnuq"]
 [ext_resource type="Texture2D" uid="uid://duf18iyss8bdy" path="res://sprites/WhatsApp Image 2026-05-14 at 20.16.23.jpeg" id="5_mgnuq"]
+[ext_resource type="FontFile" uid="uid://cqeum04no0nhn" path="res://fonts/Asteroid Blaster.tres" id="7_tcbev"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6hb1j"]
 
@@ -114,6 +115,7 @@ offset_left = 472.0
 offset_top = 42.0
 offset_right = 544.0
 offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("7_tcbev")
 text = "0"
 label_settings = SubResource("LabelSettings_mgnuq")
 horizontal_alignment = 1
@@ -124,6 +126,7 @@ offset_left = 729.0
 offset_top = 41.0
 offset_right = 801.0
 offset_bottom = 127.0
+theme_override_fonts/font = ExtResource("7_tcbev")
 text = "0"
 label_settings = SubResource("LabelSettings_6hb1j")
 horizontal_alignment = 1

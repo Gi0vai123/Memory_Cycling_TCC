@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b2ixhphmkjujg" path="res://scripts/selecao_modo.gd" id="1_smdo1"]
 [ext_resource type="Texture2D" uid="uid://bicg75a8ai7ac" path="res://sprites/modos2.jpeg" id="2_4ni2v"]
 [ext_resource type="Texture2D" uid="uid://bgycglk1ypjjo" path="res://sprites/fundomenu.jpeg" id="3_5ikon"]
-[ext_resource type="FontFile" uid="uid://1wr8dtpw0ujl" path="res://fonts/Asteroid Blaster.ttf" id="3_a0x88"]
+[ext_resource type="FontFile" uid="uid://cqeum04no0nhn" path="res://fonts/Asteroid Blaster.tres" id="3_a0x88"]
 [ext_resource type="Texture2D" uid="uid://btyewf4juc8c3" path="res://sprites/portempo.jpeg" id="4_7o37o"]
 [ext_resource type="Texture2D" uid="uid://suhv646quf64" path="res://sprites/campeonato.jpeg" id="5_a0x88"]
 [ext_resource type="Texture2D" uid="uid://bmx5iqsmmdai5" path="res://sprites/progresso.jpeg" id="6_caud3"]

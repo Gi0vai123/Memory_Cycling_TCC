@@ -1,13 +1,8 @@
-[gd_scene format=3 uid="uid://dvl4f6unww2oj"]
+[gd_scene format=3 uid="uid://buhjxv83nlw4g"]
 
 [ext_resource type="Theme" uid="uid://hucb486ifu68" path="res://style/botoes.tres" id="1_0o444"]
-[ext_resource type="Script" uid="uid://dvc72jsc3yvg1" path="res://scripts/menu_pause.gd" id="1_ajcle"]
-
-[sub_resource type="SystemFont" id="SystemFont_ajcle"]
-font_names = PackedStringArray("Asteroid Blaster")
-
-[sub_resource type="SystemFont" id="SystemFont_0o444"]
-font_names = PackedStringArray("Asteroid Blaster")
+[ext_resource type="Script" path="res://scripts/menu_pause.gd" id="1_ajcle"]
+[ext_resource type="FontFile" uid="uid://cqeum04no0nhn" path="res://fonts/Asteroid Blaster.tres" id="3_v7adk"]
 
 [node name="Control" type="Control" unique_id=926771784]
 visible = false
@@ -43,7 +38,6 @@ offset_right = 382.5
 offset_bottom = 315.8907
 theme = ExtResource("1_0o444")
 theme_override_constants/outline_size = 12
-theme_override_fonts/font = SubResource("SystemFont_ajcle")
 theme_override_font_sizes/font_size = 44
 text = "Continuar"
 
@@ -55,7 +49,7 @@ offset_right = 379.5
 offset_bottom = 152.89069
 theme_override_colors/font_color = Color(0.9529412, 0.019607844, 0.30588236, 1)
 theme_override_constants/outline_size = 12
-theme_override_fonts/font = SubResource("SystemFont_0o444")
+theme_override_fonts/font = ExtResource("3_v7adk")
 theme_override_font_sizes/font_size = 67
 text = "- Pause -"
 horizontal_alignment = 1
@@ -69,7 +63,6 @@ offset_right = 382.5
 offset_bottom = 402.8907
 theme = ExtResource("1_0o444")
 theme_override_constants/outline_size = 12
-theme_override_fonts/font = SubResource("SystemFont_ajcle")
 theme_override_font_sizes/font_size = 44
 text = "Creditos
 "
@@ -82,7 +75,6 @@ offset_right = 382.5
 offset_bottom = 496.8907
 theme = ExtResource("1_0o444")
 theme_override_constants/outline_size = 12
-theme_override_fonts/font = SubResource("SystemFont_ajcle")
 theme_override_font_sizes/font_size = 44
 text = "Sair
 "

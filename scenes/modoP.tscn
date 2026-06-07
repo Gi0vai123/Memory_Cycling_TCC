@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bnfob8tu5s7cb" path="res://scripts/cena.gd" id="1_woyb7"]
 [ext_resource type="PackedScene" uid="uid://df8fntwdh536s" path="res://scenes/cartas.tscn" id="2_048lv"]
-[ext_resource type="PackedScene" uid="uid://dvl4f6unww2oj" path="res://scenes/menu_pause.tscn" id="3_8kaiw"]
+[ext_resource type="PackedScene" uid="uid://buhjxv83nlw4g" path="res://scenes/menu_pause.tscn" id="3_8kaiw"]
 [ext_resource type="Texture2D" uid="uid://duf18iyss8bdy" path="res://sprites/WhatsApp Image 2026-05-14 at 20.16.23.jpeg" id="3_aqhb2"]
 [ext_resource type="Texture2D" uid="uid://ebreotoaqfu0" path="res://imagens/time-vermelho.png" id="4_qxw3i"]
 [ext_resource type="PackedScene" uid="uid://c6hwm4spwpxfp" path="res://prefabs/carta.tscn" id="5_1nxbq"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://gh7vjn47kmtd" path="res://imagens/setaazul.png" id="7_vuhw6"]
 [ext_resource type="Texture2D" uid="uid://dejc4cc0pvye1" path="res://imagens/setavermelho.png" id="8_qxw3i"]
 [ext_resource type="Texture2D" uid="uid://bb11ojy43okj1" path="res://imagens/barra2Att.jpg" id="9_8kaiw"]
+[ext_resource type="FontFile" uid="uid://cqeum04no0nhn" path="res://fonts/Asteroid Blaster.tres" id="12_5kftq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j5ux4"]
 texture = ExtResource("9_8kaiw")
@@ -32,7 +33,7 @@ border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color(0.95, 0.78, 0.3, 0.85)
+border_color = Color(0.9411765, 0.2, 0.5294118, 0.34901962)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
@@ -43,12 +44,12 @@ content_margin_left = 22.0
 content_margin_top = 10.0
 content_margin_right = 22.0
 content_margin_bottom = 10.0
-bg_color = Color(0.95, 0.78, 0.3, 0.92)
+bg_color = Color(0.9411765, 0.2, 0.5294118, 0.9019608)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(1.0, 0.92, 0.55, 1)
+border_color = Color(1, 0.92, 0.55, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -59,12 +60,12 @@ content_margin_left = 22.0
 content_margin_top = 10.0
 content_margin_right = 22.0
 content_margin_bottom = 10.0
-bg_color = Color(1.0, 0.88, 0.45, 1.0)
+bg_color = Color(1, 0.32156864, 0.61960787, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(1.0, 1.0, 0.75, 1)
+border_color = Color(1, 1, 0.75, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -161,6 +162,7 @@ offset_left = 32.0
 offset_top = 68.0
 offset_right = 104.0
 offset_bottom = 154.0
+theme_override_fonts/font = ExtResource("12_5kftq")
 text = "0"
 label_settings = SubResource("LabelSettings_aqhb2")
 horizontal_alignment = 1
@@ -171,12 +173,14 @@ offset_left = 1185.0
 offset_top = 71.0
 offset_right = 1257.0
 offset_bottom = 157.0
+theme_override_fonts/font = ExtResource("12_5kftq")
 text = "0"
 label_settings = SubResource("LabelSettings_j5ux4")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LabelJogador" type="Label" parent="UImp" unique_id=456776075]
+visible = false
 offset_left = 55.0
 offset_top = 672.0
 offset_right = 95.0
@@ -202,7 +206,8 @@ layout_mode = 0
 offset_top = 30.0
 offset_right = 600.0
 offset_bottom = 100.0
-theme_override_colors/font_color = Color(0.95, 0.78, 0.3, 1)
+theme_override_colors/font_color = Color(1, 0.93333334, 0.9372549, 1)
+theme_override_fonts/font = ExtResource("12_5kftq")
 theme_override_font_sizes/font_size = 56
 text = "VITÓRIA"
 horizontal_alignment = 1
@@ -213,6 +218,8 @@ layout_mode = 0
 offset_top = 130.0
 offset_right = 600.0
 offset_bottom = 210.0
+theme_override_colors/font_color = Color(1, 0.23137255, 0.5647059, 0.96862745)
+theme_override_fonts/font = ExtResource("12_5kftq")
 theme_override_font_sizes/font_size = 38
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -225,6 +232,7 @@ offset_right = 400.0
 offset_bottom = 290.0
 theme_override_colors/font_color = Color(0.15, 0.1, 0.05, 1)
 theme_override_colors/font_hover_color = Color(0.15, 0.1, 0.05, 1)
+theme_override_fonts/font = ExtResource("12_5kftq")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("BtnContinuarNormal")
 theme_override_styles/hover = SubResource("BtnContinuarHover")
