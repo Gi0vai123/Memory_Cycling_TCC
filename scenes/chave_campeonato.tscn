@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dp5j47vou8cac"]
 
 [ext_resource type="Script" uid="uid://bm1qmvee1lgi8" path="res://scripts/chave_campeonato.gd" id="1_chv01"]
+[ext_resource type="FontFile" uid="uid://cqeum04no0nhn" path="res://fonts/Asteroid Blaster.tres" id="2_1pnhl"]
 
 [node name="ChaveCampeonato" type="Control" unique_id=1532968553]
 layout_mode = 3
@@ -20,10 +21,11 @@ color = Color(0.07, 0.07, 0.14, 1)
 
 [node name="Titulo" type="Label" parent="." unique_id=149319857]
 layout_mode = 0
-offset_top = 16.0
+offset_top = 40.0
 offset_right = 1280.0
-offset_bottom = 66.0
+offset_bottom = 90.0
 theme_override_colors/font_color = Color(0.94, 0.2, 0.53, 1)
+theme_override_fonts/font = ExtResource("2_1pnhl")
 theme_override_font_sizes/font_size = 30
 text = "CAMPEONATO"
 horizontal_alignment = 1
@@ -40,7 +42,8 @@ offset_left = 1050.0
 offset_top = 300.0
 offset_right = 1270.0
 offset_bottom = 380.0
-theme_override_colors/font_color = Color(0.95, 0.78, 0.3, 1)
+theme_override_colors/font_color = Color(1, 0.23137255, 0.5647059, 0.96862745)
+theme_override_fonts/font = ExtResource("2_1pnhl")
 theme_override_font_sizes/font_size = 20
 text = "???"
 autowrap_mode = 3
@@ -60,6 +63,7 @@ offset_left = 400.0
 offset_top = 640.0
 offset_right = 780.0
 offset_bottom = 694.0
+theme_override_fonts/font = ExtResource("2_1pnhl")
 theme_override_font_sizes/font_size = 20
 text = "▶  JOGAR PRÓXIMA PARTIDA"
 
@@ -69,6 +73,7 @@ offset_left = 40.0
 offset_top = 650.0
 offset_right = 170.0
 offset_bottom = 694.0
+theme_override_fonts/font = ExtResource("2_1pnhl")
 theme_override_font_sizes/font_size = 16
 text = "← Menu"
 

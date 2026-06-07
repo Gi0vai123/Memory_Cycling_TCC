@@ -1,5 +1,7 @@
 [gd_resource type="Theme" format=3 uid="uid://hucb486ifu68"]
 
+[ext_resource type="FontFile" uid="uid://cqeum04no0nhn" path="res://fonts/Asteroid Blaster.tres" id="1_kv378"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jsmse"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
@@ -7,11 +9,13 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [resource]
 resource_name = "start"
+default_font = ExtResource("1_kv378")
 Button/colors/font_color = Color(0.9529412, 0.019607844, 0.30588236, 1)
 Button/colors/font_focus_color = Color(0.9529412, 0.019607844, 0.30588236, 1)
 Button/colors/font_hover_color = Color(0.9928003, 0.44977105, 0.57476205, 1)
 Button/colors/font_hover_pressed_color = Color(0.9529412, 0.019607844, 0.30588236, 1)
 Button/colors/font_outline_color = Color(0, 0, 0, 1)
 Button/colors/font_pressed_color = Color(0.9529412, 0.019607844, 0.30588236, 1)
+Button/fonts/font = ExtResource("1_kv378")
 Button/styles/hover = SubResource("StyleBoxFlat_jsmse")
 Button/styles/normal = SubResource("StyleBoxEmpty_kv378")
