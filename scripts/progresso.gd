@@ -9,11 +9,9 @@ extends Node2D
 @onready var fase_label = $FaseLabel
 @onready var menu_pause = $Pause
 
-const ESPACAMENTO_X = 150
-const ESPACAMENTO_Y = 200
 const PARES_INICIAIS = 2
 const INCREMENTO_PARES = 2
-const COLUNAS = 4
+const PARES_MAXIMO = 21
 const DEBUG_UM_CONTROLE = true
 const DEADZONE = 0.5
 const COOLDOWN_MOVIMENTO = 0.2
@@ -38,6 +36,34 @@ func _ready():
 		await contagem_regressiva(contador_scene)
 	iniciar_fase()
 
+func _calcular_layout(total: int) -> Dictionary:
+	var colunas: int
+	var esp_x: int
+	var esp_y: int
+
+	if total <= 8:
+		colunas = 4
+		esp_x = 150
+		esp_y = 200
+	elif total <= 16:
+		colunas = 4
+		esp_x = 130
+		esp_y = 160
+	elif total <= 24:
+		colunas = 6
+		esp_x = 120
+		esp_y = 140
+	elif total <= 32:
+		colunas = 8
+		esp_x = 110
+		esp_y = 120
+	else:
+		colunas = 8
+		esp_x = 100
+		esp_y = 100
+
+	return {"colunas": colunas, "esp_x": esp_x, "esp_y": esp_y}
+
 func _process(delta):
 	if cooldown_timer > 0:
 		cooldown_timer -= delta
@@ -47,7 +73,8 @@ func _process(delta):
 func _processar_analogico():
 	var device = 0 if DEBUG_UM_CONTROLE else (0 if jogador_atual == "azul" else 1)
 	var total = cartas.size()
-	var colunas = min(COLUNAS, total)
+	var layout = _calcular_layout(total)
+	var colunas = layout.colunas
 	var linhas = ceil(float(total) / float(colunas))
 	var linha_atual = cursor_index / colunas
 	var coluna_atual = cursor_index % colunas
@@ -97,7 +124,7 @@ func _input(event):
 				return
 	if event.is_action_pressed("ui_accept"):
 		var carta = cartas[cursor_index]
-		if is_instance_valid(carta) and not carta.virada:
+		if is_instance_valid(carta) and not carta.virada and not carta.matched:
 			carta.virar()
 			_on_carta_clicada(carta)
 
@@ -134,11 +161,6 @@ func iniciar_fase():
 	await criar_cartas()
 	await mostrar_cartas_inicial()
 
-func calcular_grid(total_cartas: int) -> Vector2i:
-	var colunas = min(COLUNAS, total_cartas)
-	var linhas = ceil(float(total_cartas) / float(colunas))
-	return Vector2i(colunas, linhas)
-
 func criar_cartas():
 	if card_scene == null:
 		push_error("Card Scene não atribuída!")
@@ -151,12 +173,14 @@ func criar_cartas():
 		ids.append(i)
 	ids.shuffle()
 
-	var grid = calcular_grid(total)
-	var colunas = grid.x
-	var linhas = grid.y
+	var layout = _calcular_layout(total)
+	var colunas = layout.colunas
+	var esp_x = layout.esp_x
+	var esp_y = layout.esp_y
+	var linhas = ceil(float(total) / float(colunas))
 
-	var largura_total = (colunas - 1) * ESPACAMENTO_X
-	var altura_total = (linhas - 1) * ESPACAMENTO_Y
+	var largura_total = (colunas - 1) * esp_x
+	var altura_total = (linhas - 1) * esp_y
 	var centro = Vector2(640, 360)
 	var offset_x = centro.x - largura_total / 2.0
 	var offset_y = centro.y - altura_total / 2.0
@@ -166,8 +190,8 @@ func criar_cartas():
 		var col = i % colunas
 		var row = i / colunas
 		var pos_final = Vector2(
-			offset_x + col * ESPACAMENTO_X,
-			offset_y + row * ESPACAMENTO_Y
+			offset_x + col * esp_x,
+			offset_y + row * esp_y
 		)
 		var carta_root = card_scene.instantiate()
 		add_child(carta_root)
@@ -177,6 +201,7 @@ func criar_cartas():
 		area.position = Vector2.ZERO
 		area.card_id = ids[i]
 		area.pode_animar = false
+		area.matched = false
 		area.connect("carta_clicada", Callable(self, "_on_carta_clicada"))
 		cartas.append(area)
 		carta_roots.append({"root": carta_root, "pos": pos_final})
@@ -211,14 +236,24 @@ func _on_carta_clicada(carta):
 		return
 	if carta == primeira_carta:
 		return
+	if carta.virada and carta != primeira_carta:
+		return
+	if carta.matched:
+		return
 	if primeira_carta == null:
 		primeira_carta = carta
 	elif segunda_carta == null:
 		segunda_carta = carta
 		pode_virar = false
+		_set_collision(true)
 		await verificar_par()
 
 func verificar_par():
+	if primeira_carta == null or segunda_carta == null:
+		_set_collision(false)
+		pode_virar = true
+		return
+
 	if primeira_carta.card_id == segunda_carta.card_id:
 		var col1 = primeira_carta.get_node_or_null("CollisionShape2D")
 		var col2 = segunda_carta.get_node_or_null("CollisionShape2D")
@@ -226,10 +261,13 @@ func verificar_par():
 			col1.disabled = true
 		if col2:
 			col2.disabled = true
+		primeira_carta.matched = true
+		segunda_carta.matched = true
 		_registrar_ponto()
 		pares_encontrados += 1
 		primeira_carta = null
 		segunda_carta = null
+		_set_collision(false)
 		pode_virar = true
 		atualizar_ui()
 		if pares_encontrados >= pares_necessarios:
@@ -239,13 +277,22 @@ func verificar_par():
 		await get_tree().create_timer(0.6).timeout
 		primeira_carta.virar()
 		segunda_carta.virar()
+		await get_tree().create_timer(0.25).timeout
 		primeira_carta = null
 		segunda_carta = null
+		_set_collision(false)
 		trocar_jogador()
 		pode_virar = true
 
 func fase_vencida():
-	pares_fase_atual += INCREMENTO_PARES
+	if pares_fase_atual >= PARES_MAXIMO:
+		if fase_label:
+			fase_label.text = "Parabéns! Todas as fases concluídas!"
+		await get_tree().create_timer(2.0).timeout
+		pares_fase_atual = PARES_INICIAIS
+		iniciar_fase()
+		return
+	pares_fase_atual = min(pares_fase_atual + INCREMENTO_PARES, PARES_MAXIMO)
 	if fase_label:
 		fase_label.text = "Fase concluída! Próxima: %d pares..." % pares_fase_atual
 	await get_tree().create_timer(2.0).timeout
@@ -274,6 +321,8 @@ func trocar_jogador():
 func _set_collision(disabled: bool):
 	for c in cartas:
 		if is_instance_valid(c):
+			if not disabled and c.matched:
+				continue
 			var collision = c.get_node_or_null("CollisionShape2D")
 			if collision:
 				collision.disabled = disabled

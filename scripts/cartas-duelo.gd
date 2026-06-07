@@ -63,17 +63,13 @@ var focado_por: Array = []
 
 func _ready():
 	z_original = z_index
-	carregar_sprite()
-	qualid.text = str(card_id)
 	mostrar_costas()
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
-
 	som_virar = AudioStreamPlayer.new()
 	som_virar.stream = load("res://sons/virar.mp3")
 	som_virar.volume_db = -20.0
 	add_child(som_virar)
-
 	som_desvirar = AudioStreamPlayer.new()
 	som_desvirar.stream = load("res://sons/desvirar.mp3")
 	som_desvirar.volume_db = -20.0

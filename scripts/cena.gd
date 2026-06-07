@@ -604,5 +604,9 @@ func pontos_ganhos():
 	atualizar_labels()
 
 func atualizar_labels():
-	$UImp/PontosA.text =  str(pontos_azul)
-	$UImp/PontosV.text =  str(pontos_vermelho)
+	if Campeonato.campeonato_ativo:
+		$UImp/PontosA.text = nome_jogador_azul + ": " + str(pontos_azul)
+		$UImp/PontosV.text = nome_jogador_vermelho + ": " + str(pontos_vermelho)
+	else:
+		$UImp/PontosA.text = str(pontos_azul)
+		$UImp/PontosV.text = str(pontos_vermelho)

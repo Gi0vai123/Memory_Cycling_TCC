@@ -2,7 +2,7 @@ extends Control
 
 func _ready() -> void:
 	$start_btn.grab_focus()
-	
+	Campeonato.resetar()
 	
 	pass
 
@@ -34,7 +34,7 @@ func _on_exit_option_btn_pressed() -> void:
 func _on_credits_btn_pressed() -> void:
 	
 	$credits.visible = true
-	
+	$credits/credits_exit.grab_focus()
 	pass
 
 func _on_credits_exit_pressed() -> void:

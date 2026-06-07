@@ -5,12 +5,13 @@
 
 [sub_resource type="SystemFont" id="SystemFont_ajcle"]
 font_names = PackedStringArray("Asteroid Blaster")
+subpixel_positioning = 0
 
 [sub_resource type="SystemFont" id="SystemFont_0o444"]
 font_names = PackedStringArray("Asteroid Blaster")
+subpixel_positioning = 0
 
 [node name="Control" type="Control" unique_id=926771784]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,6 +23,7 @@ script = ExtResource("1_ajcle")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1651296799]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=519289705]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

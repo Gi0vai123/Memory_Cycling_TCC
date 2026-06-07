@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://d0lixcfm1gfy7"]
+
+[ext_resource type="FontFile" uid="uid://21bm27kpaagx" path="res://imagens/menu/Pixeled.ttf" id="1_0bpdh"]
+[ext_resource type="Script" uid="uid://dmxfgmjmtqhkq" path="res://scripts/credits.gd" id="1_2ckv8"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_ar34o"]
+device = -1
+pressed = true
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_2ckv8"]
+events = [SubResource("InputEventKey_ar34o")]
+
+[sub_resource type="SystemFont" id="SystemFont_0ctdu"]
+
+[node name="Control" type="Control" unique_id=1771207221]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2ckv8")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=56827415]
+
+[node name="credits" type="ColorRect" parent="CanvasLayer" unique_id=962559410]
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 1
+color = Color(0.019607844, 0.019607844, 0.019607844, 1)
+
+[node name="credits_exit" type="Button" parent="CanvasLayer/credits" unique_id=425023117]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+shortcut = SubResource("Shortcut_2ckv8")
+
+[node name="TituloCreditos" type="Label" parent="CanvasLayer/credits" unique_id=1995316984]
+layout_mode = 0
+offset_top = 70.0
+offset_right = 1280.0
+offset_bottom = 150.0
+theme_override_colors/font_color = Color(0.94, 0.2, 0.53, 1)
+theme_override_fonts/font = SubResource("SystemFont_0ctdu")
+theme_override_font_sizes/font_size = 48
+text = "CRÉDITOS"
+horizontal_alignment = 1
+
+[node name="NomeVitor" type="Label" parent="CanvasLayer/credits" unique_id=1236388105]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 210.0
+offset_right = 1200.0
+offset_bottom = 250.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_0ctdu")
+theme_override_font_sizes/font_size = 22
+text = "Vitor Edmilson Duarte Santos"
+horizontal_alignment = 1
+
+[node name="FuncaoVitor" type="Label" parent="CanvasLayer/credits" unique_id=2041822900]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 250.0
+offset_right = 1200.0
+offset_bottom = 280.0
+theme_override_colors/font_color = Color(0.55, 0.85, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_0ctdu")
+theme_override_font_sizes/font_size = 16
+text = "Coordenação e Desenvolvimento"
+horizontal_alignment = 1
+
+[node name="NomePedro" type="Label" parent="CanvasLayer/credits" unique_id=828297856]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 330.0
+offset_right = 1200.0
+offset_bottom = 370.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_0ctdu")
+theme_override_font_sizes/font_size = 22
+text = "Pedro Henrique Cervinski Uchoa"
+horizontal_alignment = 1
+
+[node name="FuncaoPedro" type="Label" parent="CanvasLayer/credits" unique_id=810145857]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 370.0
+offset_right = 1200.0
+offset_bottom = 400.0
+theme_override_colors/font_color = Color(1, 0.55, 0.7, 1)
+theme_override_fonts/font = SubResource("SystemFont_0ctdu")
+theme_override_font_sizes/font_size = 16
+text = "Design Visual e Conceito"
+horizontal_alignment = 1
+
+[node name="NomeGiovani" type="Label" parent="CanvasLayer/credits" unique_id=222736256]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 450.0
+offset_right = 1200.0
+offset_bottom = 490.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_0ctdu")
+theme_override_font_sizes/font_size = 22
+text = "Giovani Ribeiro Lima"
+horizontal_alignment = 1
+
+[node name="FuncaoGiovani" type="Label" parent="CanvasLayer/credits" unique_id=1638882077]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 490.0
+offset_right = 1200.0
+offset_bottom = 520.0
+theme_override_colors/font_color = Color(0.95, 0.78, 0.3, 1)
+theme_override_fonts/font = SubResource("SystemFont_0ctdu")
+theme_override_font_sizes/font_size = 16
+text = "Desenvolvimento dos modos de jogo"
+horizontal_alignment = 1
+
+[node name="VoltarCreditos" type="Button" parent="CanvasLayer/credits" unique_id=1388077780]
+layout_mode = 0
+offset_left = 540.0
+offset_top = 600.0
+offset_right = 740.0
+offset_bottom = 660.0
+theme_override_colors/font_color = Color(0.94, 0.2, 0.53, 1)
+theme_override_colors/font_hover_color = Color(1, 0.32, 0.62, 1)
+theme_override_fonts/font = ExtResource("1_0bpdh")
+theme_override_font_sizes/font_size = 28
+text = "VOLTAR"
+flat = true
+
+[connection signal="pressed" from="CanvasLayer/credits/VoltarCreditos" to="." method="_on_voltar_creditos_pressed"]

@@ -17,8 +17,52 @@ font_color = Color(0.01860215, 0.6626679, 0.86545706, 1)
 font_size = 62
 font_color = Color(0.9427613, 0.19937798, 0.5272031, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_tcbev"]
-font_size = 34
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6hb1j"]
+bg_color = Color(0.05, 0.05, 0.08, 0.96)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9077961, 0.38931444, 0.7895356, 0.8509804)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="SystemFont" id="SystemFont_tcbev"]
+font_names = PackedStringArray("Asteroid Blaster")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qvt8n"]
+content_margin_left = 22.0
+content_margin_top = 10.0
+content_margin_right = 22.0
+content_margin_bottom = 10.0
+bg_color = Color(0.88527423, 0.075352035, 0.5589054, 0.92156863)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.92, 0.55, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_20rmb"]
+content_margin_left = 22.0
+content_margin_top = 10.0
+content_margin_right = 22.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 0.88, 0.45, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 0.75, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="Node2D" type="Node2D" unique_id=866754891]
 script = ExtResource("1_kedrr")
@@ -129,9 +173,44 @@ label_settings = SubResource("LabelSettings_6hb1j")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Vencedor" type="Label" parent="CanvasLayer" unique_id=726263797]
-offset_left = 582.0
-offset_top = 306.0
-offset_right = 700.0
-offset_bottom = 353.0
-label_settings = SubResource("LabelSettings_tcbev")
+[node name="PainelVitoria" type="Panel" parent="CanvasLayer" unique_id=149136679]
+visible = false
+offset_left = 340.0
+offset_top = 200.0
+offset_right = 940.0
+offset_bottom = 520.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_6hb1j")
+
+[node name="LblTitulo" type="Label" parent="CanvasLayer/PainelVitoria" unique_id=1423315817]
+layout_mode = 0
+offset_top = 30.0
+offset_right = 600.0
+offset_bottom = 100.0
+theme_override_colors/font_color = Color(0.9529412, 0.019607844, 0.30588236, 1)
+theme_override_fonts/font = SubResource("SystemFont_tcbev")
+theme_override_font_sizes/font_size = 56
+text = "VITÓRIA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LblVencedor" type="Label" parent="CanvasLayer/PainelVitoria" unique_id=1522131102]
+layout_mode = 0
+offset_top = 130.0
+offset_right = 600.0
+offset_bottom = 210.0
+theme_override_font_sizes/font_size = 38
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnContinuar" type="Button" parent="CanvasLayer/PainelVitoria" unique_id=937282122]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 240.0
+offset_right = 400.0
+offset_bottom = 290.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.15, 0.1, 0.05, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_qvt8n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_20rmb")
+text = "CONTINUAR"

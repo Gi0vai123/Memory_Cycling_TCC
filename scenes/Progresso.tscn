@@ -9,6 +9,7 @@
 [node name="Node2D" type="Node2D" unique_id=1304687816]
 script = ExtResource("1_a7ww8")
 card_scene = ExtResource("2_rc5xx")
+usar_contagem = null
 
 [node name="Pause" parent="." unique_id=926771784 instance=ExtResource("3_0j83w")]
 

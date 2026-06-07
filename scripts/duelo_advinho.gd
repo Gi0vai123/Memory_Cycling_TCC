@@ -6,6 +6,10 @@ extends Node2D
 @onready var P_Azul = $CanvasLayer/PontosA
 @onready var Vencedor = $CanvasLayer/Vencedor
 @onready var menu_pause = $Pause
+@onready var painel_vitoria = $CanvasLayer/PainelVitoria
+@onready var lbl_titulo = $CanvasLayer/PainelVitoria/LblTitulo
+@onready var lbl_vencedor = $CanvasLayer/PainelVitoria/LblVencedor
+@onready var btn_continuar = $CanvasLayer/PainelVitoria/BtnContinuar
 
 var pontos_azul: int = 0
 var pontos_vermelho: int = 0
@@ -29,6 +33,8 @@ var cooldown_timer: float = 0.0
 var total_pares: int = 3
 
 func _ready():
+	painel_vitoria.visible = false
+	btn_continuar.pressed.connect(_on_btn_continuar_pressed)
 	match Dificuldade.pares:
 		4: total_pares = 4
 		5: total_pares = 5
@@ -71,7 +77,6 @@ func _input(event):
 func mover_cursor(direcao: int):
 	if cartas_navegaveis.is_empty():
 		return
-	# Primeiro movimento do controle ativa o cursor sem aplicar direcao
 	if not cursor_ativo:
 		cursor_ativo = true
 		cartas_navegaveis[cursor_index].focar()
@@ -126,8 +131,8 @@ func criar_cartas_duelo():
 		carta.lado = "azul"
 		carta.global_position = baralho_azul.global_position
 		add_child(carta)
+		await get_tree().process_frame
 		carta.card_id = ids[i]
-		carta.carregar_sprite()
 		todas_cartas.append(carta)
 		carta.connect("carta_clicada", Callable(self, "ao_clicar_carta"))
 		carta.atualizar_id_visual()
@@ -141,12 +146,12 @@ func criar_cartas_duelo():
 		carta.lado = "vermelho"
 		carta.global_position = baralho_vermelho.global_position
 		add_child(carta)
+		await get_tree().process_frame
 		carta.card_id = ids[i]
-		carta.carregar_sprite()
 		todas_cartas.append(carta)
 		carta.connect("carta_clicada", Callable(self, "ao_clicar_carta"))
 		carta.atualizar_id_visual()
-
+		
 func cuspir_cartas():
 	var espacamento = 150
 
@@ -243,20 +248,13 @@ func resolver_duelo():
 
 		if acertos >= total_pares:
 			acertos = 0
-			if turno_atual == "azul":
-				Vencedor.text = "Azul venceu!"
-				Vencedor.modulate = Color.CYAN
-			else:
-				Vencedor.text = "Vermelho venceu!"
-				Vencedor.modulate = Color.RED
-			Vencedor.visible = true
-			await get_tree().create_timer(2.5).timeout
-			Vencedor.visible = false
-			pontos_azul = 0
-			pontos_vermelho = 0
-			P_Azul.text = "0"
-			P_vermelho.text = "0"
-			iniciar_duelo()
+			var lado_vencedor = turno_atual
+			var nome_vencedor = "Azul" if lado_vencedor == "azul" else "Vermelho"
+			lbl_titulo.text = "Fim de Jogo!"
+			lbl_vencedor.text = nome_vencedor + " venceu!"
+			lbl_vencedor.modulate = Color.CYAN if lado_vencedor == "azul" else Color.RED
+			painel_vitoria.visible = true
+			btn_continuar.grab_focus()
 		else:
 			await embaralhar_cartas()
 			iniciar_escolha()
@@ -265,6 +263,14 @@ func resolver_duelo():
 		await abaixar_cartas()
 		await embaralhar_cartas()
 		iniciar_escolha()
+
+func _on_btn_continuar_pressed():
+	painel_vitoria.visible = false
+	pontos_azul = 0
+	pontos_vermelho = 0
+	P_Azul.text = "0"
+	P_vermelho.text = "0"
+	iniciar_duelo()
 
 func virar_cartas():
 	for carta in todas_cartas:
