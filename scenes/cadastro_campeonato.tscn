@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bicg75a8ai7ac" path="res://sprites/modos2.jpeg" id="2_3i0m5"]
 
 [sub_resource type="StyleBoxFlat" id="PainelForm"]
-bg_color = Color(0.05, 0.05, 0.08, 0.55)
+bg_color = Color(0.0504, 0.0504, 0.08, 0.61960787)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -143,9 +143,9 @@ texture = ExtResource("2_3i0m5")
 [node name="PainelCentral" type="Panel" parent="." unique_id=1909283746]
 layout_mode = 0
 offset_left = 180.0
-offset_top = 110.0
+offset_top = 130.0
 offset_right = 1100.0
-offset_bottom = 460.0
+offset_bottom = 480.0
 theme_override_styles/panel = SubResource("PainelForm")
 
 [node name="Titulo" type="Label" parent="." unique_id=1722288560]
@@ -153,7 +153,7 @@ layout_mode = 0
 offset_top = 24.0
 offset_right = 1280.0
 offset_bottom = 70.0
-theme_override_colors/font_color = Color(0.94, 0.2, 0.53, 1)
+theme_override_colors/font_color = Color(1, 0.93333334, 0.9372549, 1)
 theme_override_font_sizes/font_size = 30
 text = "CAMPEONATO — CADASTRO DE 8 JOGADORES"
 horizontal_alignment = 1
@@ -171,9 +171,9 @@ horizontal_alignment = 1
 [node name="LblJog1" type="Label" parent="." unique_id=926097507]
 layout_mode = 0
 offset_left = 240.0
-offset_top = 130.0
+offset_top = 150.0
 offset_right = 420.0
-offset_bottom = 158.0
+offset_bottom = 178.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 text = "Jogador 1:"
@@ -181,9 +181,9 @@ text = "Jogador 1:"
 [node name="CampoJog1" type="LineEdit" parent="." unique_id=650937251]
 layout_mode = 0
 offset_left = 240.0
-offset_top = 158.0
+offset_top = 178.0
 offset_right = 540.0
-offset_bottom = 198.0
+offset_bottom = 218.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_placeholder_color = Color(0.65, 0.65, 0.75, 1)
 theme_override_colors/caret_color = Color(0.94, 0.2, 0.53, 1)
@@ -195,9 +195,9 @@ placeholder_text = "Nome do jogador 1"
 [node name="LblJog2" type="Label" parent="." unique_id=185953785]
 layout_mode = 0
 offset_left = 240.0
-offset_top = 210.0
+offset_top = 230.0
 offset_right = 420.0
-offset_bottom = 238.0
+offset_bottom = 258.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 text = "Jogador 2:"
@@ -205,9 +205,9 @@ text = "Jogador 2:"
 [node name="CampoJog2" type="LineEdit" parent="." unique_id=30501322]
 layout_mode = 0
 offset_left = 240.0
-offset_top = 238.0
+offset_top = 258.0
 offset_right = 540.0
-offset_bottom = 278.0
+offset_bottom = 298.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_placeholder_color = Color(0.65, 0.65, 0.75, 1)
 theme_override_colors/caret_color = Color(0.94, 0.2, 0.53, 1)
@@ -219,9 +219,9 @@ placeholder_text = "Nome do jogador 2"
 [node name="LblJog3" type="Label" parent="." unique_id=66775748]
 layout_mode = 0
 offset_left = 240.0
-offset_top = 290.0
+offset_top = 310.0
 offset_right = 420.0
-offset_bottom = 318.0
+offset_bottom = 338.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 text = "Jogador 3:"
@@ -229,9 +229,9 @@ text = "Jogador 3:"
 [node name="CampoJog3" type="LineEdit" parent="." unique_id=156555214]
 layout_mode = 0
 offset_left = 240.0
-offset_top = 318.0
+offset_top = 338.0
 offset_right = 540.0
-offset_bottom = 358.0
+offset_bottom = 378.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_placeholder_color = Color(0.65, 0.65, 0.75, 1)
 theme_override_colors/caret_color = Color(0.94, 0.2, 0.53, 1)
@@ -243,9 +243,9 @@ placeholder_text = "Nome do jogador 3"
 [node name="LblJog4" type="Label" parent="." unique_id=283482394]
 layout_mode = 0
 offset_left = 240.0
-offset_top = 370.0
+offset_top = 390.0
 offset_right = 420.0
-offset_bottom = 398.0
+offset_bottom = 418.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 text = "Jogador 4:"
@@ -253,9 +253,9 @@ text = "Jogador 4:"
 [node name="CampoJog4" type="LineEdit" parent="." unique_id=219953878]
 layout_mode = 0
 offset_left = 240.0
-offset_top = 398.0
+offset_top = 418.0
 offset_right = 540.0
-offset_bottom = 438.0
+offset_bottom = 458.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_placeholder_color = Color(0.65, 0.65, 0.75, 1)
 theme_override_colors/caret_color = Color(0.94, 0.2, 0.53, 1)
@@ -267,9 +267,9 @@ placeholder_text = "Nome do jogador 4"
 [node name="LblJog5" type="Label" parent="." unique_id=911589528]
 layout_mode = 0
 offset_left = 720.0
-offset_top = 130.0
+offset_top = 150.0
 offset_right = 900.0
-offset_bottom = 158.0
+offset_bottom = 178.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 text = "Jogador 5:"
@@ -277,9 +277,9 @@ text = "Jogador 5:"
 [node name="CampoJog5" type="LineEdit" parent="." unique_id=1040606295]
 layout_mode = 0
 offset_left = 720.0
-offset_top = 158.0
+offset_top = 178.0
 offset_right = 1020.0
-offset_bottom = 198.0
+offset_bottom = 218.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_placeholder_color = Color(0.65, 0.65, 0.75, 1)
 theme_override_colors/caret_color = Color(0.94, 0.2, 0.53, 1)
@@ -291,9 +291,9 @@ placeholder_text = "Nome do jogador 5"
 [node name="LblJog6" type="Label" parent="." unique_id=690369337]
 layout_mode = 0
 offset_left = 720.0
-offset_top = 210.0
+offset_top = 230.0
 offset_right = 900.0
-offset_bottom = 238.0
+offset_bottom = 258.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 text = "Jogador 6:"
@@ -301,9 +301,9 @@ text = "Jogador 6:"
 [node name="CampoJog6" type="LineEdit" parent="." unique_id=1526931442]
 layout_mode = 0
 offset_left = 720.0
-offset_top = 238.0
+offset_top = 258.0
 offset_right = 1020.0
-offset_bottom = 278.0
+offset_bottom = 298.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_placeholder_color = Color(0.65, 0.65, 0.75, 1)
 theme_override_colors/caret_color = Color(0.94, 0.2, 0.53, 1)
@@ -315,9 +315,9 @@ placeholder_text = "Nome do jogador 6"
 [node name="LblJog7" type="Label" parent="." unique_id=1679101498]
 layout_mode = 0
 offset_left = 720.0
-offset_top = 290.0
+offset_top = 310.0
 offset_right = 900.0
-offset_bottom = 318.0
+offset_bottom = 338.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 text = "Jogador 7:"
@@ -325,9 +325,9 @@ text = "Jogador 7:"
 [node name="CampoJog7" type="LineEdit" parent="." unique_id=1834556428]
 layout_mode = 0
 offset_left = 720.0
-offset_top = 318.0
+offset_top = 338.0
 offset_right = 1020.0
-offset_bottom = 358.0
+offset_bottom = 378.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_placeholder_color = Color(0.65, 0.65, 0.75, 1)
 theme_override_colors/caret_color = Color(0.94, 0.2, 0.53, 1)
@@ -339,9 +339,9 @@ placeholder_text = "Nome do jogador 7"
 [node name="LblJog8" type="Label" parent="." unique_id=235380153]
 layout_mode = 0
 offset_left = 720.0
-offset_top = 370.0
+offset_top = 390.0
 offset_right = 900.0
-offset_bottom = 398.0
+offset_bottom = 418.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 text = "Jogador 8:"
@@ -349,9 +349,9 @@ text = "Jogador 8:"
 [node name="CampoJog8" type="LineEdit" parent="." unique_id=1403877193]
 layout_mode = 0
 offset_left = 720.0
-offset_top = 398.0
+offset_top = 418.0
 offset_right = 1020.0
-offset_bottom = 438.0
+offset_bottom = 458.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_placeholder_color = Color(0.65, 0.65, 0.75, 1)
 theme_override_colors/caret_color = Color(0.94, 0.2, 0.53, 1)
@@ -387,9 +387,9 @@ text = "GERAR CHAVE"
 [node name="BtnVoltar" type="Button" parent="." unique_id=2000562711]
 layout_mode = 0
 offset_left = 40.0
-offset_top = 650.0
+offset_top = 656.0
 offset_right = 180.0
-offset_bottom = 694.0
+offset_bottom = 700.0
 theme_override_colors/font_color = Color(0.85, 0.85, 0.95, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 16

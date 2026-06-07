@@ -3,13 +3,11 @@
 [ext_resource type="Script" uid="uid://b2ixhphmkjujg" path="res://scripts/selecao_modo.gd" id="1_smdo1"]
 [ext_resource type="Texture2D" uid="uid://bicg75a8ai7ac" path="res://sprites/modos2.jpeg" id="2_4ni2v"]
 [ext_resource type="Texture2D" uid="uid://bgycglk1ypjjo" path="res://sprites/fundomenu.jpeg" id="3_5ikon"]
+[ext_resource type="FontFile" uid="uid://1wr8dtpw0ujl" path="res://fonts/Asteroid Blaster.ttf" id="3_a0x88"]
 [ext_resource type="Texture2D" uid="uid://btyewf4juc8c3" path="res://sprites/portempo.jpeg" id="4_7o37o"]
 [ext_resource type="Texture2D" uid="uid://suhv646quf64" path="res://sprites/campeonato.jpeg" id="5_a0x88"]
 [ext_resource type="Texture2D" uid="uid://bmx5iqsmmdai5" path="res://sprites/progresso.jpeg" id="6_caud3"]
 [ext_resource type="Texture2D" uid="uid://dvy0sn5mbtvcu" path="res://sprites/adivinho.jpeg" id="7_8dv0n"]
-
-[sub_resource type="SystemFont" id="SystemFont_5ikon"]
-font_names = PackedStringArray("Asteroid Blaster")
 
 [node name="SelecaoModo" type="Control" unique_id=1184998056]
 layout_mode = 3
@@ -19,6 +17,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_smdo1")
+metadata/_edit_horizontal_guides_ = [637.0, 330.0]
 
 [node name="fundo" type="Sprite2D" parent="." unique_id=249094753]
 position = Vector2(637, 362)
@@ -26,21 +25,21 @@ texture = ExtResource("2_4ni2v")
 
 [node name="Titulo" type="Label" parent="." unique_id=16180946]
 layout_mode = 0
-offset_top = 14.0
+offset_top = 21.0
 offset_right = 1280.0
-offset_bottom = 61.0
-theme_override_colors/font_color = Color(0.8, 0.039215688, 0.2784314, 1)
-theme_override_fonts/font = SubResource("SystemFont_5ikon")
+offset_bottom = 68.0
+theme_override_colors/font_color = Color(0.9996583, 0.93284106, 0.93594855, 1)
+theme_override_fonts/font = ExtResource("3_a0x88")
 theme_override_font_sizes/font_size = 34
 text = "ESCOLHA O MODO"
 horizontal_alignment = 1
 
 [node name="BtnVoltar" type="Button" parent="." unique_id=1977032901]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 26.0
-offset_right = 144.0
-offset_bottom = 62.0
+offset_left = 40.0
+offset_top = 670.0
+offset_right = 160.0
+offset_bottom = 706.0
 theme_override_font_sizes/font_size = 15
 text = "← Voltar"
 
@@ -50,19 +49,20 @@ offset_left = 16.0
 offset_top = 75.0
 offset_right = 316.0
 offset_bottom = 675.0
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0.40392157)
 
 [node name="Sprite2D" type="Sprite2D" parent="CardPadrao" unique_id=774539546]
-position = Vector2(148.62502, 300.375)
-scale = Vector2(0.37156248, 0.37671876)
+position = Vector2(148.62502, 36.499996)
+scale = Vector2(0.24593744, 0.023124998)
 texture = ExtResource("3_5ikon")
 
 [node name="TituloModo" type="Label" parent="CardPadrao" unique_id=1194224411]
 layout_mode = 0
-offset_top = 20.0
+offset_top = 27.0
 offset_right = 300.0
-offset_bottom = 56.0
+offset_bottom = 63.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_a0x88")
 theme_override_font_sizes/font_size = 22
 text = "Modo Padrão"
 horizontal_alignment = 1
@@ -76,59 +76,85 @@ offset_bottom = 244.0
 mouse_filter = 2
 color = Color(0.25, 0.25, 0.35, 1)
 
+[node name="Sprite2D" type="Sprite2D" parent="CardPadrao/Imagem" unique_id=1739912709]
+position = Vector2(132, 93.49999)
+scale = Vector2(0.36, 0.12062498)
+texture = ExtResource("3_5ikon")
+
 [node name="ilustr" type="Sprite2D" parent="CardPadrao/Imagem" unique_id=1668083394]
 position = Vector2(132.00002, 93)
 scale = Vector2(0.18066406, 0.18066406)
 texture = ExtResource("4_7o37o")
 
 [node name="Descricao" type="Label" parent="CardPadrao" unique_id=1653163680]
+z_index = 2
 layout_mode = 0
-offset_left = 16.0
-offset_top = 255.0
-offset_right = 284.0
-offset_bottom = 360.0
+offset_left = 14.0
+offset_top = 306.0
+offset_right = 282.0
+offset_bottom = 411.0
 theme_override_colors/font_color = Color(0.85, 0.85, 0.95, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_fonts/font = ExtResource("3_a0x88")
+theme_override_font_sizes/font_size = 16
 text = "Partida 1x1 entre os times Azul e Vermelho. Vence quem encontrar mais pares antes do tempo acabar."
 horizontal_alignment = 1
 autowrap_mode = 3
 
+[node name="Sprite2D2" type="Sprite2D" parent="CardPadrao/Descricao" unique_id=763195989]
+z_index = -1
+position = Vector2(135.5, 33.99997)
+scale = Vector2(0.34875003, 0.051249996)
+texture = ExtResource("3_5ikon")
+
 [node name="DificuldadeLabel" type="Label" parent="CardPadrao" unique_id=2118712593]
+z_index = 1
 layout_mode = 0
-offset_top = 460.0
+offset_top = 464.99997
 offset_right = 300.0
-offset_bottom = 478.0
+offset_bottom = 482.99997
 theme_override_colors/font_color = Color(0.75, 0.75, 0.9, 1)
+theme_override_fonts/font = ExtResource("3_a0x88")
 theme_override_font_sizes/font_size = 13
 text = "Dificuldade"
 horizontal_alignment = 1
 
 [node name="BtnFacil" type="Button" parent="CardPadrao" unique_id=498719140]
+z_index = 1
 layout_mode = 0
 offset_left = 16.0
 offset_top = 490.0
 offset_right = 100.0
 offset_bottom = 545.0
-theme_override_font_sizes/font_size = 15
+theme_override_fonts/font = ExtResource("3_a0x88")
+theme_override_font_sizes/font_size = 16
 text = "Fácil"
 
 [node name="BtnNormal" type="Button" parent="CardPadrao" unique_id=1939341185]
+z_index = 1
 layout_mode = 0
 offset_left = 108.0
 offset_top = 490.0
 offset_right = 192.0
 offset_bottom = 545.0
-theme_override_font_sizes/font_size = 15
+theme_override_fonts/font = ExtResource("3_a0x88")
+theme_override_font_sizes/font_size = 16
 text = "Normal"
 
 [node name="BtnDificil" type="Button" parent="CardPadrao" unique_id=1278453271]
+z_index = 1
 layout_mode = 0
 offset_left = 200.0
 offset_top = 490.0
 offset_right = 284.0
 offset_bottom = 545.0
-theme_override_font_sizes/font_size = 15
+theme_override_fonts/font = ExtResource("3_a0x88")
+theme_override_font_sizes/font_size = 16
 text = "Difícil"
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1483225980]
+position = Vector2(166, 582)
+scale = Vector2(0.34875003, 0.06875004)
+texture = ExtResource("3_5ikon")
 
 [node name="CardCampeonato" type="ColorRect" parent="." unique_id=969187208]
 layout_mode = 0
@@ -136,19 +162,20 @@ offset_left = 332.0
 offset_top = 75.0
 offset_right = 632.0
 offset_bottom = 675.0
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0.40392157)
 
-[node name="Sprite2D2" type="Sprite2D" parent="CardCampeonato" unique_id=1217412]
-position = Vector2(151.49998, 300.375)
-scale = Vector2(0.37874994, 0.37671876)
+[node name="Sprite2D" type="Sprite2D" parent="CardCampeonato" unique_id=1217412]
+position = Vector2(149.5, 36.5)
+scale = Vector2(0.26125008, 0.023124998)
 texture = ExtResource("3_5ikon")
 
 [node name="TituloModo" type="Label" parent="CardCampeonato" unique_id=1768616340]
 layout_mode = 0
-offset_top = 20.0
+offset_top = 27.0
 offset_right = 300.0
-offset_bottom = 56.0
+offset_bottom = 63.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_a0x88")
 theme_override_font_sizes/font_size = 22
 text = "Modo Campeonato"
 horizontal_alignment = 1
@@ -162,96 +189,135 @@ offset_bottom = 244.0
 mouse_filter = 2
 color = Color(0.25, 0.25, 0.35, 1)
 
+[node name="Sprite2D" type="Sprite2D" parent="CardCampeonato/Imagem" unique_id=1739912801]
+position = Vector2(132, 93.49999)
+scale = Vector2(0.36, 0.12062498)
+texture = ExtResource("3_5ikon")
+
 [node name="ilustr" type="Sprite2D" parent="CardCampeonato/Imagem" unique_id=1666760694]
-position = Vector2(137.00002, 93)
+position = Vector2(132, 93)
 scale = Vector2(0.18066406, 0.18066406)
 texture = ExtResource("5_a0x88")
 
 [node name="Descricao" type="Label" parent="CardCampeonato" unique_id=944352312]
+z_index = 2
 layout_mode = 0
-offset_left = 16.0
-offset_top = 255.0
-offset_right = 284.0
-offset_bottom = 360.0
+offset_left = 14.0
+offset_top = 271.0
+offset_right = 282.0
+offset_bottom = 351.0
 theme_override_colors/font_color = Color(0.85, 0.85, 0.95, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_fonts/font = ExtResource("3_a0x88")
+theme_override_font_sizes/font_size = 16
 text = "Chaveamento eliminatório entre os jogadores cadastrados. Escolha quantos jogadores e a dificuldade."
 horizontal_alignment = 1
 autowrap_mode = 3
 
+[node name="Sprite2D2" type="Sprite2D" parent="CardCampeonato/Descricao" unique_id=763195991]
+z_index = -1
+position = Vector2(135.5, 33.99997)
+scale = Vector2(0.34875003, 0.051249996)
+texture = ExtResource("3_5ikon")
+
 [node name="JogadoresLabel" type="Label" parent="CardCampeonato" unique_id=1539820394]
+z_index = 1
 layout_mode = 0
-offset_top = 370.0
+offset_top = 366.00003
 offset_right = 300.0
-offset_bottom = 388.0
+offset_bottom = 384.00003
 theme_override_colors/font_color = Color(0.75, 0.75, 0.9, 1)
+theme_override_fonts/font = ExtResource("3_a0x88")
 theme_override_font_sizes/font_size = 13
 text = "Quantos jogadores?"
 horizontal_alignment = 1
 
 [node name="Btn4" type="Button" parent="CardCampeonato" unique_id=333313546]
+z_index = 1
 layout_mode = 0
-offset_left = 30.0
-offset_top = 395.0
-offset_right = 110.0
-offset_bottom = 435.0
-theme_override_font_sizes/font_size = 16
+offset_left = 21.0
+offset_top = 390.00003
+offset_right = 101.0
+offset_bottom = 430.00003
+theme_override_fonts/font = ExtResource("3_a0x88")
+theme_override_font_sizes/font_size = 26
 text = "4"
 
 [node name="Btn6" type="Button" parent="CardCampeonato" unique_id=547141355]
+z_index = 1
 layout_mode = 0
-offset_left = 118.0
-offset_top = 395.0
-offset_right = 198.0
-offset_bottom = 435.0
-theme_override_font_sizes/font_size = 16
+offset_left = 109.0
+offset_top = 390.00003
+offset_right = 189.0
+offset_bottom = 430.00003
+theme_override_fonts/font = ExtResource("3_a0x88")
+theme_override_font_sizes/font_size = 26
 text = "6"
 
 [node name="Btn8" type="Button" parent="CardCampeonato" unique_id=1204506105]
+z_index = 1
 layout_mode = 0
-offset_left = 206.0
-offset_top = 395.0
-offset_right = 286.0
-offset_bottom = 435.0
-theme_override_font_sizes/font_size = 16
+offset_left = 197.0
+offset_top = 390.00003
+offset_right = 277.0
+offset_bottom = 430.00003
+theme_override_fonts/font = ExtResource("3_a0x88")
+theme_override_font_sizes/font_size = 26
 text = "8"
 
 [node name="DificuldadeLabel" type="Label" parent="CardCampeonato" unique_id=291488350]
+z_index = 1
 layout_mode = 0
-offset_top = 460.0
+offset_top = 464.99997
 offset_right = 300.0
-offset_bottom = 478.0
+offset_bottom = 482.99997
 theme_override_colors/font_color = Color(0.75, 0.75, 0.9, 1)
+theme_override_fonts/font = ExtResource("3_a0x88")
 theme_override_font_sizes/font_size = 13
 text = "Dificuldade"
 horizontal_alignment = 1
 
 [node name="BtnFacil" type="Button" parent="CardCampeonato" unique_id=525715053]
+z_index = 1
 layout_mode = 0
-offset_left = 16.0
+offset_left = 15.0
 offset_top = 490.0
-offset_right = 100.0
+offset_right = 99.0
 offset_bottom = 545.0
-theme_override_font_sizes/font_size = 15
+theme_override_fonts/font = ExtResource("3_a0x88")
+theme_override_font_sizes/font_size = 16
 text = "Fácil"
 
 [node name="BtnNormal" type="Button" parent="CardCampeonato" unique_id=524346336]
+z_index = 1
 layout_mode = 0
-offset_left = 108.0
+offset_left = 107.0
 offset_top = 490.0
-offset_right = 192.0
+offset_right = 191.0
 offset_bottom = 545.0
-theme_override_font_sizes/font_size = 15
+theme_override_fonts/font = ExtResource("3_a0x88")
+theme_override_font_sizes/font_size = 16
 text = "Normal"
 
 [node name="BtnDificil" type="Button" parent="CardCampeonato" unique_id=535416729]
+z_index = 1
 layout_mode = 0
-offset_left = 200.0
+offset_left = 199.0
 offset_top = 490.0
-offset_right = 284.0
+offset_right = 283.0
 offset_bottom = 545.0
-theme_override_font_sizes/font_size = 15
+theme_override_fonts/font = ExtResource("3_a0x88")
+theme_override_font_sizes/font_size = 16
 text = "Difícil"
+
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=1483225981]
+position = Vector2(482, 473.99997)
+scale = Vector2(0.34875003, 0.05125)
+texture = ExtResource("3_5ikon")
+
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=1483225982]
+position = Vector2(480.99997, 582)
+scale = Vector2(0.34875003, 0.06875004)
+texture = ExtResource("3_5ikon")
 
 [node name="CardProgresso" type="ColorRect" parent="." unique_id=1608158688]
 layout_mode = 0
@@ -259,19 +325,20 @@ offset_left = 648.0
 offset_top = 75.0
 offset_right = 948.0
 offset_bottom = 675.0
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0.40392157)
 
-[node name="Sprite2D2" type="Sprite2D" parent="CardProgresso" unique_id=529829845]
-position = Vector2(151.5, 300.375)
-scale = Vector2(0.37874994, 0.37671876)
+[node name="Sprite2D" type="Sprite2D" parent="CardProgresso" unique_id=529829845]
+position = Vector2(151.5, 36.499996)
+scale = Vector2(0.24593744, 0.023124998)
 texture = ExtResource("3_5ikon")
 
 [node name="TituloModo" type="Label" parent="CardProgresso" unique_id=316279045]
 layout_mode = 0
-offset_top = 20.0
+offset_top = 27.0
 offset_right = 300.0
-offset_bottom = 56.0
+offset_bottom = 63.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_a0x88")
 theme_override_font_sizes/font_size = 22
 text = "Modo Progresso"
 horizontal_alignment = 1
@@ -285,31 +352,51 @@ offset_bottom = 244.0
 mouse_filter = 2
 color = Color(0.25, 0.25, 0.35, 1)
 
+[node name="Sprite2D" type="Sprite2D" parent="CardProgresso/Imagem" unique_id=1739912802]
+position = Vector2(132, 93.49999)
+scale = Vector2(0.36, 0.12062498)
+texture = ExtResource("3_5ikon")
+
 [node name="ilustr" type="Sprite2D" parent="CardProgresso/Imagem" unique_id=1722343890]
-position = Vector2(138.00002, 92)
+position = Vector2(132, 93)
 scale = Vector2(0.18066406, 0.18066406)
 texture = ExtResource("6_caud3")
 
 [node name="Descricao" type="Label" parent="CardProgresso" unique_id=328553215]
+z_index = 2
 layout_mode = 0
-offset_left = 16.0
-offset_top = 255.0
-offset_right = 284.0
-offset_bottom = 360.0
+offset_left = 14.0
+offset_top = 306.0
+offset_right = 282.0
+offset_bottom = 411.0
 theme_override_colors/font_color = Color(0.85, 0.85, 0.95, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_fonts/font = ExtResource("3_a0x88")
+theme_override_font_sizes/font_size = 16
 text = "Fases progressivas: começa com 2 pares e a cada fase nova entram mais. Vá o mais longe que conseguir."
 horizontal_alignment = 1
 autowrap_mode = 3
 
+[node name="Sprite2D2" type="Sprite2D" parent="CardProgresso/Descricao" unique_id=763195992]
+z_index = -1
+position = Vector2(135.5, 33.99997)
+scale = Vector2(0.34875003, 0.051249996)
+texture = ExtResource("3_5ikon")
+
 [node name="BtnJogar" type="Button" parent="CardProgresso" unique_id=975860402]
+z_index = 1
 layout_mode = 0
-offset_left = 16.0
-offset_top = 490.0
-offset_right = 284.0
-offset_bottom = 545.0
-theme_override_font_sizes/font_size = 15
+offset_left = 77.0
+offset_top = 484.0
+offset_right = 223.0
+offset_bottom = 539.0
+theme_override_fonts/font = ExtResource("3_a0x88")
+theme_override_font_sizes/font_size = 16
 text = "Jogar"
+
+[node name="Sprite2D5" type="Sprite2D" parent="." unique_id=1483225983]
+position = Vector2(798, 582)
+scale = Vector2(0.34875003, 0.06875004)
+texture = ExtResource("3_5ikon")
 
 [node name="CardAdivinhacao" type="ColorRect" parent="." unique_id=447153794]
 layout_mode = 0
@@ -317,19 +404,20 @@ offset_left = 964.0
 offset_top = 75.0
 offset_right = 1264.0
 offset_bottom = 675.0
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0.40392157)
 
-[node name="Sprite2D2" type="Sprite2D" parent="CardAdivinhacao" unique_id=1321462174]
-position = Vector2(151.5, 300.375)
-scale = Vector2(0.37874994, 0.37671876)
+[node name="Sprite2D" type="Sprite2D" parent="CardAdivinhacao" unique_id=1321462174]
+position = Vector2(151.5, 36.499996)
+scale = Vector2(0.24593744, 0.023124998)
 texture = ExtResource("3_5ikon")
 
 [node name="TituloModo" type="Label" parent="CardAdivinhacao" unique_id=1683838228]
 layout_mode = 0
-offset_top = 20.0
+offset_top = 27.0
 offset_right = 300.0
-offset_bottom = 56.0
+offset_bottom = 63.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_a0x88")
 theme_override_font_sizes/font_size = 22
 text = "Modo Adivinhação"
 horizontal_alignment = 1
@@ -343,59 +431,85 @@ offset_bottom = 244.0
 mouse_filter = 2
 color = Color(0.25, 0.25, 0.35, 1)
 
+[node name="Sprite2D" type="Sprite2D" parent="CardAdivinhacao/Imagem" unique_id=1739912803]
+position = Vector2(132, 93.49999)
+scale = Vector2(0.36, 0.12062498)
+texture = ExtResource("3_5ikon")
+
 [node name="ilustr" type="Sprite2D" parent="CardAdivinhacao/Imagem" unique_id=263762481]
-position = Vector2(137, 93)
+position = Vector2(132, 93)
 scale = Vector2(0.18066406, 0.18066406)
 texture = ExtResource("7_8dv0n")
 
 [node name="Descricao" type="Label" parent="CardAdivinhacao" unique_id=555979965]
+z_index = 2
 layout_mode = 0
-offset_left = 16.0
-offset_top = 255.0
-offset_right = 284.0
-offset_bottom = 360.0
+offset_left = 14.0
+offset_top = 306.0
+offset_right = 282.0
+offset_bottom = 411.0
 theme_override_colors/font_color = Color(0.85, 0.85, 0.95, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_fonts/font = ExtResource("3_a0x88")
+theme_override_font_sizes/font_size = 16
 text = "Duelo entre os baralhos dos jogadores. Tente adivinhar qual carta o oponente vai virar a cada rodada."
 horizontal_alignment = 1
 autowrap_mode = 3
 
+[node name="Sprite2D2" type="Sprite2D" parent="CardAdivinhacao/Descricao" unique_id=763195993]
+z_index = -1
+position = Vector2(135.5, 33.99997)
+scale = Vector2(0.34875003, 0.051249996)
+texture = ExtResource("3_5ikon")
+
 [node name="DificuldadeLabel" type="Label" parent="CardAdivinhacao" unique_id=1004006936]
+z_index = 1
 layout_mode = 0
-offset_top = 460.0
+offset_top = 464.99997
 offset_right = 300.0
-offset_bottom = 478.0
+offset_bottom = 482.99997
 theme_override_colors/font_color = Color(0.75, 0.75, 0.9, 1)
+theme_override_fonts/font = ExtResource("3_a0x88")
 theme_override_font_sizes/font_size = 13
 text = "Dificuldade"
 horizontal_alignment = 1
 
 [node name="BtnFacil" type="Button" parent="CardAdivinhacao" unique_id=1953597479]
+z_index = 1
 layout_mode = 0
 offset_left = 16.0
 offset_top = 490.0
 offset_right = 100.0
 offset_bottom = 545.0
-theme_override_font_sizes/font_size = 15
+theme_override_fonts/font = ExtResource("3_a0x88")
+theme_override_font_sizes/font_size = 16
 text = "Fácil"
 
 [node name="BtnNormal" type="Button" parent="CardAdivinhacao" unique_id=1402339516]
+z_index = 1
 layout_mode = 0
 offset_left = 108.0
 offset_top = 490.0
 offset_right = 192.0
 offset_bottom = 545.0
-theme_override_font_sizes/font_size = 15
+theme_override_fonts/font = ExtResource("3_a0x88")
+theme_override_font_sizes/font_size = 16
 text = "Normal"
 
 [node name="BtnDificil" type="Button" parent="CardAdivinhacao" unique_id=1265056609]
+z_index = 1
 layout_mode = 0
 offset_left = 200.0
 offset_top = 490.0
 offset_right = 284.0
 offset_bottom = 545.0
-theme_override_font_sizes/font_size = 15
+theme_override_fonts/font = ExtResource("3_a0x88")
+theme_override_font_sizes/font_size = 16
 text = "Difícil"
+
+[node name="Sprite2D6" type="Sprite2D" parent="." unique_id=1483225984]
+position = Vector2(1114, 582)
+scale = Vector2(0.34875003, 0.06875004)
+texture = ExtResource("3_5ikon")
 
 [connection signal="pressed" from="BtnVoltar" to="." method="_on_voltar_pressed"]
 [connection signal="pressed" from="CardPadrao/BtnFacil" to="." method="_on_padrao_facil_pressed"]

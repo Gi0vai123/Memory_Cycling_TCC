@@ -103,10 +103,10 @@ func _input(event):
 
 func _mover_cursor(novo_index: int):
 	if cursor_index < cartas.size() and is_instance_valid(cartas[cursor_index]):
-		cartas[cursor_index].desfocar()
+		cartas[cursor_index].desfocar(jogador_atual)
 	cursor_index = novo_index
 	if cursor_index < cartas.size() and is_instance_valid(cartas[cursor_index]):
-		cartas[cursor_index].focar()
+		cartas[cursor_index].focar(jogador_atual)
 
 func contagem_regressiva(contador):
 	contador.visible = true
@@ -204,7 +204,7 @@ func mostrar_cartas_inicial():
 		c.pode_animar = true
 	cursor_index = 0
 	if not cartas.is_empty():
-		cartas[0].focar()
+		cartas[0].focar(jogador_atual)
 
 func _on_carta_clicada(carta):
 	if not pode_virar:
@@ -265,10 +265,15 @@ func _registrar_ponto():
 		pontos_vermelho += 1
 
 func trocar_jogador():
+	var jogador_anterior = jogador_atual
 	if jogador_atual == "azul":
 		jogador_atual = "vermelho"
 	else:
 		jogador_atual = "azul"
+	# Atualiza a cor do cursor pra refletir o novo jogador
+	if cursor_index < cartas.size() and is_instance_valid(cartas[cursor_index]):
+		cartas[cursor_index].desfocar(jogador_anterior)
+		cartas[cursor_index].focar(jogador_atual)
 	atualizar_ui()
 
 func _set_collision(disabled: bool):

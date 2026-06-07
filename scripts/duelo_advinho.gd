@@ -74,15 +74,15 @@ func mover_cursor(direcao: int):
 	# Primeiro movimento do controle ativa o cursor sem aplicar direcao
 	if not cursor_ativo:
 		cursor_ativo = true
-		cartas_navegaveis[cursor_index].focar()
+		cartas_navegaveis[cursor_index].focar(turno_atual)
 		return
-	cartas_navegaveis[cursor_index].desfocar()
+	cartas_navegaveis[cursor_index].desfocar(turno_atual)
 	cursor_index = (cursor_index + direcao) % cartas_navegaveis.size()
-	cartas_navegaveis[cursor_index].focar()
+	cartas_navegaveis[cursor_index].focar(turno_atual)
 
 func atualizar_navegacao():
 	if cursor_ativo and not cartas_navegaveis.is_empty():
-		cartas_navegaveis[cursor_index].desfocar()
+		cartas_navegaveis[cursor_index].desfocar(turno_atual)
 	cursor_ativo = false
 
 	if fase_escolha == "propria":
